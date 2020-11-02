@@ -5,6 +5,10 @@
 #include "basic.h"
 #include "parser.h"
 
+void prova(){
+    return 0;
+}
+
 double*alloc_array_double(int lenght){
     if(lenght<=0){
         handle_error_with_exit("error in parameter\n");
