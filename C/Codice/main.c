@@ -113,6 +113,8 @@ int main(int argc,char *argv[]){
         //verifico le prossime terminazioni. si va ad aggiornare anche il valore delle variabili 
         // task_type_next_..._termination per andare a determinare quale tipo di Job ha terminato.
 
+        //next_completion_cassa = find_next_termination(cassa_head, &task_type_next_cassa_termination);
+
         /*
         next_completion_cassa = find_next_termination(cassa_head, &task_type_next_cassa_termination);
         next_completion_delay = find_next_termination(delay_head, &task_type_next_delay_termination);
@@ -167,9 +169,9 @@ int main(int argc,char *argv[]){
         } else if (next_completion == next_completion_delay){
             task_type_next_delay_termination == task_type_next_termination;
         } else if (next_completion == next_completion_verifica){
-             task_type_next_verifica_termination == task_type_next_termination;
+            task_type_next_verifica_termination == task_type_next_termination;
         } else {
-             task_type_next_multiserver_termination == task_type_next_termination;
+            task_type_next_multiserver_termination == task_type_next_termination;
         }
 
         //determino l'istante del prossimo evento
@@ -184,7 +186,7 @@ int main(int argc,char *argv[]){
         printf("current time: %f\n", current_time);
 
 
-        printf("\n\n\n");
+        printf("\n\n");
         sleep(5);
 
         //FINO A QUI CORRETTO 
@@ -197,10 +199,22 @@ int main(int argc,char *argv[]){
             if(task_type_next_arrival == TASK_TYPE1){ //Arriva un job di tipo 1
                 next_arrival_gelato_1_gusto = get_interarrival_cassa(TASK_TYPE1);
 
+
+                /////////////BOH
+                //definisco il nodo da inserire
+                struct node newNode;
+                initialize_node(&newNode);
+                
+
+                //inserisco il Job all'interno della coda del server Cassa.
+                insert_at_tail(&newNode, &cassa_head, &cassa_tail);
+                //////////////////////
+
                 //Aggiorno le variabili del sistema tramite la funzione update.
                 update_state(TASK_TYPE1, DIRECT_VERIFY, &state);
 
-                //Assegno il task al server verifica
+                //Assegno il task al server cassa
+                
                 assign_task_to_verify(current_time, TASK_TYPE1, &verifica_head, &verifica_tail);
             }else if(task_type_next_arrival == TASK_TYPE2) {
                 next_arrival_gelato_1_gusto = get_interarrival_cassa(TASK_TYPE2);

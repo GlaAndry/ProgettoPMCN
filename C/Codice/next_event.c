@@ -13,6 +13,13 @@ void initialize_state(struct state *state) {//inizializza la struct state
     memset(state, 0, sizeof(struct state));
 }
 
+void initialize_node(struct node *node) {//inizializza la struct state
+    if (node == NULL) {
+        handle_error_with_exit("error in initialize state\n");
+    }
+    memset(node, 0, sizeof(struct node));
+}
+
 void initialize_area(struct area *area) {//inizializza la struct area
     if (area == NULL) {
         handle_error_with_exit("error in initialize area\n");
@@ -139,6 +146,15 @@ double get_service_multiserver(char task_type){
     }
 
     return service;
+}
+
+void assign_task_to_cassa(double time_current, char task_type, struct node **head,struct node **tail){
+    //il metodo assegna il task di eseguire al server verifica andando
+    //ad impostare il tempo di completamento di quel task.
+
+    double time_end_service = time_current + get_service_cassa(task_type);
+    insert_ordered(time_end_service, task_type, time_current, head, tail);
+    return;
 }
 
 void assign_task_to_verify(double time_current, char task_type, struct node **head,struct node **tail){
