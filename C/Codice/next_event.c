@@ -20,6 +20,13 @@ void initialize_area(struct area *area) {
     }
     memset(area, 0, sizeof(struct area));
 }
+//inizializza la struct node
+void initialize_area(struct node *node) {
+    if (node == NULL) {
+        handle_error_with_exit("error in initialize area\n");
+    }
+    memset(noed, 0, sizeof(struct node));
+}
 
 /**
 * Questo metodo genera un arrivo di un 
