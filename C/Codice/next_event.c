@@ -327,13 +327,13 @@ void update_state(char task_type, char location, struct state *state) {
 
     }
 
-    if(location != DIRECT_CASSA && location != DIRECT_DELAY && location != DIRECT_MULTISERVER && location != DIRECT_VERIFY) {
+    if(location != DIRECT_CASSA && location != DIRECT_DELAY && location != DIRECT_MULTISERVER && location != DIRECT_VERIFY && location != DIRECT_EXIT && location != DIRECT_QUIT) {
 
         handle_error_with_exit("error in update state location\n");
 
     }
 
-    int numberOfTaste = atoi(task_type);
+    //int numberOfTaste = task_type - '0';
 
     state->numberOfUsers ++; //ogni volta che arriva un Job aumentiamo il numero di utenti totali che il sistema serve.
 
@@ -345,7 +345,7 @@ void update_state(char task_type, char location, struct state *state) {
 
         state->number_of_user_cassa--;
         state->number_of_user_verify++;
-        state->number_balls_icecream - numberOfTaste; //per il gelato 1 gusto tolgo solo una pallina di gelato.
+        state->number_balls_icecream - task_type; //per il gelato 1 gusto tolgo solo una pallina di gelato.
            
     }else if(location == DIRECT_MULTISERVER){ //arrivo task gelato 1 gusto verso multiserver
 
@@ -358,7 +358,16 @@ void update_state(char task_type, char location, struct state *state) {
         state->number_of_user_delay++;
         state->number_balls_icecream = MAX_ICECREAM_TUB;
 
-    }else {//task type 1 e non diretto sul cloud(non interrotto)
+    }else if(location == DIRECT_QUIT){
+
+        state -> number_lost_users ++;
+        state -> number_of_user_delay --;
+
+    } else if(location == DIRECT_EXIT) {
+
+        state -> number_of_user_multiserver --;
+
+    } else {//task type 1 e non diretto sul cloud(non interrotto)
 
         handle_error_with_exit("error\n");
 

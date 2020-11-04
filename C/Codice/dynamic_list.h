@@ -28,4 +28,4 @@ void insert_ordered(double instant_service,char task_type,double time_arrive, st
 
 int count_element_linked_list(struct node*head);
 double get_instant_end_service_from_linked_list(struct node*head,char*task_type_termination);
-int delete_head(struct node** head,double *time_arrive);
+int delete_head(struct node** head);

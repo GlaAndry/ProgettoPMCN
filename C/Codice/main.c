@@ -56,16 +56,17 @@ int main(int argc,char *argv[]){
 
     //variabili del sistema
 
-    double current_time = 0.0; //Tempo iniziale della simulazione
-    double arrive_time = 0.0;  //tempo iniziale di arrivo dei Job.
-    double next_event_time = 0.0; //tempo del prossimo evento
+    double current_time = 0.0;      //Tempo iniziale della simulazione
+    double arrive_time = 0.0;       //tempo iniziale di arrivo dei Job.
+    double next_event_time = 0.0;   //tempo del prossimo evento
+    double p = 0.8;                 //probabilità di rientrare nel multiserver
 
 
     //Arrivi
     double next_arrival;
-    double next_arrival_gelato_1_gusto = get_interarrival_cassa(1);
-    double next_arrival_gelato_2_gusti = get_interarrival_cassa(2);
-    double next_arrival_gelato_3_gusti = get_interarrival_cassa(3);
+    double next_arrival_gelato_1_gusto = 0.0;
+    double next_arrival_gelato_2_gusti = 0.0;
+    double next_arrival_gelato_3_gusti = 0.0;
 
     //Completamenti
     double next_completion; //istante del prossimo completamento 
@@ -93,12 +94,17 @@ int main(int argc,char *argv[]){
     //se il tempo corrente è minore di quello massimo o ci sono ancora job in servizio
     while ((current_time < STOP || state.number_of_user_cassa > 0 || state.number_of_user_verify > 0 || state.number_of_user_delay > 0 || state.number_of_user_multiserver > 0)) {
 
+        printf("Valore palline di gelato: %f", state.number_balls_icecream);
+
         //verifico la scadenza del timer in modo da terminare la simulazione
         if(current_time > STOP){
             state.next = INF;
         } else { 
             //determino il prossimo arrivo come l'evento che possiede il tempo minimo tra tutti.
             //andando anche a scrivere il tipo di Job che è arrivato nella varibile task_type_next_arrival
+            double next_arrival_gelato_1_gusto = get_interarrival_cassa(1);
+            double next_arrival_gelato_2_gusti = get_interarrival_cassa(2);
+            double next_arrival_gelato_3_gusti = get_interarrival_cassa(3);
             printf("gusto1 %f\n", next_arrival_gelato_1_gusto);
             printf("gusto2 %f\n", next_arrival_gelato_2_gusti);
             printf("gusto3 %f\n", next_arrival_gelato_3_gusti);
@@ -106,7 +112,6 @@ int main(int argc,char *argv[]){
             next_arrival = (double) min_array_associated_job(array_arrival, 3, &task_type_next_arrival);
             printf("next_arrival: %f\n", next_arrival);
             printf("Tipologia di Task attuale: %d\n", task_type_next_arrival);
-
         }
 
         //verifico le prossime terminazioni. si va ad aggiornare anche il valore delle variabili 
@@ -177,7 +182,7 @@ int main(int argc,char *argv[]){
         next_event_time = min(next_arrival, next_completion);
 
         //aggiornamento dei valori dell'area
-        update_area(state, &area, current_time, next_event_time);
+        //update_area(state, &area, current_time, next_event_time);
 
         //aggiorno il clock
         current_time = next_event_time;
@@ -195,84 +200,110 @@ int main(int argc,char *argv[]){
         //se il prossimo evento è un arrivo
         if(current_time == next_arrival){ 
 
-            if(task_type_next_arrival == TASK_TYPE1){ //Arriva un job di tipo 1
-                next_arrival_gelato_1_gusto = get_interarrival_cassa(TASK_TYPE1);
+            //definisco il nodo da inserire
+            struct node *newNode;
+            newNode = get_new_node(0.0,task_type_next_arrival,current_time);
+            //inserisco il Job all'interno della coda del server Cassa.
+            insert_at_tail(&newNode, &cassa_head, &cassa_tail);
+            update_state(task_type_next_arrival, DIRECT_CASSA, &state);
+        
 
-
-                /////////////BOH
-                //definisco il nodo da inserire
-                struct node newNode;
-                initialize_node(&newNode);
-                
-
-                //inserisco il Job all'interno della coda del server Cassa.
-                insert_at_tail(&newNode, &cassa_head, &cassa_tail);
-                //////////////////////
-
-                //Aggiorno le variabili del sistema tramite la funzione update.
-                update_state(TASK_TYPE1, DIRECT_VERIFY, &state);
-
-                //Assegno il task al server cassa
-                
-                assign_task_to_verify(current_time, TASK_TYPE1, &verifica_head, &verifica_tail);
-
-            }else if(task_type_next_arrival == TASK_TYPE2) {
-
-                next_arrival_gelato_1_gusto = get_interarrival_cassa(TASK_TYPE2);
-
-                //Aggiorno le variabili del sistema
-                update_state(TASK_TYPE2, DIRECT_VERIFY, &state);
-
-                //Assegno il task al server verifica
-                assign_task_to_verify(current_time, TASK_TYPE2, &verifica_head, &verifica_tail);
-
-            }else {
-
-                next_arrival_gelato_1_gusto = get_interarrival_cassa(TASK_TYPE3);
-
-                //Aggiorno le variabili del sistema
-                update_state(TASK_TYPE3, DIRECT_VERIFY, &state);
-
-                //Assegno il task al server verifica
-                assign_task_to_verify(current_time, TASK_TYPE3, &verifica_head, &verifica_tail);
-
-            }
         //se il prossimo evento è un completamento
         } else if (current_time == next_completion){ //gestisco l'evento di completamento
 
+            double time_completion = 0.0;
+            struct node *new_completion_node;
+            
+
             //gestione evento completamento server verifica.
             //possibili redirezioni a delay o al multiserver.
-            if (current_time == next_completion_verifica){
+            if(current_time == next_completion_cassa){
 
-                state.completion_verifica++;
-                //elimino dalla testa della coda verifica il JOB
-                //aggiornando la variabile arrive_time.
-                delete_head(&verifica_head, &arrive_time);
+                //calcolo il tempo di completamento del Task
+                time_completion = current_time + get_service_cassa(task_type_next_termination);
+                current_time += time_completion;
+                //creazione del nodo
+                new_completion_node = get_new_node(time_completion,task_type_next_arrival,current_time);
+                //elimino la testa dalla lista dinamica della cassa
+                delete_head(&cassa_head);
+                //aggiungo il task appena calcolato nella lista dinamica della verifica
+                insert_at_tail(&new_completion_node,&verifica_head,&verifica_tail);
+                //aggiornamento delle variabili di stato.
+                update_state(task_type_next_termination, DIRECT_VERIFY, &state);
 
-                if(task_type_next_verifica_termination == TASK_TYPE1){
-                    //if(condizione per andare in delay)
 
-                    //else condizione per andare in multiserver
-                    assign_task_to_multiserver(current_time, TASK_TYPE1, &multiserver_head, &multiserver_tail);
+            }else if (current_time == next_completion_verifica){
 
-                } else if (task_type_next_verifica_termination == TASK_TYPE2){
-                    
-                    assign_task_to_multiserver(current_time, TASK_TYPE2, &multiserver_head, &multiserver_tail);
+                //determino il numero attuale di palline di gelato
+                int actual_number_of_icecream_balls = state.number_balls_icecream;
+                int number_of_balls_required = atoi(task_type_next_termination);
 
+                //calcolo il tempo di completamento del Task
+                time_completion = current_time + get_service_verifica(task_type_next_termination);
+                current_time += time_completion;
+                //creazione del nodo
+                new_completion_node = get_new_node(time_completion,task_type_next_arrival,current_time);
+                //elimino la testa dalla lista dinamica della cassa
+                delete_head(&verifica_head);
+
+                //determino se andare verso il multiserver o verso il server di delay.
+                if(actual_number_of_icecream_balls - number_of_balls_required < 0){
+                    //ci dirigiamo verso il server delay
+                    //aggiungo il task appena calcolato nella lista dinamica della verifica
+                    insert_at_tail(&new_completion_node,&delay_head,&delay_tail);
+                    //aggiornamento delle variabili di stato.
+                    update_state(task_type_next_termination, DIRECT_DELAY, &state);
                 } else {
+                    //andiamo nel multiserver
+                    //aggiungo il task appena calcolato nella lista dinamica della verifica
+                    insert_at_tail(&new_completion_node,&multiserver_head,&multiserver_tail);
+                    //aggiornamento delle variabili di stato.
+                    update_state(task_type_next_termination, DIRECT_MULTISERVER, &state);
+                }
+
                 
-                    assign_task_to_multiserver(current_time, TASK_TYPE3, &multiserver_head, &multiserver_tail);
+            } else if (current_time == next_completion_delay) { //processamento Job nel server di verifica
+                
+                //definisco la variabile di probabilità
+                double prob = 0.9;
+
+                //calcolo il tempo di completamento del Task
+                time_completion = current_time + get_service_delay(task_type_next_termination);
+                current_time += time_completion;
+                //creazione del nodo
+                new_completion_node = get_new_node(time_completion,task_type_next_arrival,current_time);
+                //elimino la testa dalla lista dinamica della cassa
+                delete_head(&delay_head);
+                //aggiungo il task appena calcolato nella lista dinamica della verifica
+
+                //determino se il Job esce dal sistema oppure va nel multiserver
+                if(p < prob){
+                    //il job esce dal sistema
+                    //aggiornamento delle variabili di stato.
+                    update_state(task_type_next_termination, DIRECT_EXIT, &state);
+                } else {
+                    //Job diretto verso il multiserver
+                    insert_at_tail(&new_completion_node,&multiserver_head,&multiserver_tail);
+                    //aggiornamento delle variabili di stato.
+                    update_state(task_type_next_termination, DIRECT_MULTISERVER, &state);
 
                 }
+
+            } else {    //processamento Job multiserver
+
+                //calcolo il tempo di completamento del Task
+                time_completion = current_time + get_service_multiserver(task_type_next_termination);
+                current_time += time_completion;
+                //creazione del nodo
+                new_completion_node = get_new_node(time_completion,task_type_next_arrival,current_time);
+                //elimino la testa dalla lista dinamica della cassa
+                delete_head(&multiserver_head);
+                //aggiornamento delle variabili di stato.
+                update_state(task_type_next_termination, DIRECT_EXIT, &state);
+
             }
 
-            //gestione dell'evento completamento multiserver
-            //l'utente esce dal sistema.
-            if (current_time == next_completion_multiserver){
-
-                delete_head(&multiserver_head, &arrive_time);
-                
-            }
+    
         }
     }
 

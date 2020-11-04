@@ -8,6 +8,7 @@ struct state{//variabili di stato del sistema
     double next;                    /* next (most imminent) event time     */
     double last;                    /* last arrival time                   */
     double numberOfUsers;           /* Numero di utenti nel sistema        */
+    double number_lost_users;       /* Numero di utenti persi dal sistema  */
     double number_balls_icecream;   /* Numero attuale di palline di gelato 
                                        prima di essere riempite nuovamente */
 
@@ -136,6 +137,8 @@ struct area{ //tipi di aree (calcolo ottenuto non dall'integrale ma dalla forma 
 #define DIRECT_VERIFY 2         //task diretto alla verifica dei gusti
 #define DIRECT_MULTISERVER 3    //task diretto al multiserver
 #define DIRECT_DELAY 4          //task diretto al server di Delay
+#define DIRECT_QUIT 5           //task esce dal sistema senza gelato
+#define DIRECT_EXIT 6           //task esce dal sistema con gelato
 
 #define SEED_DEFAULT 991102
 #define ALPHA 0.05 //ALPHA= 0.05 NECESSARIO PER INTERVALLO DI CONFIDENZA 

@@ -75,20 +75,18 @@ void remove_prev_node(struct node**pprev,struct node**head){
 }
 
 //rimuove il primo elemento dalla lista dinamica,non è importante il valore iniziale di head
-int delete_head(struct node** head,double *time_arrive){
-    if(head==NULL || time_arrive==NULL){
+int delete_head(struct node** head){
+    if(head==NULL){
         handle_error_with_exit("error in delete head\n");
     }
     if(*head == NULL){//nessuna testa da eliminare
         return -1;
     }
     if ((*head)-> next == NULL){//c'è un solo nodo in lista
-        *time_arrive=(*head)->time_arrive;
         free(*head);
         *head = NULL;
     }else{
         struct node*temp=(*head)->next;
-        *time_arrive=(*head)->time_arrive;
         free(*head);
         *head=temp;
         (*head)-> prev = NULL;
