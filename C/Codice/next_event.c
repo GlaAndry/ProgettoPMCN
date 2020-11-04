@@ -25,7 +25,7 @@ void initialize_area(struct node *node) {
     if (node == NULL) {
         handle_error_with_exit("error in initialize area\n");
     }
-    memset(noed, 0, sizeof(struct node));
+    memset(node, 0, sizeof(struct node));
 }
 
 /**
