@@ -20,9 +20,11 @@ double*alloc_array_double(int lenght){
     memset(array,0,sizeof(double)*lenght);
     return array;
 }
+
 void free_all_memory(double*tr_batch){ //necessario indicare tutte le variabili del sistema.
     free(tr_batch);
 }
+
 void handle_error_with_exit(char*error_string){//uccide il processo dopo essersi accorto di un errore
     if(error_string==NULL){
         printf("error string is NULL\n");
@@ -46,8 +48,7 @@ double min(double i,double j){
     return j;
 }
 
-double min_array_associated_job(double arr[], int len, char *type)
-{
+double min_array_associated_job(double arr[], int len, char *type){
     //Ritorna il valore minimo ed assegna la tipologia di Job.
     
     double min = arr[0];
@@ -63,8 +64,8 @@ double min_array_associated_job(double arr[], int len, char *type)
     return min;
 }
 
-double min_array(double arr[], int len)
-{
+double min_array(double arr[], int len){
+
     double min = arr[0];
 
     for ( int i = 1; i < len; i++ ){
@@ -76,8 +77,8 @@ double min_array(double arr[], int len)
     return min;
 }
 
-double* min_element(double *start, double *end)
-{
+double* min_element(double *start, double *end){
+    
     if (start == end) return end;
 
     double *min = start++;

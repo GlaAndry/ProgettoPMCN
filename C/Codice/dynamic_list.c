@@ -4,8 +4,8 @@
 #include <string.h>
 #include <math.h>
 
-
-int count_element_linked_list(struct node*head){//conta elementi nella lista dinamica
+//conta gli elementi nella lista dinamica
+int count_element_linked_list(struct node*head){
     int count=0;
     if (head==NULL){
         handle_error_with_exit("head is NULL\n");
@@ -18,7 +18,8 @@ int count_element_linked_list(struct node*head){//conta elementi nella lista din
     return count;
 }
 
-double get_instant_end_service_from_linked_list(struct node*head,char*task_type_termination){//ottiene istante fine servizio del nodo,e informazioni riguardo al task:tipo
+//ottiene istante fine servizio del nodo,e informazioni riguardo al task:tipo
+double get_instant_end_service_from_linked_list(struct node*head,char*task_type_termination){
     if(head==NULL){
         handle_error_with_exit("linked list is empty\n");
     }
@@ -27,7 +28,8 @@ double get_instant_end_service_from_linked_list(struct node*head,char*task_type_
     return p->instant_end_service;
 }
 
-void remove_after_node(struct node**ppos,struct node**tail){//rimuovi il nodo a cui punta il puntatore a nodo(*pos),*pos deve essere un puntatore next appartenente ad un nodo valido
+//rimuovi il nodo a cui punta il puntatore a nodo(*pos),*pos deve essere un puntatore next appartenente ad un nodo valido
+void remove_after_node(struct node**ppos,struct node**tail){
     if(ppos==NULL || tail==NULL){
         handle_error_with_exit("error in remove_after_node\n");
     }
@@ -49,7 +51,8 @@ void remove_after_node(struct node**ppos,struct node**tail){//rimuovi il nodo a 
     return;
 }
 
-void remove_prev_node(struct node**pprev,struct node**head){//rimuovi il nodo a cui punta il puntatore a nodo(*pos),*pos deve essere un puntatore prev appartenente ad un nodo valido
+//rimuovi il nodo a cui punta il puntatore a nodo(*pos),*pos deve essere un puntatore prev appartenente ad un nodo valido
+void remove_prev_node(struct node**pprev,struct node**head){
     if(pprev==NULL || head==NULL){
         handle_error_with_exit("error in remove_after_node\n");
     }
@@ -71,7 +74,8 @@ void remove_prev_node(struct node**pprev,struct node**head){//rimuovi il nodo a 
     return;
 }
 
-int delete_head(struct node** head,double *time_arrive){//rimuove il primo elemento dalla lista dinamica,non è importante il valore iniziale di head
+//rimuove il primo elemento dalla lista dinamica,non è importante il valore iniziale di head
+int delete_head(struct node** head,double *time_arrive){
     if(head==NULL || time_arrive==NULL){
         handle_error_with_exit("error in delete head\n");
     }
@@ -92,7 +96,8 @@ int delete_head(struct node** head,double *time_arrive){//rimuove il primo eleme
     return 0;
 }
 
-void insert_first(struct node *new_node, struct node **head, struct node **tail){//inserisce il primo nodo nella lista
+//inserisce il primo nodo nella lista
+void insert_first(struct node *new_node, struct node **head, struct node **tail){
     if(new_node==NULL || head==NULL || tail==NULL){
         handle_error_with_exit("error in insert_first\n");
     }
@@ -101,7 +106,8 @@ void insert_first(struct node *new_node, struct node **head, struct node **tail)
     return;
 }
 
-void insert_at_tail(struct node *new_node,struct node**head,struct node** tail){//inserisce un nodo in coda
+//inserisce un nodo in coda
+void insert_at_tail(struct node *new_node,struct node**head,struct node** tail){
     if(head==NULL){
         handle_error_with_exit("error in insert_at_head **head is NULL\n");
     }
@@ -150,16 +156,16 @@ void insert_at_head(struct node* new_node,struct node** head,struct node** tail)
     return;
 }
 
-
-char first_is_smaller(struct node node1, struct node node2){//verifica se il primo nodo contiene tempi più piccoli del secondo nodo
+//verifica se il primo nodo contiene tempi più piccoli del secondo nodo
+char first_is_smaller(struct node node1, struct node node2){
     if(node1.instant_end_service>=node2.instant_end_service){
         return 0;
     }
     return 1;
 }
 
+//inserisce ordinatamente un nodo nella lista ordinata per istanti temporali,partendo dalla coda
 void insert_ordered(double instant_end_service,char task_type,double time_arrive, struct node** head, struct node** tail){
-    //inserisce ordinatamente un nodo nella lista ordinata per istanti temporali,partendo dalla coda
     struct node* temp = *tail;
     struct node* next_node = NULL;
     struct node* new_node = get_new_node(instant_end_service,task_type,time_arrive);

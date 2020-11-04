@@ -25,7 +25,7 @@ int main(int argc,char *argv[]){
     double STOP=STOP_SIMULATION;
     int i=0;//indice di batch
     state.number_balls_icecream = MAX_ICECREAM_TUB; //imposto il valore massimo 
-    //alle palline di gelato quando inzia la simulazione.
+    //di palline di gelato quando inzia la simulazione.
 
     //Queste variabili assumono il valore 1,2 o 3 a seconda del Job processato.
 
@@ -48,8 +48,6 @@ int main(int argc,char *argv[]){
     struct node *multiserver_head = NULL;
     struct node *multiserver_tail = NULL;
 
-    
-
     printf("----------------------------------------------------------\n");
     printf("START SIMULATION\n");
     printf("----------------------------------------------------------\n");
@@ -58,7 +56,7 @@ int main(int argc,char *argv[]){
     //variabili del sistema
 
     double current_time = 0.0; //Tempo iniziale della simulazione
-    double arrive_time = 0.0;  //tempo inizile di arrivo dei Job.
+    double arrive_time = 0.0;  //tempo iniziale di arrivo dei Job.
     double next_event_time = 0.0; //tempo del prossimo evento
 
 
@@ -75,6 +73,7 @@ int main(int argc,char *argv[]){
     double next_completion_delay = INF;
     double next_completion_multiserver = INF;
 
+    //se il tempo corrente è minore di quello massimo o ci sono ancora job in servizio
     while ((current_time < STOP || state.number_of_user_cassa > 0 || state.number_of_user_verify > 0 || state.number_of_user_delay > 0 || state.number_of_user_multiserver > 0)) {
 
         //verifico la scadenza del timer in modo da terminare la simulazione
@@ -124,17 +123,17 @@ int main(int argc,char *argv[]){
 
         printf("current time: %f\n", current_time);
 
-
         printf("\n\n\n");
         sleep(5);
 
         //FINO A QUI CORRETTO 
 
 
-
         //GESTIONE DEGLI EVENTI
 
-        if(current_time == next_arrival){ //gestisco l'evento di arrivo nel sistema
+        //se il prossimo evento è un arrivo
+        if(current_time == next_arrival){ 
+
             if(task_type_next_arrival == TASK_TYPE1){ //Arriva un job di tipo 1
                 next_arrival_gelato_1_gusto = get_interarrival_cassa(TASK_TYPE1);
 
@@ -143,7 +142,9 @@ int main(int argc,char *argv[]){
 
                 //Assegno il task al server verifica
                 assign_task_to_verify(current_time, TASK_TYPE1, &verifica_head, &verifica_tail);
+
             }else if(task_type_next_arrival == TASK_TYPE2) {
+
                 next_arrival_gelato_1_gusto = get_interarrival_cassa(TASK_TYPE2);
 
                 //Aggiorno le variabili del sistema
@@ -151,7 +152,9 @@ int main(int argc,char *argv[]){
 
                 //Assegno il task al server verifica
                 assign_task_to_verify(current_time, TASK_TYPE2, &verifica_head, &verifica_tail);
-            } else {
+
+            }else {
+
                 next_arrival_gelato_1_gusto = get_interarrival_cassa(TASK_TYPE3);
 
                 //Aggiorno le variabili del sistema
@@ -159,29 +162,34 @@ int main(int argc,char *argv[]){
 
                 //Assegno il task al server verifica
                 assign_task_to_verify(current_time, TASK_TYPE3, &verifica_head, &verifica_tail);
+
             }
+        //se il prossimo evento è un completamento
         } else if (current_time == next_completion){ //gestisco l'evento di completamento
 
             //gestione evento completamento server verifica.
             //possibili redirezioni a delay o al multiserver.
             if (current_time == next_completion_verifica){
+
                 state.completion_verifica++;
                 //elimino dalla testa della coda verifica il JOB
                 //aggiornando la variabile arrive_time.
                 delete_head(&verifica_head, &arrive_time);
+
                 if(task_type_next_verifica_termination == TASK_TYPE1){
                     //if(condizione per andare in delay)
 
                     //else condizione per andare in multiserver
                     assign_task_to_multiserver(current_time, TASK_TYPE1, &multiserver_head, &multiserver_tail);
+
                 } else if (task_type_next_verifica_termination == TASK_TYPE2){
                     
-
                     assign_task_to_multiserver(current_time, TASK_TYPE2, &multiserver_head, &multiserver_tail);
-                } else {
-                    
 
+                } else {
+                
                     assign_task_to_multiserver(current_time, TASK_TYPE3, &multiserver_head, &multiserver_tail);
+
                 }
             }
 
@@ -190,6 +198,7 @@ int main(int argc,char *argv[]){
             if (current_time == next_completion_multiserver){
 
                 delete_head(&multiserver_head, &arrive_time);
+                
             }
         }
     }
