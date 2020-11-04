@@ -6,6 +6,7 @@
 
 void initialize_state(struct state*state);
 void initialize_area(struct area*area);
+void initialize_node(struct node *node);
 
 
 double get_interarrival_cassa(char task_type);
@@ -20,6 +21,7 @@ double find_next_termination(struct node *head, char *task_type_termination);
 
 //assegnamento dei task alle altre code
 
+void assign_task_to_cassa(double time_current, char task_type, struct node **head,struct node **tail);
 void assign_task_to_verify(double time_current, char task_type, struct node **head,struct node **tail);
 void assign_task_to_delay(double time_current, char task_type, struct node **head,struct node **tail);
 void assign_task_to_multiserver(double time_current, char task_type, struct node **head,struct node **tail);
