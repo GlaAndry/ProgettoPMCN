@@ -193,3 +193,4 @@ void insert_ordered(double instant_end_service,char task_type,double time_arrive
     }
     return;
 }
+

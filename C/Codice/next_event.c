@@ -331,9 +331,7 @@ void update_state(char task_type, char location, struct state *state) {
 
         handle_error_with_exit("error in update state location\n");
 
-    }
-
-    //int numberOfTaste = task_type - '0';
+    }    
 
     state->numberOfUsers ++; //ogni volta che arriva un Job aumentiamo il numero di utenti totali che il sistema serve.
 
@@ -345,8 +343,8 @@ void update_state(char task_type, char location, struct state *state) {
 
         state->number_of_user_cassa--;
         state->number_of_user_verify++;
-        state->number_balls_icecream - task_type; //per il gelato 1 gusto tolgo solo una pallina di gelato.
-           
+        state->number_balls_icecream -= task_type; //per il gelato 1 gusto tolgo solo una pallina di gelato.
+        
     }else if(location == DIRECT_MULTISERVER){ //arrivo task gelato 1 gusto verso multiserver
 
         state->number_of_user_verify--;
