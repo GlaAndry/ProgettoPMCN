@@ -236,7 +236,7 @@ int main(int argc,char *argv[]){
 
                 //determino il numero attuale di palline di gelato
                 int actual_number_of_icecream_balls = state.number_balls_icecream;
-                int number_of_balls_required = atoi(task_type_next_termination);
+                //int number_of_balls_required = atoi(task_type_next_termination);
 
                 //calcolo il tempo di completamento del Task
                 time_completion = current_time + get_service_verifica(task_type_next_termination);
@@ -247,7 +247,7 @@ int main(int argc,char *argv[]){
                 delete_head(&verifica_head);
 
                 //determino se andare verso il multiserver o verso il server di delay.
-                if(actual_number_of_icecream_balls - number_of_balls_required < 0){
+                if(actual_number_of_icecream_balls - task_type_next_termination < 0){
                     //ci dirigiamo verso il server delay
                     //aggiungo il task appena calcolato nella lista dinamica della verifica
                     insert_at_tail(&new_completion_node,&delay_head,&delay_tail);
