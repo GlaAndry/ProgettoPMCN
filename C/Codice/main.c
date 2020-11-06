@@ -238,8 +238,6 @@ int main(int argc,char *argv[]){
                 int actual_number_of_icecream_balls = state.number_balls_icecream;
                 //int number_of_balls_required = atoi(task_type_next_termination);
 
-                //prova
-                int prova = 0;
                 //calcolo il tempo di completamento del Task
                 time_completion = current_time + get_service_verifica(task_type_next_termination);
                 current_time += time_completion;
