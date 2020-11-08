@@ -8,7 +8,9 @@
 int count_element_linked_list(struct node*head){
     int count=0;
     if (head==NULL){
-        handle_error_with_exit("head is NULL\n");
+        //handle_error_with_exit("head is NULL\n");
+        count = 0;
+        return count;
     }
     struct node *p=head;
     while(p!=NULL){

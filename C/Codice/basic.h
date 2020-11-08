@@ -28,11 +28,19 @@ struct state{//variabili di stato del sistema
     double completion_delay;
     double number_of_user_delay;
 
+
     //variabili Multi_server
     double arrival_multi;
     double completion_multi;
     double number_of_user_multiserver;
+
     
+};
+
+struct state_multiserver{
+    //variabili Multi_server
+    int type_event;                     //determina se il server è idle o meno (1: Esegue il job , 0:idle)
+    double next_event_time;             //Prossimo evento temporale nel multiserver
 };
 
 struct last_state{ //struttura che determina le variabili dello stato precedente rispetto a quello attuale del sistema.

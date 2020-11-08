@@ -10,6 +10,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <math.h>
+#include "multiserver_func.h"
 
 int main(int argc,char *argv[]){
 
@@ -19,6 +20,7 @@ int main(int argc,char *argv[]){
     //definizione delle variabili
     struct state state;
     struct area area;
+    struct state_multiserver multiserver[NUM_MAX_SERVER];
     initialize_area(&area);
     initialize_state(&state);
 
@@ -91,8 +93,15 @@ int main(int argc,char *argv[]){
     double next_completion_multiserver_2 = INF;
     double next_completion_multiserver_3 = INF;
 
+    //Inizializzazione del multiserver
+    for (int s = 0; s <= NUM_MAX_SERVER; s++) {
+        multiserver[s].next_event_time = START;           /* this value is arbitrary because */
+        multiserver[s].type_event = 0;                  /* all servers are initially idle  */
+    }
+
     //se il tempo corrente è minore di quello massimo o ci sono ancora job in servizio
-    while ((current_time < STOP || state.number_of_user_cassa > 0 || state.number_of_user_verify > 0 || state.number_of_user_delay > 0 || state.number_of_user_multiserver > 0)) {
+    // multiserver[0].type_event != 0 significa che il primo server del multiserver è idle
+    while ((current_time < STOP || state.number_of_user_cassa > 0 || state.number_of_user_verify > 0 || state.number_of_user_delay > 0 || state.number_of_user_multiserver > 0 || multiserver[0].type_event != 0)) {
 
         printf("Valore palline di gelato: %f\n", state.number_balls_icecream);
 
@@ -218,8 +227,18 @@ int main(int argc,char *argv[]){
                     //aggiornamento delle variabili di stato.
                     update_state(task_type_next_termination, DIRECT_DELAY, &state);
                 } else {
-                    //andiamo nel multiserver
+                    //andiamo nel multiserver //multiserver arriva = completion verifica
                     //aggiungo il task appena calcolato nella lista dinamica della verifica
+
+                    int server = find_one(multiserver);
+                    int num_task = count_element_linked_list(multiserver_head);
+                    if (num_task <= NUM_MAX_SERVER) {
+
+                        multiserver[server].type_event = 1;
+                        multiserver[server].next_event_time = current_time;
+
+                    }
+
                     insert_at_tail(new_completion_node,&multiserver_head,&multiserver_tail);
                     printf("%d: numero nella lista multiserver\n", count_element_linked_list(multiserver_head));
                     //aggiornamento delle variabili di stato.
@@ -248,6 +267,16 @@ int main(int argc,char *argv[]){
                     update_state(task_type_next_termination, DIRECT_EXIT, &state);
                 } else {
                     //Job diretto verso il multiserver
+
+                    int server = find_one(multiserver);
+                    int num_task = count_element_linked_list(multiserver_head);
+                    if (num_task <= NUM_MAX_SERVER) {
+
+                        multiserver[server].type_event = 1;
+                        multiserver[server].next_event_time = current_time;
+
+                    }
+
                     insert_at_tail(new_completion_node,&multiserver_head,&multiserver_tail);
                     printf("%d: numero nella lista multiserver\n", count_element_linked_list(multiserver_head));
 
@@ -258,15 +287,27 @@ int main(int argc,char *argv[]){
 
             } else {    //processamento Job multiserver
 
-                //calcolo il tempo di completamento del Task
-                time_completion = current_time + get_service_multiserver(task_type_next_termination);
-                current_time += time_completion;
-                //creazione del nodo
-                new_completion_node = get_new_node(time_completion,task_type_next_arrival,current_time);
-                //elimino la testa dalla lista dinamica della cassa
-                delete_head(&multiserver_head);
-                //aggiornamento delle variabili di stato.
-                update_state(task_type_next_termination, DIRECT_EXIT, &state);
+                //verifico i task all'interno della lista dinamica
+                int num_task = count_element_linked_list(multiserver_head);
+                printf("Numero di elementi multi %d\n", num_task);
+                int server = find_one(multiserver);
+                if (num_task >= NUM_MAX_SERVER) {
+                    //calcolo il tempo di completamento del Task
+                    time_completion = current_time + get_service_multiserver(task_type_next_termination);
+
+                    multiserver[server].next_event_time = time_completion;
+
+                    current_time += time_completion;
+                    //creazione del nodo
+                    new_completion_node = get_new_node(time_completion,task_type_next_arrival,current_time);
+                    //elimino la testa dalla lista dinamica della cassa
+                    delete_head(&multiserver_head);
+                    //aggiornamento delle variabili di stato.
+                    update_state(task_type_next_termination, DIRECT_EXIT, &state);
+
+                } else {
+                    multiserver[server].type_event = 0;
+                }
 
             }
 

@@ -4,6 +4,14 @@
 #include "next_event.h"
 #include "distributions.h"
 
+//inizializza la struct state_multiserver
+void initialize_state_multiserver(struct state_multiserver*multiserver){
+    if (multiserver == NULL) {
+        handle_error_with_exit("error in initialize state\n");
+    }
+    memset(multiserver, 0, sizeof(struct state_multiserver)*NUM_MAX_SERVER);
+}
+
 
 //inizializza la struct state
 void initialize_state(struct state *state) {
