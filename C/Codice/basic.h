@@ -11,6 +11,9 @@ struct state{//variabili di stato del sistema
     double number_lost_users;       /* Numero di utenti persi dal sistema  */
     double number_balls_icecream;   /* Numero attuale di palline di gelato 
                                        prima di essere riempite nuovamente */
+    double job1;
+    double job2;
+    double job3;
 
     //Variabili Server Cassa
     double arrival;                 /* next arrival time server Cassa      */
@@ -21,20 +24,28 @@ struct state{//variabili di stato del sistema
     double arrival_verifica;
     double completion_verifica;
     double number_of_user_verify;
+    double job1_verify;
+    double job2_verify;
+    double job3_verify;
 
 
     //Variabili Delay Server
     double arrival_delay;
     double completion_delay;
     double number_of_user_delay;
+    double job1_delay;
+    double job2_delay;
+    double job3_delay;
 
 
     //variabili Multi_server
     double arrival_multi;
     double completion_multi;
     double number_of_user_multiserver;
+    double job1_multiserver;
+    double job2_multiserver;
+    double job3_multiserver;
 
-    
 };
 
 struct state_multiserver{
@@ -53,25 +64,46 @@ struct area{ //tipi di aree (calcolo ottenuto non dall'integrale ma dalla forma 
     
     //Variabili Cassa
     double number_node_cassa;
-    double number_queue_cassa;
-    double number_service_cassa;
+    double number_job_type1_cassa;
+    double number_job_type2_cassa;
+    double number_job_type3_cassa;
+
+    //double number_queue_cassa;
+    //double number_service_cassa;
     //Variabili verifica
     double number_node_verify;
-    double number_queue_verify;
-    double number_service_verify;
+    double number_job_type1_verify;
+    double number_job_type2_verify;
+    double number_job_type3_verify;
+    //double number_queue_verify;
+    //double number_service_verify;
     //variabili Delay
     double number_node_delay;
-    double number_queue_delay;
-    double number_service_delay;
+    double number_job_type1_delay;
+    double number_job_type2_delay;
+    double number_job_type3_delay;
+    //double number_queue_delay;
+    //double number_service_delay;
     //variabili multiserver
     double number_node_multi;
-    double number_queue_multi;
-    double number_service_multi;
+    double number_job_type1_multiserver;
+    double number_job_type2_multiserver;
+    double number_job_type3_multiserver;
+    //double number_queue_multi;
+    //double number_service_multi;
 
     //variabili globali
     double total_node;                    /* time integrated number in the node  */
-    double total_queue;                   /* time integrated number in the queue */
-    double total_service;                 /* time integrated number in service   */
+    double number_job_type1;
+    double number_job_type2;
+    double number_job_type3;
+
+    //altre variabili
+    double users_lost;
+    double ice_cream_balls;
+
+    //double total_queue;                   /* time integrated number in the queue */
+    //double total_service;                 /* time integrated number in service   */
 };
 
 #define START 0.0 //istante inizio simulazione

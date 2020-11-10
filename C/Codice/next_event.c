@@ -299,21 +299,42 @@ void update_area(struct state state, struct area *area, double time_current,doub
 
     }
 
-    //calcolo il numero di Job nel nodo della rete  ??(server + coda)??
-    area -> number_node_cassa += (time_next - time_current) * (state.number_of_user_cassa);
+    //calcolo il numero di Job nel nodo della rete
+    //area -> number_node_cassa += (time_next - time_current) * (state.number_of_user_cassa);
     area -> number_node_verify += (time_next - time_current) * (state.number_of_user_verify);
     area -> number_node_delay += (time_next - time_current) * (state.number_of_user_delay);
     area -> number_node_multi += (time_next - time_current) * (state.number_of_user_multiserver);
     area -> total_node += (time_next - time_current) * (state.number_of_user_cassa + state.number_of_user_verify + state.number_of_user_delay + state.number_of_user_multiserver);
 
+    //calcolo del numero di Job di tipo 1 nella rete e nei nodi
+    area -> number_job_type1_verify += (time_next - time_current) * (state.job1_verify);
+    area -> number_job_type1_delay += (time_next - time_current) * (state.job1_delay);
+    area -> number_job_type1_multiserver += (time_next - time_current) * (state.job1_multiserver);
+
+    area -> number_job_type2_verify += (time_next - time_current) * (state.job2_verify);
+    area -> number_job_type2_delay += (time_next - time_current) * (state.job2_delay);
+    area -> number_job_type2_multiserver += (time_next - time_current) * (state.job2_multiserver);
+
+    area -> number_job_type3_verify += (time_next - time_current) * (state.job3_verify);
+    area -> number_job_type3_delay += (time_next - time_current) * (state.job3_delay);
+    area -> number_job_type3_multiserver += (time_next - time_current) * (state.job3_multiserver);
+
+    area -> number_job_type1 += (time_next - time_current) * (state.job1);
+    area -> number_job_type2 += (time_next - time_current) * (state.job2);
+    area -> number_job_type3 += (time_next - time_current) * (state.job3);
+
+    //altre variabili
+    area -> users_lost += (time_next - time_current) * (state.number_lost_users);
+    area -> ice_cream_balls += (time_next - time_current) * (state.number_balls_icecream);
+
     //calcolo il numero di Job nella coda
-    area -> number_queue_cassa += (time_next - time_current) * (state.number_of_user_cassa - 1);
-    area -> number_queue_verify += (time_next - time_current) * (state.number_of_user_verify - 1);
-    area -> number_queue_delay += (time_next - time_current) * (state.number_of_user_delay - 1);
-    area -> number_queue_multi += (time_next - time_current) * (state.number_of_user_multiserver - 1);
+    //area -> number_queue_cassa += (time_next - time_current) * (state.number_of_user_cassa - 1);
+    //area -> number_queue_verify += (time_next - time_current) * (state.number_of_user_verify - 1);
+    //area -> number_queue_delay += (time_next - time_current) * (state.number_of_user_delay - 1);
+    //area -> number_queue_multi += (time_next - time_current) * (state.number_of_user_multiserver - 1);
 
     //calcolo il numero di Job in servizio
-    area -> number_service_cassa += (time_next - time_current); 
+    //area -> number_service_cassa += (time_next - time_current);
 
     return;
 }
@@ -344,26 +365,61 @@ void update_state(char task_type, char location, struct state *state) {
 
     state->numberOfUsers ++; //ogni volta che arriva un Job aumentiamo il numero di utenti totali che il sistema serve.
 
+    //aggiornamento globale dei job
+    //a seconda del tipo di task
+    if(task_type == TASK_TYPE1){
+        state -> job1 ++;
+    } else if (task_type == TASK_TYPE2){
+        state -> job2 ++;
+    } else {
+        state -> job3 ++;
+    }
+    //////
+
     if(location == DIRECT_CASSA) { //arrivo task gelato 1 gusto verso cassa
 
         state->number_of_user_cassa++;
+
+
 
     }else if(location == DIRECT_VERIFY) {//task type 1 e diretto sul  cloud(non interrotto)
 
         state->number_of_user_cassa--;
         state->number_of_user_verify++;
+
+        if(task_type == TASK_TYPE1){
+            state -> job1_verify ++;
+        } else if (task_type == TASK_TYPE2){
+            state -> job2_verify ++;
+        } else {
+            state -> job3_verify ++;
+        }
         
     }else if(location == DIRECT_MULTISERVER){ //arrivo task gelato 1 gusto verso multiserver
 
         state->number_of_user_verify--;
         state->number_of_user_multiserver++;
         state->number_balls_icecream -= task_type; //per il gelato 1 gusto tolgo solo una pallina di gelato.
+        if(task_type == TASK_TYPE1){
+            state -> job1_multiserver ++;
+        } else if (task_type == TASK_TYPE2){
+            state -> job2_multiserver ++;
+        } else {
+            state -> job3_multiserver ++;
+        }
 
     }else if(location == DIRECT_DELAY){
 
         state->number_of_user_verify--;
         state->number_of_user_delay++;
         state->number_balls_icecream = MAX_ICECREAM_TUB;
+        if(task_type == TASK_TYPE1){
+            state -> job1_delay ++;
+        } else if (task_type == TASK_TYPE2){
+            state -> job2_delay ++;
+        } else {
+            state -> job3_delay ++;
+        }
 
     }else if(location == DIRECT_QUIT){
 

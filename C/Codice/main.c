@@ -62,7 +62,6 @@ int main(int argc, char *argv[]) {
     double current_time = 0.0;      //Tempo iniziale della simulazione
     double arrive_time = 0.0;       //tempo iniziale di arrivo dei Job.
     double next_event_time = 0.0;   //tempo del prossimo evento
-    double p = 0.8;                 //probabilità di rientrare nel multiserver
 
 
     //Arrivi
@@ -166,7 +165,7 @@ int main(int argc, char *argv[]) {
         //printf("%d: numero nella lista verifica\n", count_element_linked_list(verifica_head));
 
 
-
+        printf("Palline di gelato totali: %f\n", area.ice_cream_balls);
         sleep(2);
 
 
@@ -295,7 +294,7 @@ int main(int argc, char *argv[]) {
                     }
 
                     printf("%d: numero nella lista multiserver\n", count_element_linked_list(multiserver_head));
-                    
+
                 }
 
             } else {    //processamento Job multiserver
