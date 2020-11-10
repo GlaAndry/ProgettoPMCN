@@ -11,6 +11,7 @@
 #include <fcntl.h>
 #include <math.h>
 #include "multiserver_func.h"
+#include "rvms.h"
 
 int main(int argc, char *argv[]) {
 
@@ -254,7 +255,9 @@ int main(int argc, char *argv[]) {
                 printf("Valore di get_service: %f\n", get_service_delay(task_type_next_termination));
 
                 //definisco la variabile di probabilità
-                double prob = 0.9;
+                //tramite la funzione radom della libreria rngs
+                //che sfrutta il generatore di Lehmer.
+                double prob = Random();
 
                 //calcolo il tempo di completamento del Task
                 time_completion = current_time + get_service_delay(task_type_next_termination);
@@ -267,12 +270,14 @@ int main(int argc, char *argv[]) {
                 //aggiungo il task appena calcolato nella lista dinamica della verifica
 
                 //determino se il Job esce dal sistema oppure va nel multiserver
-                if (p < prob) {
+                if (prob < PROBABILITY) { //probabilità del 20% di uscire dal sistema
                     //il job esce dal sistema
                     //aggiornamento delle variabili di stato.
+                    printf("Ho rosicato zi\n");
                     update_state(task_type_next_termination, DIRECT_EXIT, &state);
-                } else {
+                } else { //probabilità dell'80% di rientrare nel multiserver
                     //Job diretto verso il multiserver
+                    printf("Diretto al multiserver\n");
 
                     //aggiornamento delle variabili di stato.
                     update_state(task_type_next_termination, DIRECT_MULTISERVER, &state);
@@ -290,8 +295,7 @@ int main(int argc, char *argv[]) {
                     }
 
                     printf("%d: numero nella lista multiserver\n", count_element_linked_list(multiserver_head));
-
-
+                    
                 }
 
             } else {    //processamento Job multiserver

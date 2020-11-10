@@ -149,7 +149,9 @@ struct area{ //tipi di aree (calcolo ottenuto non dall'integrale ma dalla forma 
 #define DIRECT_EXIT 6           //task esce dal sistema con gelato
 
 #define SEED_DEFAULT 991102
-#define ALPHA 0.05 //ALPHA= 0.05 NECESSARIO PER INTERVALLO DI CONFIDENZA 
+#define ALPHA 0.05 //ALPHA= 0.05 NECESSARIO PER INTERVALLO DI CONFIDENZA
+#define PROBABILITY 0.8           //Valore di lamda per la probabilità di routing
+                                //del server delay.
 
 void handle_error_with_exit(char*error_string);
 double min_array_associated_job(double arr[], int len, char *type);
