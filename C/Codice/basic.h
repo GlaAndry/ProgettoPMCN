@@ -68,10 +68,10 @@ struct area{ //tipi di aree (calcolo ottenuto non dall'integrale ma dalla forma 
     double number_queue_multi;
     double number_service_multi;
 
-    //vecchie variabili
-    double node;                    /* time integrated number in the node  */
-    double queue;                   /* time integrated number in the queue */
-    double service;                 /* time integrated number in service   */
+    //variabili globali
+    double total_node;                    /* time integrated number in the node  */
+    double total_queue;                   /* time integrated number in the queue */
+    double total_service;                 /* time integrated number in service   */
 };
 
 #define START 0.0 //istante inizio simulazione

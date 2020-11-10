@@ -304,6 +304,7 @@ void update_area(struct state state, struct area *area, double time_current,doub
     area -> number_node_verify += (time_next - time_current) * (state.number_of_user_verify);
     area -> number_node_delay += (time_next - time_current) * (state.number_of_user_delay);
     area -> number_node_multi += (time_next - time_current) * (state.number_of_user_multiserver);
+    area -> total_node += (time_next - time_current) * (state.number_of_user_cassa + state.number_of_user_verify + state.number_of_user_delay + state.number_of_user_multiserver);
 
     //calcolo il numero di Job nella coda
     area -> number_queue_cassa += (time_next - time_current) * (state.number_of_user_cassa - 1);
@@ -351,12 +352,12 @@ void update_state(char task_type, char location, struct state *state) {
 
         state->number_of_user_cassa--;
         state->number_of_user_verify++;
-        state->number_balls_icecream -= task_type; //per il gelato 1 gusto tolgo solo una pallina di gelato.
         
     }else if(location == DIRECT_MULTISERVER){ //arrivo task gelato 1 gusto verso multiserver
 
         state->number_of_user_verify--;
         state->number_of_user_multiserver++;
+        state->number_balls_icecream -= task_type; //per il gelato 1 gusto tolgo solo una pallina di gelato.
 
     }else if(location == DIRECT_DELAY){
 

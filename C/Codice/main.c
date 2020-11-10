@@ -140,10 +140,10 @@ int main(int argc, char *argv[]) {
 
 
         printf("\n\n\n");
-        printf("next_completion_cassa: %f\n", next_completion_cassa);
-        printf("next_completion_verifica: %f\n", next_completion_verifica);
-        printf("next_completion_delay: %f\n", next_completion_delay);
-        printf("next_completion_multiserver: %f\n", next_completion_multiserver);
+        //printf("next_completion_cassa: %f\n", next_completion_cassa);
+        //printf("next_completion_verifica: %f\n", next_completion_verifica);
+        //printf("next_completion_delay: %f\n", next_completion_delay);
+        //printf("next_completion_multiserver: %f\n", next_completion_multiserver);
 
         next_completion = min_array(array_compl, 4);
 
@@ -156,7 +156,7 @@ int main(int argc, char *argv[]) {
         next_event_time = min(next_arrival, next_completion);
 
         //aggiornamento dei valori dell'area
-        //update_area(state, &area, current_time, next_event_time); //TPDO DA FARE
+        update_area(state, &area, current_time, next_event_time);
 
         //aggiorno il clock
         current_time = next_event_time;
@@ -174,22 +174,22 @@ int main(int argc, char *argv[]) {
         //se il prossimo evento è un arrivo
         if (current_time == next_arrival) {
 
+            update_state(task_type_next_arrival, DIRECT_VERIFY, &state);
             printf("Sono in next_arrival e completo nella cassa\n");
-            sleep(1);
+
             //definisco il nodo da inserire
             struct node *newNode;
             //definisco il tempo di completamento nel server cassa
             double time_completion = current_time + get_service_cassa(task_type_next_arrival);
             newNode = get_new_node(time_completion, task_type_next_arrival, current_time);
             //inserisco il Job all'interno della coda del server Cassa.
-            insert_at_tail(newNode, &verifica_head, &verifica_tail);
-            update_state(task_type_next_arrival, DIRECT_VERIFY, &state);
+            //insert_at_tail(newNode, &verifica_head, &verifica_tail);
+            insert_ordered(time_completion,task_type_next_arrival,current_time,&verifica_head,&verifica_tail);
 
 
             //se il prossimo evento è un completamento
         } else if (current_time == next_completion) { //gestisco l'evento di completamento
 
-            sleep(1);
 
             double time_completion = 0.0;
             struct node *new_completion_node;
@@ -207,26 +207,31 @@ int main(int argc, char *argv[]) {
                 //calcolo il tempo di completamento del Task
                 time_completion = current_time + get_service_verifica(task_type_next_termination);
                 //creazione del nodo
-                new_completion_node = get_new_node(time_completion, task_type_next_arrival, current_time);
+                new_completion_node = get_new_node(time_completion, task_type_next_termination, current_time);
                 //aggiorno il tempo corrente
-                current_time += time_completion;
+                //current_time += time_completion;
                 //elimino la testa dalla lista dinamica della cassa
                 delete_head(&verifica_head);
 
                 //determino se andare verso il multiserver o verso il server di delay.
                 if (actual_number_of_icecream_balls - task_type_next_termination < 0) {
+                    update_state(task_type_next_termination, DIRECT_DELAY, &state);
                     //ci dirigiamo verso il server delay
                     //aggiungo il task appena calcolato nella lista dinamica della verifica
-                    insert_at_tail(new_completion_node, &delay_head, &delay_tail);
+                    //insert_at_tail(new_completion_node, &delay_head, &delay_tail);
+                    insert_ordered(time_completion,task_type_next_termination, current_time, &delay_head, &delay_tail);
                     printf("%d: numero nella lista delay\n", count_element_linked_list(delay_head));
 
                     //aggiornamento delle variabili di stato.
-                    update_state(task_type_next_termination, DIRECT_DELAY, &state);
                 } else {
                     //andiamo nel multiserver //multiserver arriva = completion verifica
                     //aggiungo il task appena calcolato nella lista dinamica della verifica
 
-                    insert_at_tail(new_completion_node, &multiserver_head, &multiserver_tail);
+                    //aggiornamento delle variabili di stato.
+                    update_state(task_type_next_termination, DIRECT_MULTISERVER, &state);
+                    //insert_at_tail(new_completion_node, &multiserver_head, &multiserver_tail);
+                    insert_ordered(time_completion,task_type_next_termination, current_time, &multiserver_head, &multiserver_tail);
+
 
                     int server = find_idle_server(multiserver);
                     int num_task = count_element_linked_list(multiserver_head);
@@ -238,8 +243,7 @@ int main(int argc, char *argv[]) {
                     }
 
                     printf("%d: numero nella lista multiserver\n", count_element_linked_list(multiserver_head));
-                    //aggiornamento delle variabili di stato.
-                    update_state(task_type_next_termination, DIRECT_MULTISERVER, &state);
+
                 }
 
 
@@ -255,9 +259,9 @@ int main(int argc, char *argv[]) {
                 //calcolo il tempo di completamento del Task
                 time_completion = current_time + get_service_delay(task_type_next_termination);
                 //creazione del nodo
-                new_completion_node = get_new_node(time_completion, task_type_next_arrival, current_time);
+                new_completion_node = get_new_node(time_completion, task_type_next_termination, current_time);
                 //aggiorno il tempo corrente
-                current_time += time_completion;
+                //current_time += time_completion;
                 //elimino la testa dalla lista dinamica della cassa
                 delete_head(&delay_head);
                 //aggiungo il task appena calcolato nella lista dinamica della verifica
@@ -270,7 +274,11 @@ int main(int argc, char *argv[]) {
                 } else {
                     //Job diretto verso il multiserver
 
-                    insert_at_tail(new_completion_node, &multiserver_head, &multiserver_tail);
+                    //aggiornamento delle variabili di stato.
+                    update_state(task_type_next_termination, DIRECT_MULTISERVER, &state);
+                    //insert_at_tail(new_completion_node, &multiserver_head, &multiserver_tail);
+                    insert_ordered(time_completion,task_type_next_termination, current_time, &delay_head, &delay_tail);
+
 
                     int server = find_idle_server(multiserver);
                     int num_task = count_element_linked_list(multiserver_head);
@@ -283,8 +291,6 @@ int main(int argc, char *argv[]) {
 
                     printf("%d: numero nella lista multiserver\n", count_element_linked_list(multiserver_head));
 
-                    //aggiornamento delle variabili di stato.
-                    update_state(task_type_next_termination, DIRECT_MULTISERVER, &state);
 
                 }
 
@@ -294,6 +300,8 @@ int main(int argc, char *argv[]) {
                 printf("Valore di current: %f\n", current_time);
                 printf("Valore di get_service: %f\n", get_service_multiserver(task_type_next_termination));
 
+                //aggiornamento delle variabili di stato.
+                update_state(task_type_next_termination, DIRECT_EXIT, &state);
 
                 //verifico i task all'interno della lista dinamica
                 int num_task = count_element_linked_list(multiserver_head);
@@ -301,25 +309,23 @@ int main(int argc, char *argv[]) {
                 int server = find_completion_server(multiserver);
 
                 time_completion = current_time + get_service_multiserver(task_type_next_termination);
-                current_time += time_completion;
+                //current_time += time_completion;
 
                 //elimino la testa dalla lista dinamica della cassa
                 delete_head(&multiserver_head);
-                //aggiornamento delle variabili di stato.
-                update_state(task_type_next_termination, DIRECT_EXIT, &state);
 
                 if(num_task >= NUM_MAX_SERVER){
+                    //aggiornamento delle variabili di stato.
+                    update_state(task_type_next_termination, DIRECT_EXIT, &state);
                     //calcolo il tempo di completamento del Task
                     time_completion = current_time + get_service_multiserver(task_type_next_termination);
                     multiserver[server].next_event_time = time_completion;
                     //creazione del nodo
-                    new_completion_node = get_new_node(time_completion, task_type_next_arrival, current_time);
+                    new_completion_node = get_new_node(time_completion, task_type_next_termination, current_time);
                     //aggiorno il tempo corrente
-                    current_time += time_completion;
+                    //current_time += time_completion;
                     //elimino la testa dalla lista dinamica della cassa
                     delete_head(&multiserver_head);
-                    //aggiornamento delle variabili di stato.
-                    update_state(task_type_next_termination, DIRECT_EXIT, &state);
                 } else{
                     multiserver[server].type_event = 0;
                 }
