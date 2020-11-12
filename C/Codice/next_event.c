@@ -325,7 +325,6 @@ void update_area(struct state state, struct area *area, double time_current,doub
 
     //altre variabili
     area -> users_lost += (time_next - time_current) * (state.number_lost_users);
-    area -> ice_cream_balls += (time_next - time_current) * (state.number_balls_icecream);
 
     //calcolo il numero di Job nella coda
     //area -> number_queue_cassa += (time_next - time_current) * (state.number_of_user_cassa - 1);
@@ -357,13 +356,12 @@ void update_state(char task_type, char location, struct state *state) {
 
     }
 
-    if(location != DIRECT_CASSA && location != DIRECT_DELAY && location != DIRECT_MULTISERVER && location != DIRECT_VERIFY && location != DIRECT_EXIT && location != DIRECT_QUIT) {
+    if(location != DIRECT_CASSA && location != DIRECT_DELAY && location != DIRECT_MULTISERVER_FROM_VER && location != DIRECT_MULTISERVER_FROM_DEL && location != DIRECT_VERIFY && location != DIRECT_EXIT && location != DIRECT_QUIT) {
 
         handle_error_with_exit("error in update state location\n");
 
     }    
 
-    state->numberOfUsers ++; //ogni volta che arriva un Job aumentiamo il numero di utenti totali che il sistema serve.
 
     //aggiornamento globale dei job
     //a seconda del tipo di task
@@ -378,13 +376,13 @@ void update_state(char task_type, char location, struct state *state) {
 
     if(location == DIRECT_CASSA) { //arrivo task gelato 1 gusto verso cassa
 
-        state->number_of_user_cassa++;
-
+        //state->number_of_user_cassa++;
 
 
     }else if(location == DIRECT_VERIFY) {//task type 1 e diretto sul  cloud(non interrotto)
 
-        state->number_of_user_cassa--;
+        //state->number_of_user_cassa--;
+        state->numberOfUsers ++; //ogni volta che arriva un Job aumentiamo il numero di utenti totali che il sistema serve.
         state->number_of_user_verify++;
 
         if(task_type == TASK_TYPE1){
@@ -395,7 +393,7 @@ void update_state(char task_type, char location, struct state *state) {
             state -> job3_verify ++;
         }
         
-    }else if(location == DIRECT_MULTISERVER){ //arrivo task gelato 1 gusto verso multiserver
+    }else if(location == DIRECT_MULTISERVER_FROM_VER){ //arrivo task gelato 1 gusto verso multiserver
 
         state->number_of_user_verify--;
         state->number_of_user_multiserver++;
@@ -408,6 +406,18 @@ void update_state(char task_type, char location, struct state *state) {
             state -> job3_multiserver ++;
         }
 
+    }else if(location == DIRECT_MULTISERVER_FROM_DEL){ //arrivo task gelato 1 gusto verso multiserver
+
+        state->number_of_user_delay--;
+        state->number_of_user_multiserver++;
+        state->number_balls_icecream -= task_type; //per il gelato 1 gusto tolgo solo una pallina di gelato.
+        if(task_type == TASK_TYPE1){
+            state -> job1_multiserver ++;
+        } else if (task_type == TASK_TYPE2){
+            state -> job2_multiserver ++;
+        } else {
+            state->job3_multiserver++;
+        }
     }else if(location == DIRECT_DELAY){
 
         state->number_of_user_verify--;
@@ -430,7 +440,7 @@ void update_state(char task_type, char location, struct state *state) {
 
         state -> number_of_user_multiserver --;
 
-    } else {//task type 1 e non diretto sul cloud(non interrotto)
+    } else {
 
         handle_error_with_exit("error\n");
 

@@ -108,7 +108,7 @@ struct area{ //tipi di aree (calcolo ottenuto non dall'integrale ma dalla forma 
 
 #define START 0.0 //istante inizio simulazione
 //#define STOP_SIMULATION  2000000 //istante fine simulazione VECCHIO ISTANTE, quello nuovo è solo per test.
-#define STOP_SIMULATION  500
+#define STOP_SIMULATION  7000
 #define INF (STOP_SIMULATION*10)
 #define NO_TIME_LOST 0.0
 #define NUM_BATCH 64 //k=numero di batch
@@ -175,15 +175,16 @@ struct area{ //tipi di aree (calcolo ottenuto non dall'integrale ma dalla forma 
 //locazioni all'iterno della rete
 #define DIRECT_CASSA 1          //task diretto alla cassa
 #define DIRECT_VERIFY 2         //task diretto alla verifica dei gusti
-#define DIRECT_MULTISERVER 3    //task diretto al multiserver
-#define DIRECT_DELAY 4          //task diretto al server di Delay
-#define DIRECT_QUIT 5           //task esce dal sistema senza gelato
-#define DIRECT_EXIT 6           //task esce dal sistema con gelato
+#define DIRECT_MULTISERVER_FROM_VER 3    //task diretto al multiserver
+#define DIRECT_MULTISERVER_FROM_DEL 4
+#define DIRECT_DELAY 5          //task diretto al server di Delay
+#define DIRECT_QUIT 6           //task esce dal sistema senza gelato
+#define DIRECT_EXIT 7           //task esce dal sistema con gelato
 
 #define SEED_DEFAULT 991102
-#define ALPHA 0.05 //ALPHA= 0.05 NECESSARIO PER INTERVALLO DI CONFIDENZA
+#define ALPHA 0.05                //ALPHA= 0.05 NECESSARIO PER INTERVALLO DI CONFIDENZA
 #define PROBABILITY 0.8           //Valore di lamda per la probabilità di routing
-                                //del server delay.
+                                  //del server delay.
 
 void handle_error_with_exit(char*error_string);
 double min_array_associated_job(double arr[], int len, char *type);
