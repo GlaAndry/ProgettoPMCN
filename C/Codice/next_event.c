@@ -36,6 +36,13 @@ void initialize_node(struct node *node) {
     memset(node, 0, sizeof(struct node));
 }
 
+void initialize_last_state(struct last_state *last_state) {//inizializza la struct state
+    if (last_state == NULL) {
+        handle_error_with_exit("error in initialize last_state\n");
+    }
+    memset(last_state, 0, sizeof(struct last_state));
+}
+
 /**
 * Questo metodo genera un arrivo di un 
 * Job all'interno del Server Cassa
@@ -361,6 +368,8 @@ void update_state(char task_type, char location, struct state *state) {
         handle_error_with_exit("error in update state location\n");
 
     }    
+
+
 
 
     //aggiornamento globale dei job

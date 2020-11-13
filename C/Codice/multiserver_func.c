@@ -22,6 +22,7 @@ int find_idle_server(struct state_multiserver *multiserver) {
         if ((multiserver[i].type_event == 0) && (multiserver[i].next_event_time < multiserver[s].next_event_time))
             s = i;
     }
+    if (s > 10) return NUM_MAX_SERVER + 1;
     return s;
 
 }

@@ -5,7 +5,7 @@
 #include "distributions.h"
 #include "next_event.h"
 #include "parser.h"
-//#include "stats.h"
+#include "stats.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -23,16 +23,29 @@ int main(int argc, char *argv[]) {
     //definizione delle variabili
     struct state state;
     struct area area;
-    struct state_multiserver multiserver[NUM_MAX_SERVER];
+    struct state_multiserver multiserver[NUM_MAX_SERVER + 1];
+    struct last_state last_state;
+
     initialize_area(&area);
     initialize_state(&state);
+    initialize_state_multiserver(&multiserver[NUM_MAX_SERVER + 1]);
+    initialize_last_state(&last_state);
+
 
     double STOP = STOP_SIMULATION;
-    int i = 0;//indice di batch
-    state.number_balls_icecream = MAX_ICECREAM_TUB; //imposto il valore massimo 
+    state.number_balls_icecream = MAX_ICECREAM_TUB; //imposto il valore massimo
     //di palline di gelato quando inzia la simulazione.
 
-    //Queste variabili assumono il valore 1,2 o 3 a seconda del Job processato.
+    //Variabili Batch means
+    int i = 0;//indice di batch
+    //alloca array per batch means
+
+    double* tr_batch=alloc_array_double(NUM_BATCH);
+    double* tr_type1_batch = alloc_array_double(NUM_BATCH);
+    double* tr_type2_batch = alloc_array_double(NUM_BATCH);
+    double* tr_type3_batch = alloc_array_double(NUM_BATCH);
+
+
 
     char task_type_next_arrival = 0;//tipo di job del prossimo arrivo
     char task_type_next_termination = 0;//tipo di job del prossimo completamento
@@ -74,7 +87,7 @@ int main(int argc, char *argv[]) {
 
 
     //Inizializzazione del multiserver
-    for (int s = 0; s <= NUM_MAX_SERVER; s++) {
+    for (int s = 1; s <= NUM_MAX_SERVER; s++) {
         multiserver[s].next_event_time = START;           /* this value is arbitrary because */
         multiserver[s].type_event = 0;                  /* all servers are initially idle  */
     }
@@ -125,11 +138,11 @@ int main(int argc, char *argv[]) {
                                 next_completion_multiserver};
 
 
-        printf("\n\n\n");
-        //printf("next_completion_cassa: %f\n", next_completion_cassa);
-        //printf("next_completion_verifica: %f\n", next_completion_verifica);
-        //printf("next_completion_delay: %f\n", next_completion_delay);
-        //printf("next_completion_multiserver: %f\n", next_completion_multiserver);
+//        printf("\n\n\n");
+//        printf("next_completion_cassa: %f\n", next_completion_cassa);
+//        printf("next_completion_verifica: %f\n", next_completion_verifica);
+//        printf("next_completion_delay: %f\n", next_completion_delay);
+//        printf("next_completion_multiserver: %f\n", next_completion_multiserver);
 
         next_completion = min_array(array_compl, 4);
 
@@ -144,6 +157,13 @@ int main(int argc, char *argv[]) {
         //aggiornamento dei valori dell'area
         update_area(state, &area, current_time, next_event_time);
 
+        //calcolo batch means
+        if(next_event_time-last_state.last_observed_time >= LENGTH_BATCH_TIME) {
+
+            calculate_batch(next_event_time,state,area,&last_state,&i,tr_batch,
+                            tr_type1_batch,tr_type2_batch,tr_type3_batch);
+        }
+
         //aggiorno il clock
         current_time = next_event_time;
 
@@ -151,22 +171,22 @@ int main(int argc, char *argv[]) {
         //printf("%d: numero nella lista verifica\n", count_element_linked_list(verifica_head));
 
 
-        printf("user lost area: %f\n", area.users_lost);
+        printf("user total state: %f\n", state.numberOfUsers);
         printf("user lost state: %f\n", state.number_lost_users);
-        printf("numero utenti totali del sistema: %f\n", state.numberOfUsers);
+//        printf("numero utenti totali del sistema: %f\n", state.numberOfUsers);
+//
+//
+//        printf("Number user cassa: %f\n", state.number_of_user_cassa);
+//        printf("Number user ver: %f\n", state.number_of_user_verify);
+//        printf("Number user delay: %f\n", state.number_of_user_delay);
+//        printf("Number user mult: %f\n", state.number_of_user_multiserver);
 
+        //printf("pid:%ld ppid:%ld \n", (long)getpid(), (long)getppid());
 
         printf("\n\n");
-        printf("Number user cassa: %f\n", state.number_of_user_cassa);
-        printf("Number user ver: %f\n", state.number_of_user_verify);
-        printf("Number user delay: %f\n", state.number_of_user_delay);
-        printf("Number user mult: %f\n", state.number_of_user_multiserver);
-        printf("\n\n");
-
-        printf("pid:%ld ppid:%ld \n", (long)getpid(), (long)getppid());
 
 
-        usleep(100000);
+        //usleep(100000);
 
 
         //GESTIONE DEGLI EVENTI
@@ -200,7 +220,6 @@ int main(int argc, char *argv[]) {
 //                printf("Valore di current: %f\n", current_time);
 //                printf("Valore di get_service: %f\n", get_service_verifica(task_type_next_termination));
 
-                printf("Sto qua2");
                 //determino il numero attuale di palline di gelato
                 int actual_number_of_icecream_balls = state.number_balls_icecream;
 
@@ -209,11 +228,11 @@ int main(int argc, char *argv[]) {
 
                 //elimino la testa dalla lista dinamica della cassa
                 delete_head(&verifica_head);
-                printf("Sto qua1");
 
                 //determino se andare verso il multiserver o verso il server di delay.
                 if (actual_number_of_icecream_balls - task_type_next_termination < 0) {
                     update_state(task_type_next_termination, DIRECT_DELAY, &state);
+
                     //ci dirigiamo verso il server delay
                     //aggiungo il task appena calcolato nella lista dinamica della verifica
                     //insert_at_tail(new_completion_node, &delay_head, &delay_tail);
@@ -227,11 +246,13 @@ int main(int argc, char *argv[]) {
 
                     //aggiornamento delle variabili di stato.
                     update_state(task_type_next_termination, DIRECT_MULTISERVER_FROM_VER, &state);
+
+
                     //insert_at_tail(new_completion_node, &multiserver_head, &multiserver_tail);
                     insert_ordered(time_completion,task_type_next_termination, current_time, &multiserver_head, &multiserver_tail);
 
-
                     int server = find_idle_server(multiserver);
+
                     int num_task = count_element_linked_list(multiserver_head);
                     if (num_task <= NUM_MAX_SERVER) {
 
@@ -275,7 +296,7 @@ int main(int argc, char *argv[]) {
                     //aggiornamento delle variabili di stato.
                     update_state(task_type_next_termination, DIRECT_MULTISERVER_FROM_DEL, &state);
                     //insert_at_tail(new_completion_node, &multiserver_head, &multiserver_tail);
-                    insert_ordered(time_completion,task_type_next_termination, current_time, &delay_head, &delay_tail);
+                    insert_ordered(time_completion,task_type_next_termination, current_time, &multiserver_head, &multiserver_tail);
 
 
                     int server = find_idle_server(multiserver);
@@ -294,8 +315,8 @@ int main(int argc, char *argv[]) {
             } else {    //processamento Job multiserver
 
                 printf("Sono in next_completion multi\n");
-                printf("Valore di current: %f\n", current_time);
-                printf("Valore di get_service: %f\n", get_service_multiserver(task_type_next_termination));
+//                printf("Valore di current: %f\n", current_time);
+//                printf("Valore di get_service: %f\n", get_service_multiserver(task_type_next_termination));
 
                 //aggiornamento delle variabili di stato.
                 update_state(task_type_next_termination, DIRECT_EXIT, &state);
@@ -320,9 +341,10 @@ int main(int argc, char *argv[]) {
 
                     //elimino la testa dalla lista dinamica della cassa
                     delete_head(&multiserver_head);
-                } else{
-                    multiserver[server].type_event = 0;
                 }
+
+                multiserver[server].type_event = 0;
+
 
             }
 

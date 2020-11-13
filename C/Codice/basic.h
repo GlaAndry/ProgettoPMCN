@@ -11,7 +11,9 @@ struct state{//variabili di stato del sistema
     double number_lost_users;       /* Numero di utenti persi dal sistema  */
     double number_balls_icecream;   /* Numero attuale di palline di gelato 
                                        prima di essere riempite nuovamente */
-    double job1;
+    int num_job_completed;
+
+    double job1;        //numero di Job totali di tipo 1 completati
     double job2;
     double job3;
 
@@ -24,7 +26,7 @@ struct state{//variabili di stato del sistema
     double arrival_verifica;
     double completion_verifica;
     double number_of_user_verify;
-    double job1_verify;
+    double job1_verify;     //numero di job di tipo 1 completati dal server verifica
     double job2_verify;
     double job3_verify;
 
@@ -33,7 +35,7 @@ struct state{//variabili di stato del sistema
     double arrival_delay;
     double completion_delay;
     double number_of_user_delay;
-    double job1_delay;
+    double job1_delay;     //numero di job di tipo 1 completati dal server delay
     double job2_delay;
     double job3_delay;
 
@@ -42,7 +44,7 @@ struct state{//variabili di stato del sistema
     double arrival_multi;
     double completion_multi;
     double number_of_user_multiserver;
-    double job1_multiserver;
+    double job1_multiserver;   //numero di job di tipo 1 completati dal server multiserver
     double job2_multiserver;
     double job3_multiserver;
 
@@ -56,7 +58,29 @@ struct state_multiserver{
 
 struct last_state{ //struttura che determina le variabili dello stato precedente rispetto a quello attuale del sistema.
 
-    double last_completition_cassa;
+    int last_num_job_completed;
+
+    int last_num_job_1_completed;
+    int last_num_job_2_completed;
+    int last_num_job_3_completed;
+
+    int last_num_job_1_verifica;
+    int last_num_job_2_verifica;
+    int last_num_job_3_verifica;
+
+    int last_num_job_1_multiserver;
+    int last_num_job_2_multiserver;
+    int last_num_job_3_multiserver;
+
+    int last_num_job_1_delay;
+    int last_num_job_2_delay;
+    int last_num_job_3_delay;
+
+
+
+
+    double last_observed_time;
+
 };
 
 
@@ -108,7 +132,7 @@ struct area{ //tipi di aree (calcolo ottenuto non dall'integrale ma dalla forma 
 
 #define START 0.0 //istante inizio simulazione
 //#define STOP_SIMULATION  2000000 //istante fine simulazione VECCHIO ISTANTE, quello nuovo è solo per test.
-#define STOP_SIMULATION  7000
+#define STOP_SIMULATION  2000000
 #define INF (STOP_SIMULATION*10)
 #define NO_TIME_LOST 0.0
 #define NUM_BATCH 64 //k=numero di batch
