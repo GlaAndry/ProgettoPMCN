@@ -64,6 +64,10 @@ struct last_state{ //struttura che determina le variabili dello stato precedente
     int last_num_job_2_completed;
     int last_num_job_3_completed;
 
+    int last_num_job_1_arrived;
+    int last_num_job_2_arrived;
+    int last_num_job_3_arrived;
+
     int last_num_job_1_verifica;
     int last_num_job_2_verifica;
     int last_num_job_3_verifica;
@@ -76,8 +80,24 @@ struct last_state{ //struttura che determina le variabili dello stato precedente
     int last_num_job_2_delay;
     int last_num_job_3_delay;
 
+    double last_area;
+    double last_area_type1;
+    double last_area_type2;
+    double last_area_type3;
 
+    double last_area_type1_verifica;
+    double last_area_type2_verifica;
+    double last_area_type3_verifica;
 
+    double last_area_type1_delay;
+    double last_area_type2_delay;
+    double last_area_type3_delay;
+
+    double last_area_type1_multiserver;
+    double last_area_type2_multiserver;
+    double last_area_type3_multiserver;
+
+    int last_numberOfUsers;
 
     double last_observed_time;
 
@@ -95,21 +115,21 @@ struct area{ //tipi di aree (calcolo ottenuto non dall'integrale ma dalla forma 
     //double number_queue_cassa;
     //double number_service_cassa;
     //Variabili verifica
-    double number_node_verify;
+    double number_verify;
     double number_job_type1_verify;
     double number_job_type2_verify;
     double number_job_type3_verify;
     //double number_queue_verify;
     //double number_service_verify;
     //variabili Delay
-    double number_node_delay;
+    double number_delay;
     double number_job_type1_delay;
     double number_job_type2_delay;
     double number_job_type3_delay;
     //double number_queue_delay;
     //double number_service_delay;
     //variabili multiserver
-    double number_node_multi;
+    double number_multi;
     double number_job_type1_multiserver;
     double number_job_type2_multiserver;
     double number_job_type3_multiserver;
@@ -131,7 +151,7 @@ struct area{ //tipi di aree (calcolo ottenuto non dall'integrale ma dalla forma 
 };
 
 #define START 0.0 //istante inizio simulazione
-//#define STOP_SIMULATION  2000000 //istante fine simulazione VECCHIO ISTANTE, quello nuovo è solo per test.
+//istante fine simulazione VECCHIO ISTANTE, quello nuovo è solo per test.
 #define STOP_SIMULATION  2000000
 #define INF (STOP_SIMULATION*10)
 #define NO_TIME_LOST 0.0

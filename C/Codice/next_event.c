@@ -307,10 +307,6 @@ void update_area(struct state state, struct area *area, double time_current,doub
     }
 
     //calcolo il numero di Job nel nodo della rete
-    //area -> number_node_cassa += (time_next - time_current) * (state.number_of_user_cassa);
-    area -> number_node_verify += (time_next - time_current) * (state.number_of_user_verify);
-    area -> number_node_delay += (time_next - time_current) * (state.number_of_user_delay);
-    area -> number_node_multi += (time_next - time_current) * (state.number_of_user_multiserver);
     area -> total_node += (time_next - time_current) * (state.number_of_user_cassa + state.number_of_user_verify + state.number_of_user_delay + state.number_of_user_multiserver);
 
     //calcolo del numero di Job di tipo 1 nella rete e nei nodi
@@ -329,6 +325,10 @@ void update_area(struct state state, struct area *area, double time_current,doub
     area -> number_job_type1 += (time_next - time_current) * (state.job1);
     area -> number_job_type2 += (time_next - time_current) * (state.job2);
     area -> number_job_type3 += (time_next - time_current) * (state.job3);
+
+    area -> number_verify += (time_next - time_current) * (state.job1_verify + state.job2_verify + state.job3_verify);
+    area -> number_delay += (time_next - time_current) * (state.job1_delay + state.job2_delay + state.job3_delay);
+    area -> number_multi += (time_next - time_current) * (state.job1_multiserver + state.job2_multiserver + state.job3_multiserver);
 
     //altre variabili
     area -> users_lost += (time_next - time_current) * (state.number_lost_users);

@@ -40,12 +40,42 @@ int main(int argc, char *argv[]) {
     int i = 0;//indice di batch
     //alloca array per batch means
 
+    ///variabili THR
     double* tr_batch=alloc_array_double(NUM_BATCH);
     double* tr_type1_batch = alloc_array_double(NUM_BATCH);
     double* tr_type2_batch = alloc_array_double(NUM_BATCH);
     double* tr_type3_batch = alloc_array_double(NUM_BATCH);
+    double* tr_verifica = alloc_array_double(NUM_BATCH);
+    double* tr_type1_verifica = alloc_array_double(NUM_BATCH);
+    double* tr_type2_verifica = alloc_array_double(NUM_BATCH);
+    double* tr_type3_verifica = alloc_array_double(NUM_BATCH);
+    double* tr_delay = alloc_array_double(NUM_BATCH);
+    double* tr_type1_delay = alloc_array_double(NUM_BATCH);
+    double* tr_type2_delay = alloc_array_double(NUM_BATCH);
+    double* tr_type3_delay = alloc_array_double(NUM_BATCH);
+    double* tr_multiserver = alloc_array_double(NUM_BATCH);
+    double* tr_type1_multiserver = alloc_array_double(NUM_BATCH);
+    double* tr_type2_multiserver = alloc_array_double(NUM_BATCH);
+    double* tr_type3_multiserver = alloc_array_double(NUM_BATCH);
 
-
+    //variabili tempo di risposta
+    double *response_batch = alloc_array_double(NUM_BATCH);
+    double *response_type1_batch = alloc_array_double(NUM_BATCH);
+    double *response_type2_batch = alloc_array_double(NUM_BATCH);
+    double *response_type3_batch = alloc_array_double(NUM_BATCH);
+    double *response_verifica = alloc_array_double(NUM_BATCH);
+    double *response_type1_verifica = alloc_array_double(NUM_BATCH);
+    double *response_type2_verifica = alloc_array_double(NUM_BATCH);
+    double *response_type3_verifica = alloc_array_double(NUM_BATCH);
+    double *response_delay = alloc_array_double(NUM_BATCH);
+    double *response_type1_delay = alloc_array_double(NUM_BATCH);
+    double *response_type2_delay = alloc_array_double(NUM_BATCH);
+    double *response_type3_delay = alloc_array_double(NUM_BATCH);
+    double *response_multiserver = alloc_array_double(NUM_BATCH);
+    double *response_type1_multiserver = alloc_array_double(NUM_BATCH);
+    double *response_type2_multiserver = alloc_array_double(NUM_BATCH);
+    double *response_type3_multiserver = alloc_array_double(NUM_BATCH);
+    ///////////////////
 
     char task_type_next_arrival = 0;//tipo di job del prossimo arrivo
     char task_type_next_termination = 0;//tipo di job del prossimo completamento
@@ -160,19 +190,29 @@ int main(int argc, char *argv[]) {
         //calcolo batch means
         if(next_event_time-last_state.last_observed_time >= LENGTH_BATCH_TIME) {
 
-            calculate_batch(next_event_time,state,area,&last_state,&i,tr_batch,
-                            tr_type1_batch,tr_type2_batch,tr_type3_batch);
+            calculate_batch(next_event_time,state,area,&last_state,&i,
+                            tr_batch,tr_type1_batch,tr_type2_batch,tr_type3_batch,
+                            tr_verifica, tr_type1_verifica, tr_type2_verifica, tr_type3_verifica,
+                            tr_delay, tr_type1_delay, tr_type2_delay, tr_type3_delay,
+                            tr_multiserver, tr_type1_multiserver, tr_type2_multiserver, tr_type3_multiserver,
+                            response_batch, response_type1_batch, response_type2_batch,response_type3_batch,
+                            response_verifica, response_type1_verifica, response_type2_verifica, response_type3_verifica,
+                            response_delay, response_type1_delay, response_type2_delay, response_type3_delay,
+                            response_multiserver, response_type1_multiserver, response_type2_multiserver, response_type3_multiserver);
+
         }
+
+
 
         //aggiorno il clock
         current_time = next_event_time;
 
-        printf("current time: %f\n", current_time);
+        //printf("current time: %f\n", current_time);
         //printf("%d: numero nella lista verifica\n", count_element_linked_list(verifica_head));
 
 
-        printf("user total state: %f\n", state.numberOfUsers);
-        printf("user lost state: %f\n", state.number_lost_users);
+//        printf("user total state: %f\n", state.numberOfUsers);
+//        printf("user lost state: %f\n", state.number_lost_users);
 //        printf("numero utenti totali del sistema: %f\n", state.numberOfUsers);
 //
 //
@@ -183,7 +223,7 @@ int main(int argc, char *argv[]) {
 
         //printf("pid:%ld ppid:%ld \n", (long)getpid(), (long)getppid());
 
-        printf("\n\n");
+        //printf("\n\n");
 
 
         //usleep(100000);
@@ -195,7 +235,7 @@ int main(int argc, char *argv[]) {
         if (current_time == next_arrival) {
 
             update_state(task_type_next_arrival, DIRECT_VERIFY, &state);
-            printf("Sono in next_arrival e completo nella cassa\n");
+            //printf("Sono in next_arrival e completo nella cassa\n");
 
             //definisco il nodo da inserire
             //struct node *newNode = NULL;
@@ -287,11 +327,11 @@ int main(int argc, char *argv[]) {
                 if (prob < PROBABILITY) { //probabilità del 20% di uscire dal sistema
                     //il job esce dal sistema
                     //aggiornamento delle variabili di stato.
-                    printf("Ho rosicato zi\n");
+                    //printf("Ho rosicato zi\n");
                     update_state(task_type_next_termination, DIRECT_QUIT, &state);
                 } else { //probabilità dell'80% di rientrare nel multiserver
                     //Job diretto verso il multiserver
-                    printf("Diretto al multiserver\n");
+                    //printf("Diretto al multiserver\n");
 
                     //aggiornamento delle variabili di stato.
                     update_state(task_type_next_termination, DIRECT_MULTISERVER_FROM_DEL, &state);
@@ -308,13 +348,13 @@ int main(int argc, char *argv[]) {
 
                     }
 
-                    printf("%d: numero nella lista multiserver\n", count_element_linked_list(multiserver_head));
+                    //printf("%d: numero nella lista multiserver\n", count_element_linked_list(multiserver_head));
 
                 }
 
             } else {    //processamento Job multiserver
 
-                printf("Sono in next_completion multi\n");
+                //printf("Sono in next_completion multi\n");
 //                printf("Valore di current: %f\n", current_time);
 //                printf("Valore di get_service: %f\n", get_service_multiserver(task_type_next_termination));
 
@@ -351,6 +391,14 @@ int main(int argc, char *argv[]) {
 
         }
     }
+    print_all(tr_batch,tr_type1_batch,tr_type2_batch,tr_type3_batch,
+              tr_verifica, tr_type1_verifica, tr_type2_verifica, tr_type3_verifica,
+              tr_delay, tr_type1_delay, tr_type2_delay, tr_type3_delay,
+              tr_multiserver, tr_type1_multiserver, tr_type2_multiserver, tr_type3_multiserver,
+              response_batch, response_type1_batch, response_type2_batch,response_type3_batch,
+              response_verifica, response_type1_verifica, response_type2_verifica, response_type3_verifica,
+              response_delay, response_type1_delay, response_type2_delay, response_type3_delay,
+              response_multiserver, response_type1_multiserver, response_type2_multiserver, response_type3_multiserver);
     printf("Esco zi\n");
     exit(0);
 
