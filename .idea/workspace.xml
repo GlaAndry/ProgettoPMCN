@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated />
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="87415312-7195-4724-b327-0cb650329885" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/C/Codice/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Codice/basic.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Codice/basic.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Codice/distributions.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Codice/distributions.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Codice/dynamic_list.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Codice/dynamic_list.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Codice/main.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Codice/multiserver_func.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Codice/multiserver_func.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Codice/next_event.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Codice/next_event.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Codice/parser.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Codice/parser.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Codice/prog_pmcsn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Codice/rngs.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Codice/rngs.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Codice/rvms.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Codice/rvms.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Codice/stats.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Codice/stats.h" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1k1QwaoQvXVQ2OfDkUSPdX1V8yT" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.first.check.clang-format" value="false" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Scrivania/Progetto PMCSN Nostro/Codice_alg1" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="87415312-7195-4724-b327-0cb650329885" name="Default Changelist" comment="" />
+      <created>1604865857004</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1604865857004</updated>
+      <workItem from="1604865858174" duration="8286000" />
+      <workItem from="1604953243819" duration="9585000" />
+      <workItem from="1605019701455" duration="11526000" />
+      <workItem from="1605213257662" duration="9749000" />
+      <workItem from="1605299315965" duration="8092000" />
+      <workItem from="1605388273192" duration="7809000" />
+      <workItem from="1605558052546" duration="561000" />
+    </task>
+    <task id="LOCAL-00001" summary="committino">
+      <created>1604875681923</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1604875681923</updated>
+    </task>
+    <task id="LOCAL-00002" summary="committone">
+      <created>1604962813823</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1604962813823</updated>
+    </task>
+    <task id="LOCAL-00003" summary="update time_current">
+      <created>1605041520749</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1605041520749</updated>
+    </task>
+    <task id="LOCAL-00004" summary="update Probability">
+      <created>1605045065238</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1605045065238</updated>
+    </task>
+    <task id="LOCAL-00005" summary="update variables">
+      <created>1605047864378</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1605047864378</updated>
+    </task>
+    <task id="LOCAL-00006" summary="commit 13-11-2020">
+      <created>1605222959894</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1605222959894</updated>
+    </task>
+    <task id="LOCAL-00007" summary="commit 13-11-2020 #2">
+      <created>1605307483952</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1605307483952</updated>
+    </task>
+    <task id="LOCAL-00008" summary="commit 15-11-2020 #1">
+      <created>1605396593239</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1605396593239</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="committino" />
+    <MESSAGE value="committone" />
+    <MESSAGE value="update time_current" />
+    <MESSAGE value="update Probability" />
+    <MESSAGE value="update variables" />
+    <MESSAGE value="commit 13-11-2020" />
+    <MESSAGE value="commit 13-11-2020 #2" />
+    <MESSAGE value="commit 15-11-2020 #1" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit 15-11-2020 #1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="3379" y="261" width="922" height="918" key="CommitChangelistDialog2" timestamp="1605396593092">
+      <screen x="2560" y="0" width="2560" height="1440" />
+    </state>
+    <state x="3379" y="261" width="922" height="918" key="CommitChangelistDialog2/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605396593092" />
+    <state x="2806" y="159" width="2048" height="1130" key="DiffContextDialog" timestamp="1604875679250">
+      <screen x="2560" y="0" width="2560" height="1440" />
+    </state>
+    <state x="2806" y="159" width="2048" height="1130" key="DiffContextDialog/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1604875679250" />
+    <state x="3623" y="474" width="424" height="491" key="FileChooserDialogImpl" timestamp="1605221980863">
+      <screen x="2560" y="0" width="2560" height="1440" />
+    </state>
+    <state x="3623" y="474" width="424" height="491" key="FileChooserDialogImpl/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605221980863" />
+    <state x="3329" y="351" width="1022" height="737" key="SettingsEditor" timestamp="1605216226377">
+      <screen x="2560" y="0" width="2560" height="1440" />
+    </state>
+    <state x="3329" y="351" width="1022" height="737" key="SettingsEditor/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605216226377" />
+    <state x="3435" y="452" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1605396594944">
+      <screen x="2560" y="0" width="2560" height="1440" />
+    </state>
+    <state x="3435" y="452" width="800" height="535" key="Vcs.Push.Dialog.v2/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605396594944" />
+    <state x="3189" y="270" width="1292" height="899" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1605220727884">
+      <screen x="2560" y="0" width="2560" height="1440" />
+    </state>
+    <state x="3189" y="270" width="1292" height="899" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605220727884" />
+    <state x="580" y="99" width="1152" height="995" maximized="true" key="dock-window-1" timestamp="1605393307610">
+      <screen x="0" y="33" width="2560" height="1367" />
+    </state>
+    <state x="580" y="99" width="1152" height="995" maximized="true" key="dock-window-1/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605393307610" />
+    <state x="3503" y="343" width="672" height="678" key="search.everywhere.popup" timestamp="1605306323575">
+      <screen x="2560" y="0" width="2560" height="1440" />
+    </state>
+    <state x="3503" y="343" width="672" height="678" key="search.everywhere.popup/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605306323575" />
+  </component>
+</project>
