@@ -104,9 +104,14 @@ int main(int argc, char *argv[]) {
     //double arrive_time = 0.0;       //tempo iniziale di arrivo dei Job.
     double next_event_time = 0.0;   //tempo del prossimo evento
 
+    int counter = 0;
+
 
     //Arrivi
     double next_arrival;
+    double next_arrival_gelato_1_gusto = get_interarrival_cassa(1, 1);
+    double next_arrival_gelato_2_gusti = get_interarrival_cassa(2, 0);
+    double next_arrival_gelato_3_gusti = get_interarrival_cassa(3, 0);
 
     //Completamenti
     double next_completion; //istante del prossimo completamento
@@ -141,12 +146,10 @@ int main(int argc, char *argv[]) {
         } else {
             //determino il prossimo arrivo come l'evento che possiede il tempo minimo tra tutti.
             //andando anche a scrivere il tipo di Job che è arrivato nella varibile task_type_next_arrival
-            double next_arrival_gelato_1_gusto = get_interarrival_cassa(1);
-            double next_arrival_gelato_2_gusti = get_interarrival_cassa(2);
-            double next_arrival_gelato_3_gusti = get_interarrival_cassa(3);
-            //printf("gusto1 %f\n", next_arrival_gelato_1_gusto);
-            //printf("gusto2 %f\n", next_arrival_gelato_2_gusti);
-            //printf("gusto3 %f\n", next_arrival_gelato_3_gusti);
+
+//            printf("gusto1 %f\n", next_arrival_gelato_1_gusto);
+//            printf("gusto2 %f\n", next_arrival_gelato_2_gusti);
+//            printf("gusto3 %f\n", next_arrival_gelato_3_gusti);
             double array_arrival[] = {next_arrival_gelato_1_gusto, next_arrival_gelato_2_gusti,
                                       next_arrival_gelato_3_gusti}; //array contentente gli arrivi dei Job
             next_arrival = (double) min_array_associated_job(array_arrival, 3, &task_type_next_arrival);
@@ -200,14 +203,22 @@ int main(int argc, char *argv[]) {
                             response_delay, response_type1_delay, response_type2_delay, response_type3_delay,
                             response_multiserver, response_type1_multiserver, response_type2_multiserver, response_type3_multiserver);
 
+            printf("Response: %f\n", response_batch[counter]);
+            counter++;
+
+
         }
 
+//        printf("time next %f\n", next_event_time);
+//        printf("current %f\n", current_time);
 
 
         //aggiorno il clock
         current_time = next_event_time;
 
         //printf("current time: %f\n", current_time);
+
+        //sleep(2);
         //printf("%d: numero nella lista verifica\n", count_element_linked_list(verifica_head));
 
 
@@ -233,6 +244,14 @@ int main(int argc, char *argv[]) {
 
         //se il prossimo evento è un arrivo
         if (current_time == next_arrival) {
+
+            if (task_type_next_arrival == TASK_TYPE1){
+                next_arrival_gelato_1_gusto = get_interarrival_cassa(task_type_next_arrival, 0);
+            } else if (task_type_next_arrival == TASK_TYPE2){
+                next_arrival_gelato_2_gusti = get_interarrival_cassa(task_type_next_arrival, 0);
+            } else {
+                next_arrival_gelato_3_gusti = get_interarrival_cassa(task_type_next_arrival, 0);
+            }
 
             update_state(task_type_next_arrival, DIRECT_VERIFY, &state);
             //printf("Sono in next_arrival e completo nella cassa\n");
@@ -339,14 +358,14 @@ int main(int argc, char *argv[]) {
                     insert_ordered(time_completion,task_type_next_termination, current_time, &multiserver_head, &multiserver_tail);
 
 
-                    int server = find_idle_server(multiserver);
-                    int num_task = count_element_linked_list(multiserver_head);
-                    if (num_task <= NUM_MAX_SERVER) {
-
-                        multiserver[server].type_event = 1;
-                        multiserver[server].next_event_time = current_time;
-
-                    }
+//                    int server = find_idle_server(multiserver);
+//                    int num_task = count_element_linked_list(multiserver_head);
+//                    if (num_task <= NUM_MAX_SERVER) {
+//
+//                        multiserver[server].type_event = 1;
+//                        multiserver[server].next_event_time = current_time;
+//
+//                    }
 
                     //printf("%d: numero nella lista multiserver\n", count_element_linked_list(multiserver_head));
 
@@ -358,13 +377,14 @@ int main(int argc, char *argv[]) {
 //                printf("Valore di current: %f\n", current_time);
 //                printf("Valore di get_service: %f\n", get_service_multiserver(task_type_next_termination));
 
+
                 //aggiornamento delle variabili di stato.
                 update_state(task_type_next_termination, DIRECT_EXIT, &state);
 
                 //verifico i task all'interno della lista dinamica
-                int num_task = count_element_linked_list(multiserver_head);
+                //int num_task = count_element_linked_list(multiserver_head);
                 //printf("Numero di elementi multi %d\n", num_task);
-                int server = find_completion_server(multiserver);
+                //int server = find_completion_server(multiserver);
 
                 time_completion = current_time + get_service_multiserver(task_type_next_termination);
                 //current_time += time_completion;
@@ -372,19 +392,26 @@ int main(int argc, char *argv[]) {
                 //elimino la testa dalla lista dinamica della cassa
                 delete_head(&multiserver_head);
 
-                if(num_task >= NUM_MAX_SERVER){
-                    //aggiornamento delle variabili di stato.
-                    update_state(task_type_next_termination, DIRECT_EXIT, &state);
-                    //calcolo il tempo di completamento del Task
-                    time_completion = current_time + get_service_multiserver(task_type_next_termination);
-                    multiserver[server].next_event_time = time_completion;
+//                if(num_task >= NUM_MAX_SERVER){
+//                    //aggiornamento delle variabili di stato.
+//                    update_state(task_type_next_termination, DIRECT_EXIT, &state);
+//                    //calcolo il tempo di completamento del Task
+//                    time_completion = current_time + get_service_multiserver(task_type_next_termination);
+//                    multiserver[server].next_event_time = time_completion;
+//
+//                    //elimino la testa dalla lista dinamica della cassa
+//                    delete_head(&multiserver_head);
+//                }
 
-                    //elimino la testa dalla lista dinamica della cassa
-                    delete_head(&multiserver_head);
+                //multiserver[server].type_event = 0;
+
+                if (task_type_next_termination == TASK_TYPE1){
+                    state.job1--;
+                } else if (task_type_next_termination == TASK_TYPE2){
+                    state.job2--;
+                } else {
+                    state.job3--;
                 }
-
-                multiserver[server].type_event = 0;
-
 
             }
 

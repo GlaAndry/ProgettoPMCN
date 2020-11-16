@@ -47,7 +47,7 @@ void initialize_last_state(struct last_state *last_state) {//inizializza la stru
 * Questo metodo genera un arrivo di un 
 * Job all'interno del Server Cassa
 */
-double get_interarrival_cassa(char task_type){
+double get_interarrival_cassa(char task_type, char new_replication){
     
     if (task_type != TASK_TYPE1 && task_type != TASK_TYPE2 && task_type != TASK_TYPE3) {
         handle_error_with_exit("error in get_arrival\n");
@@ -57,6 +57,33 @@ double get_interarrival_cassa(char task_type){
     static double arrivals[3] = {START, START, START}; //{0,0,0} è inizializzato a 0
     double arrival;
 
+    static int init = 0;
+    if (new_replication == 1) {
+        init = 0;
+        arrivals[0] = START;
+        arrivals[1] = START;
+    }
+
+    if (init < 3) {//inizializza i 2 tipi di arrivo,blocco di codice eseguito solo due volte
+        if (init == 0) {
+            SelectStream(STREAM_ARR1);
+            arrivals[0] += Exponential(mean[0]);;
+            init++;
+            return arrivals[0];
+        }
+        if (init == 1) {
+            SelectStream(STREAM_ARR2);
+            arrivals[1] += Exponential(mean[1]);
+            init++;
+            return arrivals[1];
+        }
+        if (init == 2){
+            SelectStream(STREAM_ARR3);
+            arrivals[2] += Exponential(mean[2]);
+            arrival = arrivals[2];
+            return arrivals[2];
+        }
+    }
     if(task_type == TASK_TYPE1) {//task gelato 1 gusto
 
         SelectStream(STREAM_ARR1);
@@ -367,9 +394,10 @@ void update_state(char task_type, char location, struct state *state) {
 
         handle_error_with_exit("error in update state location\n");
 
-    }    
+    }
 
 
+    state->numberOfUsers ++; //ogni volta che arriva un Job aumentiamo il numero di utenti totali che il sistema serve.
 
 
     //aggiornamento globale dei job
@@ -391,7 +419,6 @@ void update_state(char task_type, char location, struct state *state) {
     }else if(location == DIRECT_VERIFY) {//task type 1 e diretto sul  cloud(non interrotto)
 
         //state->number_of_user_cassa--;
-        state->numberOfUsers ++; //ogni volta che arriva un Job aumentiamo il numero di utenti totali che il sistema serve.
         state->number_of_user_verify++;
 
         if(task_type == TASK_TYPE1){

@@ -172,6 +172,20 @@ void calculate_batch(double time_next,struct state state,struct area area,struct
     //sistema
     response_batch[*i] = (double) ((area.number_job_type1 + area.number_job_type2 + area.number_job_type3) - last_state->last_area)/(state.numberOfUsers - last_state->last_numberOfUsers);
 
+//    printf("SCRIVO I VALORI\n\n\n");
+//    printf("state: %f\n", state.numberOfUsers);
+//    printf("Last state: %d\n", last_state -> last_numberOfUsers);
+//
+//    printf("nJ1: %f\n", area.number_job_type1);
+//    printf("nJ2: %f\n", area.number_job_type2);
+//    printf("nJ3: %f\n", area.number_job_type3);
+//
+//    printf("lArea: %f\n", last_state->last_area);
+//
+//    printf("Response: %f\n", response_batch[2]);
+//
+//    printf("FINE \n\n");
+
     //tipi di Job
     response_type1_batch[*i] = (double) ((area.number_job_type1 - last_state->last_area_type1)/(state.job1 - last_state->last_num_job_1_arrived));
     response_type2_batch[*i] = (double) ((area.number_job_type2 - last_state->last_area_type2)/(state.job2 - last_state->last_num_job_2_arrived));
