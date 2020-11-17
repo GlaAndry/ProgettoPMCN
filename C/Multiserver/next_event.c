@@ -401,16 +401,6 @@ void update_state(char task_type, char location, struct state *state) {
 
     //aggiornamento dei Job attuali e globali
     //a seconda del tipo di task
-    if(task_type == TASK_TYPE1){
-        state -> actual_job1 ++;
-        state -> total_job1 ++;
-    } else if (task_type == TASK_TYPE2){
-        state -> actual_job2 ++;
-        state -> total_job2 ++;
-    } else {
-        state -> actual_job3 ++;
-        state -> total_job3 ++;
-    }
     //////
 
     if(location == DIRECT_CASSA) { //arrivo task gelato 1 gusto verso cassa
@@ -432,12 +422,18 @@ void update_state(char task_type, char location, struct state *state) {
         if(task_type == TASK_TYPE1){
             state -> actual_job1_verify ++;
             state -> total_job1_verify ++;
+            state -> actual_job1 ++;
+            state -> total_job1 ++;
         } else if (task_type == TASK_TYPE2){
             state -> actual_job2_verify ++;
             state -> total_job2_verify ++;
+            state -> actual_job2 ++;
+            state -> total_job2 ++;
         } else {
             state -> actual_job3_verify ++;
             state -> total_job3_verify ++;
+            state -> actual_job3 ++;
+            state -> total_job3 ++;
         }
         
     }else if(location == DIRECT_MULTISERVER_FROM_VER){ //arrivo task gelato 1 gusto verso multiserver
@@ -517,13 +513,17 @@ void update_state(char task_type, char location, struct state *state) {
 
         state -> number_lost_users ++;
         state -> actual_delay --;
+        state -> actual_system --;
 
         if(task_type == TASK_TYPE1){
             state -> actual_job1_delay --;
+            state -> actual_job1 --;
         } else if (task_type == TASK_TYPE2){
             state -> actual_job2_delay --;
+            state -> actual_job2 --;
         } else {
             state -> actual_job3_delay --;
+            state -> actual_job3 --;
         }
         //state -> number_of_user_delay --;
 

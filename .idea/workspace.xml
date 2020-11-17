@@ -15,11 +15,9 @@
     <list default="true" id="87415312-7195-4724-b327-0cb650329885" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/C/Multiserver/basic.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Multiserver/basic.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/C/Multiserver/basic.h" beforeDir="false" afterPath="$PROJECT_DIR$/C/Multiserver/basic.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/C/Multiserver/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Multiserver/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/C/Multiserver/next_event.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Multiserver/next_event.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/C/Multiserver/prog_pmcsn" beforeDir="false" afterPath="$PROJECT_DIR$/C/Multiserver/prog_pmcsn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/C/Multiserver/stats.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Multiserver/stats.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,9 +46,9 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
   </component>
@@ -71,6 +69,7 @@
       <workItem from="1605558052546" duration="9231000" />
       <workItem from="1605624395590" duration="712000" />
       <workItem from="1605645629060" duration="5388000" />
+      <workItem from="1605651774295" duration="1982000" />
     </task>
     <task id="LOCAL-00001" summary="committino">
       <created>1604875681923</created>
@@ -182,17 +181,19 @@
       <screen x="2560" y="0" width="2560" height="1440" />
     </state>
     <state x="3435" y="452" width="800" height="535" key="Vcs.Push.Dialog.v2/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605567005541" />
-    <state x="3189" y="270" width="1292" height="899" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1605220727884">
-      <screen x="2560" y="0" width="2560" height="1440" />
+    <state x="472" y="212" width="762" height="686" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1605652046132">
+      <screen x="0" y="27" width="1920" height="985" />
     </state>
+    <state x="472" y="212" width="762" height="686" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.27.1920.985@0.27.1920.985" timestamp="1605652046132" />
     <state x="3189" y="270" width="1292" height="899" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605220727884" />
     <state x="2223" y="321" width="1119" height="745" key="dock-window-1" timestamp="1605646113776">
       <screen x="2560" y="0" width="2560" height="1440" />
     </state>
     <state x="2223" y="321" width="1119" height="745" key="dock-window-1/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605646113776" />
-    <state x="3503" y="343" width="672" height="678" key="search.everywhere.popup" timestamp="1605648159365">
-      <screen x="2560" y="0" width="2560" height="1440" />
+    <state x="707" y="262" width="672" height="464" key="search.everywhere.popup" timestamp="1605652884218">
+      <screen x="0" y="27" width="1920" height="985" />
     </state>
+    <state x="707" y="262" width="672" height="464" key="search.everywhere.popup/0.27.1920.985@0.27.1920.985" timestamp="1605652884218" />
     <state x="3503" y="343" width="672" height="678" key="search.everywhere.popup/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605648159365" />
   </component>
 </project>

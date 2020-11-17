@@ -4,6 +4,7 @@
 #include <math.h>
 #include "basic.h"
 #include "parser.h"
+#include <unistd.h>
 
 double*alloc_array_double(int lenght){
     if(lenght<=0){
@@ -85,9 +86,41 @@ double* min_element(double *start, double *end){
 }
 
 void check_state_variables_during_simulation(struct state state){ //da modificare per aggiungere i controlli da eseguire durante la simulazione.
-    if(state.actual_job1<0 || state.actual_job2<0 || state.actual_job3<0){
+    if(state.actual_job1 < 0 || state.actual_job2 < 0 || state.actual_job3 < 0){
+
+        printf("Stampo job1: %f\n", state.actual_job1);
+        printf("Stampo job2: %f\n", state.actual_job2);
+        printf("Stampo job3: %f\n", state.actual_job3);
+
+        sleep(1);
+        //handle_error_with_exit("Error in Job total Count (Negative)\n");
+    }
+
+    if(state.actual_job1 + state.actual_job2 + state.actual_job3 != state.actual_system){
+
+//        printf("Stampo job1: %f\n", state.actual_job1);
+//        printf("Stampo job2: %f\n", state.actual_job2);
+//        printf("Stampo job3: %f\n", state.actual_job3);
+//        printf("Stampo job: %f\n", state.actual_system);
+
         handle_error_with_exit("Error in Job total Count\n");
     }
+
+    if(state.actual_job1_verify + state.actual_job2_verify + state.actual_job3_verify != state.actual_verify){
+
+        handle_error_with_exit("Error in Verify Job total Count\n");
+    }
+
+    if(state.actual_job1_delay + state.actual_job2_delay + state.actual_job3_delay != state.actual_delay){
+
+        handle_error_with_exit("Error in Delay Job total Count\n");
+    }
+
+    if(state.actual_job1_multi + state.actual_job2_multi + state.actual_job3_multi != state.actual_multi){
+
+        handle_error_with_exit("Error in Multi Job total Count\n");
+    }
+
     return;
 }
 

@@ -131,6 +131,12 @@ int main(int argc, char *argv[]) {
     // multiserver[0].type_event != 0 significa che il primo server del multiserver è idle
     while (1) {
 
+        printf("Counter: %d\n", counter);
+
+        check_state_variables_during_simulation(state);
+
+        counter++;
+
         //printf("Valore palline di gelato: %f\n", state.number_balls_icecream);
 
         //verifico la scadenza del timer in modo da terminare la simulazione
@@ -202,9 +208,7 @@ int main(int argc, char *argv[]) {
                             response_delay, response_type1_delay, response_type2_delay, response_type3_delay,
                             response_multiserver, response_type1_multiserver, response_type2_multiserver, response_type3_multiserver);
 
-            printf("Response: %f\n", response_batch[counter]);
-            counter++;
-
+            //printf("Response: %f\n", response_batch[counter]);
 
         }
 
