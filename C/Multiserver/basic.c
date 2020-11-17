@@ -84,9 +84,9 @@ double* min_element(double *start, double *end){
     return min;
 }
 
-void check_state_variables_during_simulation(int N, struct state state){ //da modificare per aggiungere i controlli da eseguire durante la simulazione.
-    if(0){ //inserire le condizioni esatte come il controllo delle palline di gelato.
-        handle_error_with_exit("During Simulation Error 1: Not Enough Ice Cream Balls\n");
+void check_state_variables_during_simulation(struct state state){ //da modificare per aggiungere i controlli da eseguire durante la simulazione.
+    if(state.actual_job1<0 || state.actual_job2<0 || state.actual_job3<0){
+        handle_error_with_exit("Error in Job total Count\n");
     }
     return;
 }

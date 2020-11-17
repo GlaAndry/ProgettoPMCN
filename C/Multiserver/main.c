@@ -38,7 +38,6 @@ int main(int argc, char *argv[]) {
 
     //Variabili Batch means
     int i = 0;//indice di batch
-    //alloca array per batch means
 
     ///variabili THR
     double* tr_batch=alloc_array_double(NUM_BATCH);
@@ -58,7 +57,7 @@ int main(int argc, char *argv[]) {
     double* tr_type2_multiserver = alloc_array_double(NUM_BATCH);
     double* tr_type3_multiserver = alloc_array_double(NUM_BATCH);
 
-    //variabili tempo di risposta
+    ///variabili tempo di risposta
     double *response_batch = alloc_array_double(NUM_BATCH);
     double *response_type1_batch = alloc_array_double(NUM_BATCH);
     double *response_type2_batch = alloc_array_double(NUM_BATCH);
@@ -275,6 +274,7 @@ int main(int argc, char *argv[]) {
             //gestione evento completamento server verifica.
             //possibili redirezioni a delay o al multiserver.
             if (current_time == next_completion_verifica) {
+
 //                printf("Sono in next_completion_verifica\n");
 //                printf("Valore di current: %f\n", current_time);
 //                printf("Valore di get_service: %f\n", get_service_verifica(task_type_next_termination));
@@ -334,6 +334,7 @@ int main(int argc, char *argv[]) {
                 //definisco la variabile di probabilità
                 //tramite la funzione radom della libreria rngs
                 //che sfrutta il generatore di Lehmer.
+
                 double prob = Random();
 
                 //calcolo il tempo di completamento del Task
@@ -378,6 +379,7 @@ int main(int argc, char *argv[]) {
 //                printf("Valore di get_service: %f\n", get_service_multiserver(task_type_next_termination));
 
 
+
                 //aggiornamento delle variabili di stato.
                 update_state(task_type_next_termination, DIRECT_EXIT, &state);
 
@@ -404,14 +406,6 @@ int main(int argc, char *argv[]) {
 //                }
 
                 //multiserver[server].type_event = 0;
-
-                if (task_type_next_termination == TASK_TYPE1){
-                    state.job1--;
-                } else if (task_type_next_termination == TASK_TYPE2){
-                    state.job2--;
-                } else {
-                    state.job3--;
-                }
 
             }
 

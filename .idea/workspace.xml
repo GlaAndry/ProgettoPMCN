@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated />
   </component>
@@ -11,10 +14,10 @@
   <component name="ChangeListManager">
     <list default="true" id="87415312-7195-4724-b327-0cb650329885" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Multiserver/basic.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Multiserver/basic.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/C/Multiserver/basic.h" beforeDir="false" afterPath="$PROJECT_DIR$/C/Multiserver/basic.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/C/Multiserver/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Multiserver/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/C/Multiserver/next_event.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Multiserver/next_event.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/C/Multiserver/next_event.h" beforeDir="false" afterPath="$PROJECT_DIR$/C/Multiserver/next_event.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/C/Multiserver/prog_pmcsn" beforeDir="false" afterPath="$PROJECT_DIR$/C/Multiserver/prog_pmcsn" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/C/Multiserver/stats.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Multiserver/stats.c" afterDir="false" />
     </list>
@@ -65,7 +68,9 @@
       <workItem from="1605213257662" duration="9749000" />
       <workItem from="1605299315965" duration="8092000" />
       <workItem from="1605388273192" duration="7809000" />
-      <workItem from="1605558052546" duration="8941000" />
+      <workItem from="1605558052546" duration="9231000" />
+      <workItem from="1605624395590" duration="712000" />
+      <workItem from="1605645629060" duration="5388000" />
     </task>
     <task id="LOCAL-00001" summary="committino">
       <created>1604875681923</created>
@@ -130,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605558791825</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="commit 16-11-2020 #2">
+      <created>1605567002544</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1605567002544</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -146,13 +158,14 @@
     <MESSAGE value="commit 13-11-2020 #2" />
     <MESSAGE value="commit 15-11-2020 #1" />
     <MESSAGE value="commit 16-11-2020 #1" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit 16-11-2020 #1" />
+    <MESSAGE value="commit 16-11-2020 #2" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit 16-11-2020 #2" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="3379" y="261" width="922" height="918" key="CommitChangelistDialog2" timestamp="1605558791677">
+    <state x="3379" y="261" width="922" height="918" key="CommitChangelistDialog2" timestamp="1605567002476">
       <screen x="2560" y="0" width="2560" height="1440" />
     </state>
-    <state x="3379" y="261" width="922" height="918" key="CommitChangelistDialog2/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605558791677" />
+    <state x="3379" y="261" width="922" height="918" key="CommitChangelistDialog2/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605567002476" />
     <state x="2806" y="159" width="2048" height="1130" key="DiffContextDialog" timestamp="1604875679250">
       <screen x="2560" y="0" width="2560" height="1440" />
     </state>
@@ -165,21 +178,21 @@
       <screen x="2560" y="0" width="2560" height="1440" />
     </state>
     <state x="3329" y="351" width="1022" height="737" key="SettingsEditor/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605216226377" />
-    <state x="3435" y="452" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1605558796587">
+    <state x="3435" y="452" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1605567005541">
       <screen x="2560" y="0" width="2560" height="1440" />
     </state>
-    <state x="3435" y="452" width="800" height="535" key="Vcs.Push.Dialog.v2/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605558796587" />
+    <state x="3435" y="452" width="800" height="535" key="Vcs.Push.Dialog.v2/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605567005541" />
     <state x="3189" y="270" width="1292" height="899" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1605220727884">
       <screen x="2560" y="0" width="2560" height="1440" />
     </state>
     <state x="3189" y="270" width="1292" height="899" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605220727884" />
-    <state x="2188" y="352" width="1119" height="745" key="dock-window-1" timestamp="1605566314960">
+    <state x="2223" y="321" width="1119" height="745" key="dock-window-1" timestamp="1605646113776">
       <screen x="2560" y="0" width="2560" height="1440" />
     </state>
-    <state x="2188" y="352" width="1119" height="745" key="dock-window-1/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605566314960" />
-    <state x="3503" y="343" width="672" height="678" key="search.everywhere.popup" timestamp="1605306323575">
+    <state x="2223" y="321" width="1119" height="745" key="dock-window-1/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605646113776" />
+    <state x="3503" y="343" width="672" height="678" key="search.everywhere.popup" timestamp="1605648159365">
       <screen x="2560" y="0" width="2560" height="1440" />
     </state>
-    <state x="3503" y="343" width="672" height="678" key="search.everywhere.popup/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605306323575" />
+    <state x="3503" y="343" width="672" height="678" key="search.everywhere.popup/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605648159365" />
   </component>
 </project>
