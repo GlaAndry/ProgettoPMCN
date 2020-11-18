@@ -11,7 +11,7 @@ void initialize_node(struct node *node);
 void initialize_last_state(struct last_state *last_state);
 
 
-double get_interarrival_cassa(char task_type);
+double get_interarrival_cassa(char task_type, char new_replication);
 
 
 double get_service_cassa(char task_type);

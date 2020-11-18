@@ -14,12 +14,22 @@
   <component name="ChangeListManager">
     <list default="true" id="87415312-7195-4724-b327-0cb650329885" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/C/Multiserver/basic.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Multiserver/basic.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/C/Multiserver/basic.h" beforeDir="false" afterPath="$PROJECT_DIR$/C/Multiserver/basic.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/C/Multiserver/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Multiserver/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/C/Multiserver/multiserver_func.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Multiserver/multiserver_func.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/C/Multiserver/prog_pmcsn" beforeDir="false" afterPath="$PROJECT_DIR$/C/Multiserver/prog_pmcsn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/C/Multiserver/stats.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Multiserver/stats.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Single_Server/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Single_Server/basic.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/basic.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Single_Server/basic.h" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/basic.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Single_Server/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Single_Server/multiserver_func.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Single_Server/multiserver_func.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Single_Server/next_event.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/next_event.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Single_Server/next_event.h" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/next_event.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Single_Server/parser.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/parser.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Single_Server/parser.h" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/parser.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Single_Server/prog_pmcsn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Single_Server/rngs.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/rngs.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Single_Server/rngs.h" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/rngs.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Single_Server/rvms.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/rvms.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Single_Server/rvms.h" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/rvms.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Single_Server/stats.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/stats.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,11 +51,16 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Scrivania/Progetto PMCSN Nostro/Codice_alg1" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/C/Single_Server" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/C/Single_Server" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
@@ -143,7 +158,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605567002544</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="commit 18-11-2020 #2">
+      <created>1605736592774</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1605736592774</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -160,13 +182,14 @@
     <MESSAGE value="commit 15-11-2020 #1" />
     <MESSAGE value="commit 16-11-2020 #1" />
     <MESSAGE value="commit 16-11-2020 #2" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit 16-11-2020 #2" />
+    <MESSAGE value="commit 18-11-2020 #2" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit 18-11-2020 #2" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="3379" y="261" width="922" height="918" key="CommitChangelistDialog2" timestamp="1605567002476">
+    <state x="3379" y="261" width="922" height="918" key="CommitChangelistDialog2" timestamp="1605736592640">
       <screen x="2560" y="0" width="2560" height="1440" />
     </state>
-    <state x="3379" y="261" width="922" height="918" key="CommitChangelistDialog2/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605567002476" />
+    <state x="3379" y="261" width="922" height="918" key="CommitChangelistDialog2/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605736592640" />
     <state x="2806" y="159" width="2048" height="1130" key="DiffContextDialog" timestamp="1604875679250">
       <screen x="2560" y="0" width="2560" height="1440" />
     </state>
@@ -179,10 +202,10 @@
       <screen x="2560" y="0" width="2560" height="1440" />
     </state>
     <state x="3329" y="351" width="1022" height="737" key="SettingsEditor/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605216226377" />
-    <state x="3435" y="452" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1605567005541">
+    <state x="3435" y="452" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1605736594164">
       <screen x="2560" y="0" width="2560" height="1440" />
     </state>
-    <state x="3435" y="452" width="800" height="535" key="Vcs.Push.Dialog.v2/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605567005541" />
+    <state x="3435" y="452" width="800" height="535" key="Vcs.Push.Dialog.v2/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605736594164" />
     <state x="472" y="212" width="762" height="686" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1605652046132">
       <screen x="0" y="27" width="1920" height="985" />
     </state>

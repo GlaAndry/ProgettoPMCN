@@ -13,6 +13,52 @@ struct state{//variabili di stato del sistema
                                        prima di essere riempite nuovamente */
     int num_job_completed;
 
+    ///Numero di Job attuali nel sistema////
+    double actual_system;
+    double actual_job1;
+    double actual_job2;
+    double actual_job3;
+
+    double actual_verify;
+    double actual_job1_verify;
+    double actual_job2_verify;
+    double actual_job3_verify;
+
+    double actual_delay;
+    double actual_job1_delay;
+    double actual_job2_delay;
+    double actual_job3_delay;
+
+    double actual_multi;
+    double actual_job1_multi;
+    double actual_job2_multi;
+    double actual_job3_multi;
+
+    ///Numero di Job totali del sistema////
+
+    double total_system;
+    double total_job1;
+    double total_job2;
+    double total_job3;
+
+    double total_verify;
+    double total_job1_verify;
+    double total_job2_verify;
+    double total_job3_verify;
+
+    double total_delay;
+    double total_job1_delay;
+    double total_job2_delay;
+    double total_job3_delay;
+
+    double total_multi;
+    double total_job1_multi;
+    double total_job2_multi;
+    double total_job3_multi;
+
+    /////
+
+
     double job1;        //numero di Job totali di tipo 1 completati
     double job2;
     double job3;
@@ -60,25 +106,50 @@ struct last_state{ //struttura che determina le variabili dello stato precedente
 
     int last_num_job_completed;
 
-    int last_num_job_1_completed;
-    int last_num_job_2_completed;
-    int last_num_job_3_completed;
+    ///attuali
+    int last_num_job_1_completed_actual;
+    int last_num_job_2_completed_actual;
+    int last_num_job_3_completed_actual;
 
-    int last_num_job_1_arrived;
-    int last_num_job_2_arrived;
-    int last_num_job_3_arrived;
+    int last_num_job_1_arrived_actual;
+    int last_num_job_2_arrived_actual;
+    int last_num_job_3_arrived_actual;
 
-    int last_num_job_1_verifica;
-    int last_num_job_2_verifica;
-    int last_num_job_3_verifica;
+    int last_num_job_1_verifica_actual;
+    int last_num_job_2_verifica_actual;
+    int last_num_job_3_verifica_actual;
 
-    int last_num_job_1_multiserver;
-    int last_num_job_2_multiserver;
-    int last_num_job_3_multiserver;
+    int last_num_job_1_multiserver_actual;
+    int last_num_job_2_multiserver_actual;
+    int last_num_job_3_multiserver_actual;
 
-    int last_num_job_1_delay;
-    int last_num_job_2_delay;
-    int last_num_job_3_delay;
+    int last_num_job_1_delay_actual;
+    int last_num_job_2_delay_actual;
+    int last_num_job_3_delay_actual;
+
+    ///totali
+
+    int last_num_job_1_completed_total;
+    int last_num_job_2_completed_total;
+    int last_num_job_3_completed_total;
+
+    int last_num_job_1_arrived_total;
+    int last_num_job_2_arrived_total;
+    int last_num_job_3_arrived_total;
+
+    int last_num_job_1_verifica_total;
+    int last_num_job_2_verifica_total;
+    int last_num_job_3_verifica_total;
+
+    int last_num_job_1_multiserver_total;
+    int last_num_job_2_multiserver_total;
+    int last_num_job_3_multiserver_total;
+
+    int last_num_job_1_delay_total;
+    int last_num_job_2_delay_total;
+    int last_num_job_3_delay_total;
+
+    /////
 
     double last_area;
     double last_area_type1;
@@ -158,55 +229,55 @@ struct area{ //tipi di aree (calcolo ottenuto non dall'integrale ma dalla forma 
 #define NUM_BATCH 64 //k=numero di batch
 #define LENGTH_BATCH_TIME (STOP/NUM_BATCH)
 
-#define NUM_MAX_SERVER 3//NUM_MAX_SERVER==N,numero massimo di server della cloudlet
+#define NUM_MAX_SERVER 2//NUM_MAX_SERVER==N,numero massimo di server della cloudlet
 
 //arrival rate and service rate
-#define ARRIVALONE	4.0 //lambda1 1 gusto gelato        [task/s]
-#define ARRIVALTWO  6.25 //lambda2 2 gusti gelato       [task/s]
-#define ARRIVALTHREE 5.50 //lamdbda3 3 gusti gelato     [task/s]
+#define ARRIVALONE	0.05 //lambda1 1 gusto gelato        [task/s]
+#define ARRIVALTWO  0.0666 //lambda2 2 gusti gelato       [task/s]
+#define ARRIVALTHREE 0.0833333 //lamdbda3 3 gusti gelato     [task/s]
 
 //tasso di servizio cassa
-#define SERVICEONE_CASSA 5.25  //u1 1 gusto gelato            [task/s]
-#define SERVICETWO_CASSA 6.37  //u2 2 gusti gelato            [task/s]
-#define SERVICETHREE_CASSA 5.59  //u2 3 gusti gelato          [task/s]
+#define SERVICEONE_CASSA 0.25  //u1 1 gusto gelato            [task/s]
+#define SERVICETWO_CASSA 0.283333333  //u2 2 gusti gelato            [task/s]
+#define SERVICETHREE_CASSA 0.333333333  //u2 3 gusti gelato          [task/s]
 
 //tasso di servizio verifica
-#define SERVICEONE_VERIFY 12  //u1 1 gusto gelato            [task/s]
-#define SERVICETWO_VERIFY 11  //u2 2 gusti gelato            [task/s]
-#define SERVICETHREE_VERIFY 7  //u2 3 gusti gelato          [task/s]
+#define SERVICEONE_VERIFY 0.25  //u1 1 gusto gelato            [task/s]
+#define SERVICETWO_VERIFY 0.283333333  //u2 2 gusti gelato            [task/s]
+#define SERVICETHREE_VERIFY 0.333333333  //u2 3 gusti gelato          [task/s]
 
 //tasso di servizio delay
-#define SERVICEONE_DELAY 5.25  //u1 1 gusto gelato            [task/s]
-#define SERVICETWO_DELAY 6.37  //u2 2 gusti gelato            [task/s]
-#define SERVICETHREE_DELAY 5.59  //u2 3 gusti gelato          [task/s]
+#define SERVICEONE_DELAY 0.25  //u1 1 gusto gelato            [task/s]
+#define SERVICETWO_DELAY 0.283333333  //u2 2 gusti gelato            [task/s]
+#define SERVICETHREE_DELAY 0.333333333  //u2 3 gusti gelato          [task/s]
 
 //tasso di servizio Multiserver
-#define SERVICEONE_MULTI 5.25  //u1 1 gusto gelato            [task/s]
-#define SERVICETWO_MULTI 6.37  //u2 2 gusti gelato            [task/s]
-#define SERVICETHREE_MULTI 5.59  //u2 3 gusti gelato          [task/s]
+#define SERVICEONE_MULTI 0.25  //u1 1 gusto gelato            [task/s]
+#define SERVICETWO_MULTI 0.283333333  //u2 2 gusti gelato            [task/s]
+#define SERVICETHREE_MULTI 0.333333333  //u2 3 gusti gelato          [task/s]
 
 //streams per arrivi e servizi
 #define STREAM_ARR1 0
-#define STREAM_ARR2 1
-#define STREAM_ARR3 2
+#define STREAM_ARR2 10
+#define STREAM_ARR3 20
 
-#define STREAM_SERV_CASSA1 3
-#define STREAM_SERV_CASSA2 4
-#define STREAM_SERV_CASSA3 5
+#define STREAM_SERV_CASSA1 30
+#define STREAM_SERV_CASSA2 40
+#define STREAM_SERV_CASSA3 50
 
-#define STREAM_SERV_DELAY1 6
-#define STREAM_SERV_DELAY2 7
-#define STREAM_SERV_DELAY3 8
+#define STREAM_SERV_DELAY1 60
+#define STREAM_SERV_DELAY2 70
+#define STREAM_SERV_DELAY3 80
 
-#define STREAM_SERV_MULTISERVER1 9
-#define STREAM_SERV_MULTISERVER2 10
-#define STREAM_SERV_MULTISERVER3 11
+#define STREAM_SERV_MULTISERVER1 90
+#define STREAM_SERV_MULTISERVER2 100
+#define STREAM_SERV_MULTISERVER3 110
 
-#define STREAM_SERV_VERIFY1 12
-#define STREAM_SERV_VERIFY2 13
-#define STREAM_SERV_VERIFY3 14
+#define STREAM_SERV_VERIFY1 120
+#define STREAM_SERV_VERIFY2 130
+#define STREAM_SERV_VERIFY3 140
 
-#define STREAM_SETUP 15
+#define STREAM_SETUP 150
 
 //constants
 #define TASK_TYPE1 1    //1 gusto gelato
@@ -239,7 +310,7 @@ double max(double i,double j);
 double min(double i,double j);
 double* min_element(double *start, double *end);
 void check_state_variables(int N, struct state state);
-void check_state_variables_during_simulation(int N, struct state state);
+void check_state_variables_during_simulation(struct state state);
 void check_state_variables_after_simulation(struct state state);
 
 
