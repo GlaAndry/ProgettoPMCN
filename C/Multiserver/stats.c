@@ -151,9 +151,9 @@ void calculate_batch(double time_next,struct state state,struct area area,struct
     tr_type3_batch[*i] = (double) (state.total_job3 - last_state->last_num_job_3_completed_total)/(time_next-last_state->last_observed_time);
 
     tr_verifica[*i] = (double) ((state.total_job1_verify + state.total_job2_verify + state.total_job3_verify) - (last_state -> last_num_job_1_verifica_total + last_state -> last_num_job_2_verifica_total + last_state -> last_num_job_3_verifica_total))/(time_next-last_state->last_observed_time);
-    tr_type1_verifica[*i] = (double) (state.job1_verify - last_state->last_num_job_1_verifica_total)/(time_next-last_state->last_observed_time);
-    tr_type2_verifica[*i] = (double) (state.job2_verify - last_state->last_num_job_2_verifica_total)/(time_next-last_state->last_observed_time);
-    tr_type3_verifica[*i] = (double) (state.job3_verify - last_state->last_num_job_3_verifica_total)/(time_next-last_state->last_observed_time);
+    tr_type1_verifica[*i] = (double) (state.total_job1_verify - last_state->last_num_job_1_verifica_total)/(time_next-last_state->last_observed_time);
+    tr_type2_verifica[*i] = (double) (state.total_job2_verify - last_state->last_num_job_2_verifica_total)/(time_next-last_state->last_observed_time);
+    tr_type3_verifica[*i] = (double) (state.total_job3_verify - last_state->last_num_job_3_verifica_total)/(time_next-last_state->last_observed_time);
 
     tr_delay[*i] = (double) ((state.total_job1_delay + state.total_job2_delay + state.total_job3_delay) - (last_state -> last_num_job_1_delay_total + last_state -> last_num_job_2_delay_total + last_state -> last_num_job_3_delay_total))/(time_next-last_state->last_observed_time);
     tr_type1_delay[*i] = (double) (state.total_job1_delay - last_state->last_num_job_1_delay_total)/(time_next-last_state->last_observed_time);

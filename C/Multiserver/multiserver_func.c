@@ -45,5 +45,6 @@ int find_completion_server(struct state_multiserver *multiserver) {
         if ((multiserver[i].type_event == 1) && (multiserver[i].next_event_time < multiserver[e].next_event_time))
             e = i;
     }
+    if (e > 10) return NUM_MAX_SERVER + 1;
     return e;
 }

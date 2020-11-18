@@ -3,24 +3,6 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
-  <component name="BranchesTreeState">
-    <expand>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </expand>
-    <select />
-  </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated />
   </component>
@@ -30,8 +12,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87415312-7195-4724-b327-0cb650329885" name="Default Changelist" comment="commit 18-11-2020 #1&#10;resolved type_task">
+    <list default="true" id="87415312-7195-4724-b327-0cb650329885" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Multiserver/basic.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Multiserver/basic.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Multiserver/basic.h" beforeDir="false" afterPath="$PROJECT_DIR$/C/Multiserver/basic.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Multiserver/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Multiserver/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Multiserver/multiserver_func.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Multiserver/multiserver_func.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/C/Multiserver/prog_pmcsn" beforeDir="false" afterPath="$PROJECT_DIR$/C/Multiserver/prog_pmcsn" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/C/Multiserver/stats.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Multiserver/stats.c" afterDir="false" />
     </list>
@@ -61,6 +47,13 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
+  <component name="RunManager">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -79,8 +72,6 @@
       <workItem from="1605624395590" duration="712000" />
       <workItem from="1605645629060" duration="5388000" />
       <workItem from="1605651774295" duration="1982000" />
-      <workItem from="1605692271459" duration="1868000" />
-      <workItem from="1605694325325" duration="2782000" />
     </task>
     <task id="LOCAL-00001" summary="committino">
       <created>1604875681923</created>
@@ -152,29 +143,11 @@
       <option name="project" value="LOCAL" />
       <updated>1605567002544</updated>
     </task>
-    <task id="LOCAL-00011" summary="commit 18-11-2020 #1&#10;resolved type_task">
-      <created>1605696145029</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1605696145029</updated>
-    </task>
-    <option name="localTasksCounter" value="12" />
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="committino" />
@@ -187,8 +160,7 @@
     <MESSAGE value="commit 15-11-2020 #1" />
     <MESSAGE value="commit 16-11-2020 #1" />
     <MESSAGE value="commit 16-11-2020 #2" />
-    <MESSAGE value="commit 18-11-2020 #1&#10;resolved type_task" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit 18-11-2020 #1&#10;resolved type_task" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit 16-11-2020 #2" />
   </component>
   <component name="WindowStateProjectService">
     <state x="3379" y="261" width="922" height="918" key="CommitChangelistDialog2" timestamp="1605567002476">
@@ -207,10 +179,9 @@
       <screen x="2560" y="0" width="2560" height="1440" />
     </state>
     <state x="3329" y="351" width="1022" height="737" key="SettingsEditor/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605216226377" />
-    <state x="492" y="270" width="509" height="324" key="Vcs.Push.Dialog.v2" timestamp="1605696148697">
-      <screen x="0" y="0" width="1440" height="870" />
+    <state x="3435" y="452" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1605567005541">
+      <screen x="2560" y="0" width="2560" height="1440" />
     </state>
-    <state x="492" y="270" width="509" height="324" key="Vcs.Push.Dialog.v2/0.0.1440.870@0.0.1440.870" timestamp="1605696148697" />
     <state x="3435" y="452" width="800" height="535" key="Vcs.Push.Dialog.v2/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605567005541" />
     <state x="472" y="212" width="762" height="686" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1605652046132">
       <screen x="0" y="27" width="1920" height="985" />

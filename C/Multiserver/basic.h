@@ -229,7 +229,7 @@ struct area{ //tipi di aree (calcolo ottenuto non dall'integrale ma dalla forma 
 #define NUM_BATCH 64 //k=numero di batch
 #define LENGTH_BATCH_TIME (STOP/NUM_BATCH)
 
-#define NUM_MAX_SERVER 3//NUM_MAX_SERVER==N,numero massimo di server della cloudlet
+#define NUM_MAX_SERVER 2//NUM_MAX_SERVER==N,numero massimo di server della cloudlet
 
 //arrival rate and service rate
 #define ARRIVALONE	0.05 //lambda1 1 gusto gelato        [task/s]
