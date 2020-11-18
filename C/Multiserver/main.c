@@ -78,6 +78,10 @@ int main(int argc, char *argv[]) {
 
     char task_type_next_arrival = 0;//tipo di job del prossimo arrivo
     char task_type_next_termination = 0;//tipo di job del prossimo completamento
+    char task_type_next_termination_cassa = 0;
+    char task_type_next_termination_verifica = 0;
+    char task_type_next_termination_multiserver = 0;
+    char task_type_next_termination_delay = 0;
 
     //definizione delle liste dinamiche
     struct node *cassa_head = NULL;
@@ -131,7 +135,7 @@ int main(int argc, char *argv[]) {
     // multiserver[0].type_event != 0 significa che il primo server del multiserver è idle
     while (1) {
 
-        printf("Counter: %d\n", counter);
+        //printf("Counter: %d\n", counter);
 
         check_state_variables_during_simulation(state);
 
@@ -167,10 +171,10 @@ int main(int argc, char *argv[]) {
 
 
 
-        next_completion_cassa = find_next_termination(cassa_head, &task_type_next_termination);
-        next_completion_delay = find_next_termination(delay_head, &task_type_next_termination);
-        next_completion_verifica = find_next_termination(verifica_head, &task_type_next_termination);
-        next_completion_multiserver = find_next_termination(multiserver_head, &task_type_next_termination);
+        next_completion_cassa = find_next_termination(cassa_head, &task_type_next_termination_cassa);
+        next_completion_delay = find_next_termination(delay_head, &task_type_next_termination_delay);
+        next_completion_verifica = find_next_termination(verifica_head, &task_type_next_termination_verifica);
+        next_completion_multiserver = find_next_termination(multiserver_head, &task_type_next_termination_multiserver);
 
         double array_compl[] = {next_completion_cassa, next_completion_delay, next_completion_verifica,
                                 next_completion_multiserver};
@@ -244,9 +248,12 @@ int main(int argc, char *argv[]) {
 
 
         //GESTIONE DEGLI EVENTI
+        //sleep(1);
 
         //se il prossimo evento è un arrivo
         if (current_time == next_arrival) {
+
+            //printf("Sono in NextArrival\n");
 
             if (task_type_next_arrival == TASK_TYPE1){
                 next_arrival_gelato_1_gusto = get_interarrival_cassa(task_type_next_arrival, 0);
@@ -256,6 +263,7 @@ int main(int argc, char *argv[]) {
                 next_arrival_gelato_3_gusti = get_interarrival_cassa(task_type_next_arrival, 0);
             }
 
+            //printf("Tipo di Task: %d\n", task_type_next_arrival);
             update_state(task_type_next_arrival, DIRECT_VERIFY, &state);
             //printf("Sono in next_arrival e completo nella cassa\n");
 
@@ -268,24 +276,29 @@ int main(int argc, char *argv[]) {
             //insert_at_tail(newNode, &verifica_head, &verifica_tail);
             insert_ordered(time_completion,task_type_next_arrival,current_time,&verifica_head,&verifica_tail);
 
+            continue;
             //se il prossimo evento è un completamento
         } else if (current_time == next_completion) { //gestisco l'evento di completamento
 
 
             double time_completion = 0.0;
             //struct node *new_completion_node;
+            //printf("Tipo di Task: %d\n", task_type_next_termination);
+
 
             //gestione evento completamento server verifica.
             //possibili redirezioni a delay o al multiserver.
             if (current_time == next_completion_verifica) {
 
-//                printf("Sono in next_completion_verifica\n");
+                //printf("Sono in next_completion_verifica\n");
 //                printf("Valore di current: %f\n", current_time);
 //                printf("Valore di get_service: %f\n", get_service_verifica(task_type_next_termination));
 
                 //determino il numero attuale di palline di gelato
                 int actual_number_of_icecream_balls = state.number_balls_icecream;
 
+                ///update del tipo di task
+                task_type_next_termination = task_type_next_termination_verifica;
                 //calcolo il tempo di completamento del Task
                 time_completion = current_time + get_service_verifica(task_type_next_termination);
 
@@ -301,7 +314,7 @@ int main(int argc, char *argv[]) {
                     //insert_at_tail(new_completion_node, &delay_head, &delay_tail);
                     insert_ordered(time_completion,task_type_next_termination, current_time, &delay_head, &delay_tail);
                     //printf("%d: numero nella lista delay\n", count_element_linked_list(delay_head));
-
+                    continue;
                     //aggiornamento delle variabili di stato.
                 } else {
                     //andiamo nel multiserver //multiserver arriva = completion verifica
@@ -314,16 +327,16 @@ int main(int argc, char *argv[]) {
                     //insert_at_tail(new_completion_node, &multiserver_head, &multiserver_tail);
                     insert_ordered(time_completion,task_type_next_termination, current_time, &multiserver_head, &multiserver_tail);
 
-                    int server = find_idle_server(multiserver);
+                    //int server = find_idle_server(multiserver);
 
-                    int num_task = count_element_linked_list(multiserver_head);
-                    if (num_task <= NUM_MAX_SERVER) {
+                    //int num_task = count_element_linked_list(multiserver_head);
+                    //if (num_task <= NUM_MAX_SERVER) {
 
-                        multiserver[server].type_event = 1;
-                        multiserver[server].next_event_time = current_time;
+                    //    multiserver[server].type_event = 1;
+                    //    multiserver[server].next_event_time = current_time;
 
-                    }
-
+                    //}
+                    continue;
                     //printf("%d: numero nella lista multiserver\n", count_element_linked_list(multiserver_head));
 
                 }
@@ -331,7 +344,9 @@ int main(int argc, char *argv[]) {
 
             } else if (current_time == next_completion_delay) { //processamento Job nel server di verifica
 
-//                printf("Sono in next_completion_delay\n");
+                ///Update del tipo di task
+                task_type_next_termination = task_type_next_termination_delay;
+                //printf("Sono in next_completion_delay\n");
 //                printf("Valore di current: %f\n", current_time);
 //                printf("Valore di get_service: %f\n", get_service_delay(task_type_next_termination));
 
@@ -353,6 +368,7 @@ int main(int argc, char *argv[]) {
                     //aggiornamento delle variabili di stato.
                     //printf("Ho rosicato zi\n");
                     update_state(task_type_next_termination, DIRECT_QUIT, &state);
+                    continue;
                 } else { //probabilità dell'80% di rientrare nel multiserver
                     //Job diretto verso il multiserver
                     //printf("Diretto al multiserver\n");
@@ -373,12 +389,14 @@ int main(int argc, char *argv[]) {
 //                    }
 
                     //printf("%d: numero nella lista multiserver\n", count_element_linked_list(multiserver_head));
-
+                    continue;
                 }
 
             } else {    //processamento Job multiserver
 
-                //printf("Sono in next_completion multi\n");
+                ///update del tipo di task
+                task_type_next_termination = task_type_next_termination_multiserver;
+                  //printf("Sono in next_completion multi\n");
 //                printf("Valore di current: %f\n", current_time);
 //                printf("Valore di get_service: %f\n", get_service_multiserver(task_type_next_termination));
 
@@ -410,7 +428,7 @@ int main(int argc, char *argv[]) {
 //                }
 
                 //multiserver[server].type_event = 0;
-
+                continue;
             }
 
 

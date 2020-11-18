@@ -88,20 +88,10 @@ double* min_element(double *start, double *end){
 void check_state_variables_during_simulation(struct state state){ //da modificare per aggiungere i controlli da eseguire durante la simulazione.
     if(state.actual_job1 < 0 || state.actual_job2 < 0 || state.actual_job3 < 0){
 
-        printf("Stampo job1: %f\n", state.actual_job1);
-        printf("Stampo job2: %f\n", state.actual_job2);
-        printf("Stampo job3: %f\n", state.actual_job3);
-
-        sleep(1);
-        //handle_error_with_exit("Error in Job total Count (Negative)\n");
+        handle_error_with_exit("Error in Job total Count (Negative)\n");
     }
 
     if(state.actual_job1 + state.actual_job2 + state.actual_job3 != state.actual_system){
-
-//        printf("Stampo job1: %f\n", state.actual_job1);
-//        printf("Stampo job2: %f\n", state.actual_job2);
-//        printf("Stampo job3: %f\n", state.actual_job3);
-//        printf("Stampo job: %f\n", state.actual_system);
 
         handle_error_with_exit("Error in Job total Count\n");
     }
