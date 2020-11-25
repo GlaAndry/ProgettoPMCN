@@ -286,6 +286,9 @@ int main(int argc, char *argv[]) {
 
         }
     }
+
+
+
     print_all(tr_batch,tr_type1_batch,tr_type2_batch,tr_type3_batch,
               tr_verifica, tr_type1_verifica, tr_type2_verifica, tr_type3_verifica,
               tr_delay, tr_type1_delay, tr_type2_delay, tr_type3_delay,
@@ -294,6 +297,7 @@ int main(int argc, char *argv[]) {
               response_verifica, response_type1_verifica, response_type2_verifica, response_type3_verifica,
               response_delay, response_type1_delay, response_type2_delay, response_type3_delay,
               response_multiserver, response_type1_multiserver, response_type2_multiserver, response_type3_multiserver);
+
 
     check_state_variables_after_simulation(state);
     exit(0);

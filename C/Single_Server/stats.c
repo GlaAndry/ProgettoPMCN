@@ -92,42 +92,6 @@ void print_all(double*tr_batch,double* tr_type1_batch,double* tr_type2_batch, do
     printf("\n\n");
 
 
-
-
-/*
-    printf("tr_batch:%f\n", *tr_batch);
-    printf("tr_type1_batch:%f\n", *tr_type1_batch);
-    printf("tr_type2_batch:%f\n", *tr_type2_batch);
-    printf("tr_type3_batch:%f\n", *tr_type3_batch);
-    printf("tr_verifica:%f\n", *tr_verifica);
-    printf("tr_type1_verifica:%f\n", *tr_type1_verifica);
-    printf("tr_type2_verifica:%f\n", *tr_type2_verifica);
-    printf("tr_type3_verifica:%f\n", *tr_type3_verifica);
-    printf("tr_delay:%f\n", *tr_delay);
-    printf("tr_type1_delay:%f\n", *tr_type1_delay);
-    printf("tr_type2_delay:%f\n", *tr_type2_delay);
-    printf("tr_type3_delay:%f\n", *tr_type3_delay);
-    printf("tr_multiserver:%f\n", *tr_multiserver);
-    printf("tr_type1_multiserver:%f\n", *tr_type1_multiserver);
-    printf("tr_type2_multiserver:%f\n", *tr_type2_multiserver);
-    printf("tr_type3_multiserver:%f\n", *tr_type3_multiserver);
-    printf("response_batch:%f\n", *response_batch);
-    printf("response_type1_batch:%f\n", *response_type1_batch);
-    printf("response_type2_batch:%f\n", *response_type2_batch);
-    printf("response_type3_batch:%f\n", *response_type3_batch);
-    printf("response_verifica:%f\n", *response_verifica);
-    printf("response_type1_verifica:%f\n", *response_type1_verifica);
-    printf("response_type2_verifica:%f\n", *response_type2_verifica);
-    printf("response_type3_verifica:%f\n", *response_type3_verifica);
-    printf("response_delay:%f\n", *response_delay);
-    printf("response_type1_delay:%f\n", *response_type1_delay);
-    printf("response_type2_delay:%f\n", *response_type2_delay);
-    printf("response_type3_delay:%f\n", *response_type3_delay);
-    printf("response_multiserver:%f\n", *response_multiserver);
-    printf("response_type1_multiserver:%f\n", *response_type1_multiserver);
-    printf("response_type2_multiserver:%f\n", *response_type2_multiserver);
-    printf("response_type3_multiserver:%f\n", *response_type3_multiserver);
-*/
 }
 
 void calculate_batch(double time_next,struct state state,struct area area,struct last_state*last_state,int*i
@@ -254,9 +218,6 @@ void calculate_batch(double time_next,struct state state,struct area area,struct
     last_state -> last_area_type1_multiserver = area.number_job_type1_multiserver;
     last_state -> last_area_type2_multiserver = area.number_job_type2_multiserver;
     last_state -> last_area_type3_multiserver = area.number_job_type3_multiserver;
-
-
-
 
 
     (*i)++;//aumento batch i;
