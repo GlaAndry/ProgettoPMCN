@@ -5,7 +5,6 @@
 #include <string.h>
 
 void initialize_state(struct state*state);
-void initialize_state_multiserver(struct state_multiserver*multiserver);
 void initialize_area(struct area*area);
 void initialize_node(struct node *node);
 void initialize_last_state(struct last_state *last_state);

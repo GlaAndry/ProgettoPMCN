@@ -231,29 +231,29 @@ struct area{ //tipi di aree (calcolo ottenuto non dall'integrale ma dalla forma 
 
 
 //arrival rate and service rate
-#define ARRIVALONE	0.05 //lambda1 1 gusto gelato        [task/s]*[1/60 s] = task/min
-#define ARRIVALTWO  0.066667 //lambda2 2 gusti gelato       [task/s]
-#define ARRIVALTHREE 0.083333 //lamdbda3 3 gusti gelato     [task/s]
+#define ARRIVALONE	(double)3 //lambda1 1 gusto gelato        [task/s]*[1/60 s] = task/min
+#define ARRIVALTWO  (double)4 //lambda2 2 gusti gelato       [task/s]
+#define ARRIVALTHREE (double)5 //lamdbda3 3 gusti gelato     [task/s]
 
 //tasso di servizio cassa
-#define SERVICEONE_CASSA 0.066667         //u1 1 gusto gelato            [task/s]
-#define SERVICETWO_CASSA 0.066667  //u2 2 gusti gelato            [task/s]
-#define SERVICETHREE_CASSA 0.066667  //u2 3 gusti gelato          [task/s]
+#define SERVICEONE_CASSA (double)7         //u1 1 gusto gelato            [task/s]
+#define SERVICETWO_CASSA (double)7  //u2 2 gusti gelato            [task/s]
+#define SERVICETHREE_CASSA (double)7  //u2 3 gusti gelato          [task/s]
 
 //tasso di servizio verifica
-#define SERVICEONE_VERIFY 0.116667        //u1 1 gusto gelato            [task/s]
-#define SERVICETWO_VERIFY 0.116667        //u2 2 gusti gelato            [task/s]
-#define SERVICETHREE_VERIFY 0.116667      //u2 3 gusti gelato          [task/s]
+#define SERVICEONE_VERIFY (double)7       //u1 1 gusto gelato            [task/s]
+#define SERVICETWO_VERIFY (double)7        //u2 2 gusti gelato            [task/s]
+#define SERVICETHREE_VERIFY (double)7      //u2 3 gusti gelato          [task/s]
 
 //tasso di servizio delay
-#define SERVICEONE_DELAY 0.016667  //u1 1 gusto gelato            [task/s]
-#define SERVICETWO_DELAY 0.016667  //u2 2 gusti gelato            [task/s]
-#define SERVICETHREE_DELAY 0.016667  //u2 3 gusti gelato          [task/s]
+#define SERVICEONE_DELAY (double)1  //u1 1 gusto gelato            [task/s]
+#define SERVICETWO_DELAY (double)1  //u2 2 gusti gelato            [task/s]
+#define SERVICETHREE_DELAY (double)1  //u2 3 gusti gelato          [task/s]
 
 //tasso di servizio Multiserver
-#define SERVICEONE_MULTI 0.066667           //u1 1 gusto gelato            [task/s]
-#define SERVICETWO_MULTI 0.083333    //u2 2 gusti gelato            [task/s]
-#define SERVICETHREE_MULTI 0.1  //u2 3 gusti gelato          [task/s]
+#define SERVICEONE_MULTI (double)4           //u1 1 gusto gelato            [task/s]
+#define SERVICETWO_MULTI (double)5    //u2 2 gusti gelato            [task/s]
+#define SERVICETHREE_MULTI (double)6  //u2 3 gusti gelato          [task/s]
 
 //streams per arrivi e servizi
 #define STREAM_ARR1 0
