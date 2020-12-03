@@ -18,13 +18,13 @@ double pDelay = 0.063996;
 double pService = 0.948820;
 
 //soluzioni al sistema ottenuto dalla catena di markov per N=2
-double p000 = 0.0620365226361930810483614;
-double p100 = 0.1050026110558957698204452;
-double p010 = 0.0470382296799317367597126;
-double p001 = 0.1422639920706446348130925;
-double p200 = 0.1800044760958213196921918;
-double p110 = 0.0806369651655972630166502;
-double p101 = 0.3830172032959161532161829;
+double p000 = 0.0206752322387839838901957;
+double p100 = 0.1231793339400770181946143;
+double p010 = 0.0042446840449080133761406;
+double p001 = 0.0478555838818889439645332;
+double p200 = 0.2111645724687034597621960;
+double p110 = 0.1455320243968461768613309;
+double p101 = 0.4473485690287923866037545;
 
 
 int main() {
@@ -51,17 +51,22 @@ int main() {
     double lambda_delay_p = lambda_tot * p_direct_delay;
     double lambda_service_p = lambda_tot * p_direct_service;
 
+    printf("lambdap %f\n", lambda_verifica_p);
+
 
     //utilizzazione
     double utilization = 1 - p000; //rho
-    double rho_verifica = lambda_verifica_p/mu_verifica;
-    double rho_delay = lambda_delay_p/mu_verifica;
-    double rho_service = lambda_service_p/mu_verifica;
+    double rho_verifica = lambda_verifica_p/(3*mu_verifica);
+    double rho_delay = lambda_delay_p/(3*mu_delay);
+    double rho1_service = lambda_service_p*p1/mu1_service;
+    double rho2_service = lambda_service_p*p2/mu2_service;
+    double rho3_service = lambda_service_p*p3/mu3_service;
+    double rho_service = rho1_service*p1 + rho2_service*p2 + rho3_service*p3;
 
 
     /////////Statistiche Job tipo1///////////////////////////////
     //flusso di job di tipo 1 che entrano in verifica
-    double lambda1_verifica = lambda1 * (p000 + p100);
+    double lambda1_verifica = lambda1 * (p000 + p100 + p010 + p001 + p200 + p110 + p101);
     //flusso di job di tipo 1 che entrano in delay
     double lambda1_delay = lambda1 * (p100 + p200);
     //flusso di job di tipo 1 che entrano in Service
@@ -88,9 +93,9 @@ int main() {
     double E_s1_service = 1/ mu1_service;
 
     //tempo di attesa in coda
-    double E_tq1_verifica = 0;
+    double E_tq1_verifica = (rho_verifica*E_s1_verifica)/(1-rho_verifica);
     double E_tq1_delay = (rho_delay*E_s1_delay)/(1-rho_delay);
-    double E_tq1_service = 0;
+    double E_tq1_service = (rho_service*E_s1_service)/(1-rho_service);
 
     //tempo medio di risposta
     double E_ts1_verifica = E_s1_verifica;
@@ -114,13 +119,14 @@ int main() {
     double x1_delay_little = E_n1_delay * mu_delay;
     double x1_service_little = E_n1_service * mu1_service;
 
-    double x1 = x1_service + x1_delay + x1_verifica;
-    double x1_little = x1_verifica_little + x1_delay_little + x1_service_little;
+    //double x1 = x1_service + x1_delay + x1_verifica;
+    double x1 = x1_service;
+    double x1_little = x1_service_little;
     //////////////////////////////////
 
     /////////Statistiche Job tipo2////
     //flusso di job di tipo 2 che entrano in verifica
-    double lambda2_verifica = lambda2 * (p000 + p100);
+    double lambda2_verifica = lambda2 * (p000 + p100 + p010 + p001 + p200 + p110 + p101);
     //flusso di job di tipo 2 che entrano in delay
     double lambda2_delay = lambda2 * (p100 + p200);
     //flusso di job di tipo 2 che entrano in Service
@@ -147,9 +153,9 @@ int main() {
     double E_s2_service = 1/ mu1_service;
 
     //tempo di attesa in coda
-    double E_tq2_verifica = 0;
+    double E_tq2_verifica = (rho_verifica*E_s2_verifica)/(1-rho_verifica);
     double E_tq2_delay = (rho_delay*E_s2_delay)/(1-rho_delay);
-    double E_tq2_service = 0;
+    double E_tq2_service = (rho_service*E_s2_service)/(1-rho_service);
 
     //tempo medio di risposta
     double E_ts2_verifica = E_s2_verifica;
@@ -173,13 +179,15 @@ int main() {
     double x2_delay_little = E_n2_delay * mu_delay;
     double x2_service_little = E_n2_service * mu1_service;
 
-    double x2 = x2_service + x2_delay + x2_verifica;
-    double x2_little = x2_verifica_little + x2_delay_little + x2_service_little;
+    //double x2 = x2_service + x2_delay + x2_verifica;
+    double x2 = x2_service;
+    double x2_little = x2_service_little;
     //////////////////////////////////
 
     /////////Statistiche Job tipo2////
     //flusso di job di tipo 3 che entrano in verifica
-    double lambda3_verifica = lambda3 * (p000 + p100);
+    double lambda3_verifica = lambda3 * (p000 + p100 + p010 + p001 + p200 + p110 + p101);
+    printf("lambda3ver %f\n", lambda3_verifica);
     //flusso di job di tipo 3 che entrano in delay
     double lambda3_delay = lambda3 * (p100 + p200);
     //flusso di job di tipo 3 che entrano in Service
@@ -206,9 +214,9 @@ int main() {
     double E_s3_service = 1/ mu3_service;
 
     //tempo di attesa in coda
-    double E_tq3_verifica = 0;
+    double E_tq3_verifica = (rho_verifica*E_s3_verifica)/(1-rho_verifica);
     double E_tq3_delay = (rho_delay*E_s3_delay)/(1-rho_delay);
-    double E_tq3_service = 0;
+    double E_tq3_service = (rho_verifica*E_s3_verifica)/(1-rho_verifica);
 
     //tempo medio di risposta
     double E_ts3_verifica = E_s3_verifica;
@@ -232,8 +240,9 @@ int main() {
     double x3_delay_little = E_n3_delay * mu_delay;
     double x3_service_little = E_n3_service * mu1_service;
 
-    double x3 = x3_service + x3_delay + x3_verifica;
-    double x3_little = x3_verifica_little + x3_delay_little + x3_service_little;
+    //double x3 = x3_service + x3_delay + x3_verifica;
+    double x3 = x3_service;
+    double x3_little = x3_service_little;
     //////////////////////////////////
 
     /////////Statistiche Sistema  ////
@@ -273,7 +282,7 @@ int main() {
     double x0_verifica_little = E_n1_verifica * mu_verifica + E_n2_verifica * mu_verifica + E_n3_verifica * mu_verifica;
     double x0_delay_little = E_n1_delay * mu_delay + E_n2_delay * mu_delay + E_n3_delay * mu_delay;
     double x0_service_little = E_n1_service * mu1_service + E_n2_service * mu2_service + E_n3_service * mu3_service;
-    double x0_little = x0_verifica_little + x0_delay_little + x0_service_little;
+    double x0_little = x0_service_little;
     //////////////////////////////////
 
 
@@ -410,6 +419,11 @@ int main() {
     printf("x0_delay_little: %f\n", x0_delay_little);
     printf("x0_service_little: %f\n", x0_service_little);
     printf("x0_little: %f\n", x0_little);
+    printf("rho: %f\n", utilization);
+    printf("rho_verifica: %f\n", rho_verifica);
+    printf("rho_delay: %f\n", rho_delay);
+    printf("rho_service: %f\n", rho_service);
+
 
     printf("FEEEENE\n");
 
