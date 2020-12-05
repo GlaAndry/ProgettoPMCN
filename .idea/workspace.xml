@@ -48,13 +48,6 @@
       <recent name="$PROJECT_DIR$/C/Single_Server" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -78,7 +71,9 @@
       <workItem from="1606687048729" duration="4077000" />
       <workItem from="1606768221280" duration="4749000" />
       <workItem from="1606854785754" duration="10474000" />
-      <workItem from="1607027766628" duration="1511000" />
+      <workItem from="1607027766628" duration="1713000" />
+      <workItem from="1607029495485" duration="45000" />
+      <workItem from="1607035074110" duration="1325000" />
     </task>
     <task id="LOCAL-00001" summary="committino">
       <created>1604875681923</created>
@@ -185,7 +180,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606861831209</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="commit 01-12-2020 #1&#10;adjusted results.c">
+      <created>1607029456731</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1607029456731</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,13 +209,14 @@
     <MESSAGE value="commit 18-11-2020 #4" />
     <MESSAGE value="commit 25-11-2020 #1" />
     <MESSAGE value="commit 01-12-2020 #1&#10;added results.c" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit 01-12-2020 #1&#10;added results.c" />
+    <MESSAGE value="commit 01-12-2020 #1&#10;adjusted results.c" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit 01-12-2020 #1&#10;adjusted results.c" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="819" y="281" width="912" height="921" key="CommitChangelistDialog2" timestamp="1606861831089">
+    <state x="819" y="281" width="912" height="921" key="CommitChangelistDialog2" timestamp="1607029456606">
       <screen x="0" y="33" width="2560" height="1367" />
     </state>
-    <state x="819" y="281" width="912" height="921" key="CommitChangelistDialog2/0.33.2560.1367/2560.0.2560.1440@0.33.2560.1367" timestamp="1606861831089" />
+    <state x="819" y="281" width="912" height="921" key="CommitChangelistDialog2/0.33.2560.1367/2560.0.2560.1440@0.33.2560.1367" timestamp="1607029456606" />
     <state x="3379" y="261" width="922" height="918" key="CommitChangelistDialog2/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605738729811" />
     <state x="2806" y="159" width="2048" height="1130" key="DiffContextDialog" timestamp="1604875679250">
       <screen x="2560" y="0" width="2560" height="1440" />
@@ -227,10 +230,10 @@
       <screen x="2560" y="0" width="2560" height="1440" />
     </state>
     <state x="3329" y="351" width="1022" height="737" key="SettingsEditor/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605216226377" />
-    <state x="875" y="462" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1606861839002">
+    <state x="875" y="462" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1607029458584">
       <screen x="0" y="33" width="2560" height="1367" />
     </state>
-    <state x="875" y="462" width="800" height="535" key="Vcs.Push.Dialog.v2/0.33.2560.1367/2560.0.2560.1440@0.33.2560.1367" timestamp="1606861839002" />
+    <state x="875" y="462" width="800" height="535" key="Vcs.Push.Dialog.v2/0.33.2560.1367/2560.0.2560.1440@0.33.2560.1367" timestamp="1607029458584" />
     <state x="3435" y="452" width="800" height="535" key="Vcs.Push.Dialog.v2/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605738731224" />
     <state x="472" y="212" width="762" height="686" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1605652046132">
       <screen x="0" y="27" width="1920" height="985" />

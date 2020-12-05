@@ -18,13 +18,16 @@ double pDelay = 0.063996;
 double pService = 0.948820;
 
 //soluzioni al sistema ottenuto dalla catena di markov per N=2
-double p000 = 0.0206752322387839838901957;
-double p100 = 0.1231793339400770181946143;
-double p010 = 0.0042446840449080133761406;
-double p001 = 0.0478555838818889439645332;
-double p200 = 0.2111645724687034597621960;
-double p110 = 0.1455320243968461768613309;
-double p101 = 0.4473485690287923866037545;
+double p000 = 0.0340107401391916072674881;
+double p100 = 0.0290753523120670237522845;
+double p010 = 0.0011753250343715447405468;
+double p001 = 0.0789471903219532283868531;
+double p200 = 0.0498434611064006091729617;
+double p110 = 0.0251609667667710631966393;
+double p101 = 0.1059482904340488806926857;
+double p002 = 0.2070393537539734485353193;
+double p020 = 0.0112714086044439654871185;
+double p011 = 0.4575279115267786300691455;
 
 
 int main() {
@@ -39,7 +42,7 @@ int main() {
     double p3 = lambda3 / lambda_tot;
 
     //popolazione media del Sistema
-    double E_n = 0*p000 + 1*p100 + 1*p010 + 1*p001 + 2*p200 + 2*p110 + 2*p101;
+    double E_n = 0*p000 + 1*p100 + 1*p010 + 1*p001 + 2*(p200 + p110 + p101 +p002 + p020 + p011);
 
     //percentuale di arrivi diretti verso i server del sistema
     double p_direct_verifica = 1; //tasso di visita server verifica
@@ -66,11 +69,11 @@ int main() {
 
     /////////Statistiche Job tipo1///////////////////////////////
     //flusso di job di tipo 1 che entrano in verifica
-    double lambda1_verifica = lambda1 * (p000 + p100 + p010 + p001 + p200 + p110 + p101);
+    double lambda1_verifica = lambda1 * (p000 + p100 + p010 + p001 + p200 + p110 + p101 + p020 + p002 + p010);
     //flusso di job di tipo 1 che entrano in delay
-    double lambda1_delay = lambda1 * (p100 + p200);
+    double lambda1_delay = lambda1 * (p100 + p200 + p110 + p101);
     //flusso di job di tipo 1 che entrano in Service
-    double lambda1_service = lambda1 * (p100 + p200 + p010 + p110);
+    double lambda1_service = lambda1 * (p100 + p200 + p010 + p110 + p101 + p011);
 
     //percentuale di job di tipo 1 che entrano nella server rispetto al totale dei job nel server
     double p1_verifica = lambda1_verifica / lambda_verifica_p;
@@ -111,9 +114,9 @@ int main() {
     double E_n1 = E_n1_service + E_n1_delay + E_n1_verifica;
 
     //throughput
-    double x1_verifica = mu_verifica * (p000 + p100);
-    double x1_delay = mu_delay * (p100 + p200);
-    double x1_service = mu1_service * (p100 + p200 + p010 + p110);
+    double x1_verifica = mu_verifica * (p000 + p100 + p010 + p001 + p200 + p110 + p101 + p020 + p002 + p010);
+    double x1_delay = mu_delay * (p100 + p200 + p110 + p101);
+    double x1_service = mu1_service * (p100 + p200 + p010 + p110 + p101 + p011);
 
     double x1_verifica_little = E_n1_verifica * mu_verifica;
     double x1_delay_little = E_n1_delay * mu_delay;
@@ -126,11 +129,11 @@ int main() {
 
     /////////Statistiche Job tipo2////
     //flusso di job di tipo 2 che entrano in verifica
-    double lambda2_verifica = lambda2 * (p000 + p100 + p010 + p001 + p200 + p110 + p101);
+    double lambda2_verifica = lambda2 * (p000 + p100 + p010 + p001 + p200 + p110 + p101 + p020 + p002 + p010);
     //flusso di job di tipo 2 che entrano in delay
-    double lambda2_delay = lambda2 * (p100 + p200);
+    double lambda2_delay = lambda2 * (p100 + p200 + p110 + p101);
     //flusso di job di tipo 2 che entrano in Service
-    double lambda2_service = lambda2 * (p100 + p200 + p010 + p110);
+    double lambda2_service = lambda2 * (p100 + p200 + p010 + p110 + p101 + p011);
 
     //percentuale di job di tipo 2 che entrano nella server rispetto al totale dei job nel server
     double p2_verifica = lambda2_verifica / lambda_verifica_p;
@@ -171,9 +174,9 @@ int main() {
     double E_n2 = E_n2_service + E_n2_delay + E_n2_verifica;
 
     //throughput
-    double x2_verifica = mu_verifica * (p000 + p100);
-    double x2_delay = mu_delay * (p100 + p200);
-    double x2_service = mu2_service * (p100 + p200 + p010 + p110);
+    double x2_verifica = mu_verifica * (p000 + p100 + p010 + p001 + p200 + p110 + p101 + p020 + p002 + p010);
+    double x2_delay = mu_delay * (p100 + p200 + p110 + p101);
+    double x2_service = mu2_service * (p100 + p200 + p010 + p110 + p101 + p011);
 
     double x2_verifica_little = E_n2_verifica * mu_verifica;
     double x2_delay_little = E_n2_delay * mu_delay;
@@ -186,12 +189,12 @@ int main() {
 
     /////////Statistiche Job tipo2////
     //flusso di job di tipo 3 che entrano in verifica
-    double lambda3_verifica = lambda3 * (p000 + p100 + p010 + p001 + p200 + p110 + p101);
+    double lambda3_verifica = lambda3 * (p000 + p100 + p010 + p001 + p200 + p110 + p101 + p020 + p002 + p010);
     printf("lambda3ver %f\n", lambda3_verifica);
     //flusso di job di tipo 3 che entrano in delay
-    double lambda3_delay = lambda3 * (p100 + p200);
+    double lambda3_delay = lambda3 * (p100 + p200 + p110 + p101);
     //flusso di job di tipo 3 che entrano in Service
-    double lambda3_service = lambda3 * (p100 + p200 + p010 + p110);
+    double lambda3_service = lambda3 * (p100 + p200 + p010 + p110 + p101 + p011);
 
     //percentuale di job di tipo 3 che entrano nella server rispetto al totale dei job nel server
     double p3_verifica = lambda3_verifica / lambda_verifica_p;
@@ -232,9 +235,9 @@ int main() {
     double E_n3 = E_n3_service + E_n3_delay + E_n3_verifica;
 
     //throughput
-    double x3_verifica = mu_verifica * (p000 + p100);
-    double x3_delay = mu_delay * (p100 + p200);
-    double x3_service = mu3_service * (p100 + p200 + p010 + p110);
+    double x3_verifica = mu_verifica * (p000 + p100 + p010 + p001 + p200 + p110 + p101 + p020 + p002 + p010);
+    double x3_delay = mu_delay * (p100 + p200 + p110 + p101);
+    double x3_service = mu3_service * (p100 + p200 + p010 + p110 + p101 + p011);
 
     double x3_verifica_little = E_n3_verifica * mu_verifica;
     double x3_delay_little = E_n3_delay * mu_delay;
@@ -268,10 +271,10 @@ int main() {
     double E_ts_system = E_ts_verifica * p_direct_verifica + E_ts_delay * p_direct_delay + E_ts_service * p_direct_service;
 
     //popolazione media del sistema
-    double E_n_system = E_n1 + E_n2 + E_n3;
     double E_n_verifica = (lambda1_verifica + lambda2_verifica + lambda3_verifica) * E_ts_verifica;
     double E_n_delay = (lambda1_delay + lambda2_delay + lambda3_delay) * E_ts_delay;
     double E_n_Service = (lambda1_service + lambda2_service + lambda3_service) * E_ts_service;
+    double E_n_system = E_n_verifica + E_n_delay + E_n_Service;
 
     //throughput
     double x0_verifica = x1_verifica + x2_verifica + x3_verifica;
