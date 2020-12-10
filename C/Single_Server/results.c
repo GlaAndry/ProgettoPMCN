@@ -6,11 +6,11 @@ double lambda2 = 4.0;//frequenza arrivi di tipo 2
 double lambda3 = 5.0;
 double lambda_tot = 12.0;//frequenza arrivi totale
 
-double mu_verifica = 0.25; //frequenza di servizio job cassa+Verifica
-double mu_delay = 0.10;    //frequenza di servizio job Delay Server
-double mu1_service = 0.45; //frequenza di servizio job di tipo 1 Service Server
-double mu2_service = 0.40; //frequenza di servizio job di tipo 2 Service Server
-double mu3_service = 0.35;
+double mu_verifica = 5; //frequenza di servizio job cassa+Verifica
+double mu_delay = 2;    //frequenza di servizio job Delay Server
+double mu1_service = 5; //frequenza di servizio job di tipo 1 Service Server
+double mu2_service = 6; //frequenza di servizio job di tipo 2 Service Server
+double mu3_service = 7;
 
 //valori delle probabilità
 double p = 0.8;
@@ -18,28 +18,29 @@ double pDelay = 0.063996;
 double pService = 0.948820;
 
 //soluzioni al sistema ottenuto dalla catena di markov per N=2
-//double p000 = 0.0340107401391916072674881;
-//double p100 = 0.0290753523120670237522845;
-//double p010 = 0.0011753250343715447405468;
-//double p001 = 0.0789471903219532283868531;
-//double p200 = 0.0498434611064006091729617;
-//double p110 = 0.0251609667667710631966393;
-//double p101 = 0.1059482904340488806926857;
-//double p002 = 0.2070393537539734485353193;
-//double p020 = 0.0112714086044439654871185;
-//double p011 = 0.4575279115267786300691455;
 
-double p000000 = 0.0114688085653344047643021;
-double p010100 = 0.1835009370453504762288333;
-double p100100 = 0.1376257027840128710494128;
-double p001100 = 0.2293761713066881091638294;
-double p010010 = 0.0293583149178856216143796;
-double p010001 = 0.1369890932822097617815871;
-double p100010 = 0.0220187361884142188128699;
-double p100001 = 0.0764600082754553489472471;
-double p001010 = 0.0366978936473570313547832;
-double p001001 = 0.1588034148563188807656843;
 
+double p000000 = 0.1741252832646891512968779;
+double p010100 = 0.1393002266117513154863872;
+double p100100 = 0.1044751699588134935536843;
+double p001100 = 0.1741252832646891512968779;
+double p010010 = 0.0222866432556140907361719;
+double p010001 = 0.1160854723796319876161220;
+double p100010 = 0.0167149824417105706542142;
+double p100001 = 0.1044769251416687999567401;
+double p001010 = 0.0278583040695176142875766;
+double p001001 = 0.1205517096119138459320297;
+
+//double p000000 = 0.0114688085653344047643021;
+//double p010100 = 0.1835009370453504762288333;
+//double p100100 = 0.1376257027840128710494128;
+//double p001100 = 0.2293761713066881091638294;
+//double p010010 = 0.0293583149178856216143796;
+//double p010001 = 0.1146900124131830372986585;
+//double p100010 = 0.0220187361884142188128699;
+//double p100001 = 0.0764600082754553489472471;
+//double p001010 = 0.0366978936473570313547832;
+//double p001001 = 0.1588034148563188807656843;
 
 int main() {
 
@@ -85,7 +86,7 @@ int main() {
     //flusso di job di tipo 1 che entrano in delay
     double lambda1_delay = mu_verifica * (p100100) * p_direct_delay;
     //flusso di job di tipo 1 che entrano in Service
-    double lambda1_service = mu_verifica * (p100100) * p_direct_service + mu_delay * (p100010) * p;
+    double lambda1_service = (mu_verifica * (p100100) * p_direct_service) + (mu_delay * (p100010) * p);
 
     //percentuale di job di tipo 1 che entrano nel server rispetto al totale dei job nel server
     double p1_verifica = lambda1_verifica / lambda_verifica_p;
@@ -106,6 +107,11 @@ int main() {
     double E_s1_verifica = 1/ mu_verifica;
     double E_s1_delay = 1/ mu_delay;
     double E_s1_service = 1/ mu1_service;
+
+    //Utilizzazione tipo1
+    double rho1_verifica = lambda1_verifica/(mu_verifica);
+    double rho1_delay = lambda1_delay/(mu_delay);
+    rho1_service = lambda1_service/(mu1_service);
 
     //tempo di attesa in coda
     double E_tq1_verifica = (rho_verifica*E_s1_verifica)/(1-rho_verifica);
@@ -135,8 +141,8 @@ int main() {
     double x1_service_little = E_n1_service * mu1_service;
 
     //double x1 = x1_service + x1_delay + x1_verifica;
-    double x1 = x1_service;
-    double x1_little = x1_service_little;
+    double x1 = x1_service + x1_delay + x1_verifica;
+    double x1_little = x1_service_little + x1_delay_little + x1_verifica_little;
     //////////////////////////////////
 
     /////////Statistiche Job tipo2////
@@ -186,7 +192,7 @@ int main() {
     double E_n2 = E_n2_service + E_n2_delay + E_n2_verifica;
 
     //throughput
-    double x2_verifica = mu_verifica * (p000000);
+    double x2_verifica = mu_verifica * (p010100);
     double x2_delay = mu_delay * (p010100);
     double x2_service = mu2_service * (p010100 + p010010);
 
@@ -248,8 +254,8 @@ int main() {
 
     //throughput
     double x3_verifica = mu_verifica * (p000000);
-    double x3_delay = mu_delay * (p001100);
-    double x3_service = mu3_service * (p001100 + p001010);
+    double x3_delay = mu_delay * (p001010);
+    double x3_service = mu3_service * (p001001);
 
     double x3_verifica_little = E_n3_verifica * mu_verifica;
     double x3_delay_little = E_n3_delay * mu_delay;

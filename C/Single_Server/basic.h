@@ -245,24 +245,24 @@ struct area{ //tipi di aree (calcolo ottenuto non dall'integrale ma dalla forma 
 #define ARRIVALTHREE (double)5 //lamdbda3 3 gusti gelato     [task/s]
 
 //tasso di servizio cassa
-#define SERVICEONE_CASSA (double)0.25         //u1 1 gusto gelato            [task/s]
-#define SERVICETWO_CASSA (double)0.25  //u2 2 gusti gelato            [task/s]
-#define SERVICETHREE_CASSA (double)0.25  //u2 3 gusti gelato          [task/s]
+#define SERVICEONE_CASSA (double)5         //u1 1 gusto gelato            [task/s]
+#define SERVICETWO_CASSA (double)5  //u2 2 gusti gelato            [task/s]
+#define SERVICETHREE_CASSA (double)5  //u2 3 gusti gelato          [task/s]
 
 //tasso di servizio verifica
-#define SERVICEONE_VERIFY (double)0.25       //u1 1 gusto gelato            [task/s]
-#define SERVICETWO_VERIFY (double)0.25        //u2 2 gusti gelato            [task/s]
-#define SERVICETHREE_VERIFY (double)0.25      //u2 3 gusti gelato          [task/s]
+#define SERVICEONE_VERIFY (double)5       //u1 1 gusto gelato            [task/s]
+#define SERVICETWO_VERIFY (double)5        //u2 2 gusti gelato            [task/s]
+#define SERVICETHREE_VERIFY (double)5      //u2 3 gusti gelato          [task/s]
 
 //tasso di servizio delay
-#define SERVICEONE_DELAY (double)0.10  //u1 1 gusto gelato            [task/s]
-#define SERVICETWO_DELAY (double)0.10  //u2 2 gusti gelato            [task/s]
-#define SERVICETHREE_DELAY (double)0.10  //u2 3 gusti gelato          [task/s]
+#define SERVICEONE_DELAY (double)2  //u1 1 gusto gelato            [task/s]
+#define SERVICETWO_DELAY (double)2  //u2 2 gusti gelato            [task/s]
+#define SERVICETHREE_DELAY (double)2  //u2 3 gusti gelato          [task/s]
 
 //tasso di servizio Multiserver
-#define SERVICEONE_MULTI (double)0.45           //u1 1 gusto gelato            [task/s]
-#define SERVICETWO_MULTI (double)0.40    //u2 2 gusti gelato            [task/s]
-#define SERVICETHREE_MULTI (double)0.35  //u2 3 gusti gelato          [task/s]
+#define SERVICEONE_MULTI (double)5           //u1 1 gusto gelato            [task/s]
+#define SERVICETWO_MULTI (double)6    //u2 2 gusti gelato            [task/s]
+#define SERVICETHREE_MULTI (double)7  //u2 3 gusti gelato          [task/s]
 
 //streams per arrivi e servizi
 #define STREAM_ARR1 0
