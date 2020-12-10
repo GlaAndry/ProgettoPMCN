@@ -143,9 +143,9 @@ int main() {
     //flusso di job di tipo 2 che entrano in verifica
     double lambda2_verifica = lambda2 * (p000000);
     //flusso di job di tipo 2 che entrano in delay
-    double lambda2_delay = lambda2 * (p010100);
+    double lambda2_delay = mu_verifica * (p010100) * p_direct_delay;
     //flusso di job di tipo 2 che entrano in Service
-    double lambda2_service = lambda2 * (p010100 + p010010);
+    double lambda2_service = mu_verifica * (p010100) * p_direct_service + mu_delay * (p010010) * p;
 
     //percentuale di job di tipo 2 che entrano nella server rispetto al totale dei job nel server
     double p2_verifica = lambda2_verifica / lambda_verifica_p;
@@ -173,9 +173,9 @@ int main() {
     double E_tq2_service = (rho_service*E_s2_service)/(1-rho_service);
 
     //tempo medio di risposta
-    double E_ts2_verifica = E_s2_verifica;
-    double E_ts2_delay = E_s2_delay;
-    double E_ts2_service = E_s2_service;
+    double E_ts2_verifica = E_s2_verifica + E_tq2_verifica;
+    double E_ts2_delay = E_s2_delay + E_tq2_delay;
+    double E_ts2_service = E_s2_service + E_tq2_service;
     //tempo medio di risposta job tipo 1
     double E_ts2 = v2_verifica * E_ts2_verifica + v2_delay * E_ts2_delay + v2_service * E_ts2_service;
 
@@ -204,9 +204,9 @@ int main() {
     double lambda3_verifica = lambda3 * (p000000);
     //printf("lambda3ver %f\n", lambda3_verifica);
     //flusso di job di tipo 3 che entrano in delay
-    double lambda3_delay = lambda3 * (p001100);
+    double lambda3_delay = mu_verifica * (p001100) * p_direct_delay;
     //flusso di job di tipo 3 che entrano in Service
-    double lambda3_service = lambda3 * (p001100 + p001010);
+    double lambda3_service = mu_verifica * (p001100) * p_direct_service + mu_delay * (p001010) * p;
 
     //percentuale di job di tipo 3 che entrano nella server rispetto al totale dei job nel server
     double p3_verifica = lambda3_verifica / lambda_verifica_p;
