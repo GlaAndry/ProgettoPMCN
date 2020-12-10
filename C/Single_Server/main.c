@@ -298,7 +298,6 @@ int main(int argc, char *argv[]) {
               response_delay, response_type1_delay, response_type2_delay, response_type3_delay,
               response_multiserver, response_type1_multiserver, response_type2_multiserver, response_type3_multiserver);
 
-
     check_state_variables_after_simulation(state);
     exit(0);
 }

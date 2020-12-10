@@ -356,6 +356,9 @@ void update_area(struct state state, struct area *area, double time_current,doub
     //altre variabili
     area -> users_lost += (time_next - time_current) * (state.number_lost_users);
 
+    area -> service += (time_next - time_current);
+
+
     //calcolo il numero di Job nella coda
     //area -> number_queue_cassa += (time_next - time_current) * (state.number_of_user_cassa - 1);
     //area -> number_queue_verify += (time_next - time_current) * (state.number_of_user_verify - 1);
@@ -526,16 +529,20 @@ void update_state(char task_type, char location, struct state *state) {
         //state -> number_of_user_multiserver --;
         state -> actual_multi --;
         state -> actual_system --;
+        state -> total_completed++;
 
         if(task_type == TASK_TYPE1){
             state -> actual_job1_multi --;
             state -> actual_job1 --;
+            state -> total_job1_completed++;
         } else if (task_type == TASK_TYPE2){
             state -> actual_job2_multi --;
             state -> actual_job2 --;
+            state -> total_job2_completed++;
         } else {
             state -> actual_job3_multi --;
             state -> actual_job3 --;
+            state -> total_job3_completed++;
         }
 
 

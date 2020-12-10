@@ -104,15 +104,13 @@ void calculate_batch(double time_next,struct state state,struct area area,struct
         double *response_delay, double *response_type1_delay, double *response_type2_delay, double *response_type3_delay,
         double *response_multiserver, double *response_type1_multiserver, double *response_type2_multiserver, double *response_type3_multiserver){
 
-    int num_job_completed = state.total_system - state.number_lost_users;
-
     ///////CALCOLO THROUGHPUT////
 
-    tr_batch[*i]=(num_job_completed-last_state->last_num_job_completed)/(time_next-last_state->last_observed_time);//batch[i] del throughput
+    tr_batch[*i]=(state.total_completed-last_state->last_num_job_completed)/(time_next-last_state->last_observed_time);//batch[i] del throughput
+    tr_type1_batch[*i] = (double) (state.total_job1_completed - last_state->last_num_job_1_completed_total)/(time_next-last_state->last_observed_time);
+    tr_type2_batch[*i] = (double) (state.total_job2_completed - last_state->last_num_job_2_completed_total)/(time_next-last_state->last_observed_time);
+    tr_type3_batch[*i] = (double) (state.total_job3_completed - last_state->last_num_job_3_completed_total)/(time_next-last_state->last_observed_time);
 
-    tr_type1_batch[*i] = (double) (state.total_job1 - last_state->last_num_job_1_completed_total)/(time_next-last_state->last_observed_time);
-    tr_type2_batch[*i] = (double) (state.total_job2 - last_state->last_num_job_2_completed_total)/(time_next-last_state->last_observed_time);
-    tr_type3_batch[*i] = (double) (state.total_job3 - last_state->last_num_job_3_completed_total)/(time_next-last_state->last_observed_time);
 
     tr_verifica[*i] = (double) ((state.total_job1_verify + state.total_job2_verify + state.total_job3_verify) - (last_state -> last_num_job_1_verifica_total + last_state -> last_num_job_2_verifica_total + last_state -> last_num_job_3_verifica_total))/(time_next-last_state->last_observed_time);
     tr_type1_verifica[*i] = (double) (state.total_job1_verify - last_state->last_num_job_1_verifica_total)/(time_next-last_state->last_observed_time);
@@ -147,6 +145,7 @@ void calculate_batch(double time_next,struct state state,struct area area,struct
     response_type2_verifica[*i] = (double) ((area.number_job_type2_verify - last_state->last_area_type2_verifica)/(state.total_job2_verify - last_state->last_num_job_2_verifica_total));
     response_type3_verifica[*i] = (double) ((area.number_job_type3_verify - last_state->last_area_type3_verifica)/(state.total_job3_verify - last_state->last_num_job_3_verifica_total));
 
+    //response_delay[*i] = (double) (area.service - last_state-> last_area_service)/((state.total_job1_delay + state.total_job2_delay + state.total_job3_delay)-(last_state->last_num_job_1_delay_total + last_state->last_num_job_2_delay_total + last_state->last_num_job_3_delay_total));
     response_delay[*i] = (double) (area.number_delay - (last_state->last_area_type1_delay + last_state->last_area_type2_delay + last_state->last_area_type3_delay))/((state.total_job1_delay + state.total_job2_delay + state.total_job3_delay)-(last_state->last_num_job_1_delay_total + last_state->last_num_job_2_delay_total + last_state->last_num_job_3_delay_total));
     response_type1_delay[*i] = (double) ((area.number_job_type1_delay - last_state->last_area_type1_delay)/(state.total_job1_delay - last_state->last_num_job_1_delay_total));
     response_type2_delay[*i] = (double) ((area.number_job_type2_delay - last_state->last_area_type2_delay)/(state.total_job2_delay - last_state->last_num_job_2_delay_total));
@@ -158,13 +157,13 @@ void calculate_batch(double time_next,struct state state,struct area area,struct
     response_type3_multiserver[*i] = (double) ((area.number_job_type3_multiserver - last_state->last_area_type3_multiserver)/(state.total_job3_multi - last_state->last_num_job_3_multiserver_total));
 
 
-    last_state -> last_num_job_completed = num_job_completed;
+    last_state -> last_num_job_completed = state.total_completed;
     last_state -> last_numberOfUsers = state.total_system;
 
     ///TOTALI
-    last_state -> last_num_job_1_completed_total = state.total_job1;
-    last_state -> last_num_job_2_completed_total = state.total_job2;
-    last_state -> last_num_job_3_completed_total = state.total_job3;
+    last_state -> last_num_job_1_completed_total = state.total_job1_completed;
+    last_state -> last_num_job_2_completed_total = state.total_job2_completed;
+    last_state -> last_num_job_3_completed_total = state.total_job3_completed;
 
     last_state -> last_num_job_1_verifica_total = state.total_job1_verify;
     last_state -> last_num_job_2_verifica_total = state.total_job2_verify;
@@ -218,6 +217,7 @@ void calculate_batch(double time_next,struct state state,struct area area,struct
     last_state -> last_area_type1_multiserver = area.number_job_type1_multiserver;
     last_state -> last_area_type2_multiserver = area.number_job_type2_multiserver;
     last_state -> last_area_type3_multiserver = area.number_job_type3_multiserver;
+    last_state -> last_area_service = area.service;
 
 
     (*i)++;//aumento batch i;
