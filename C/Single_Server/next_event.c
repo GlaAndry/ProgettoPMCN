@@ -56,6 +56,7 @@ double get_interarrival_cassa(char task_type, char new_replication){
         init = 0;
         arrivals[0] = START;
         arrivals[1] = START;
+        arrivals[2] = START;
     }
 
     if (init < 3) {//inizializza i 2 tipi di arrivo,blocco di codice eseguito solo due volte
@@ -74,7 +75,8 @@ double get_interarrival_cassa(char task_type, char new_replication){
         if (init == 2){
             SelectStream(STREAM_ARR3);
             arrivals[2] += Exponential(mean[2]);
-            arrival = arrivals[2];
+            init++;
+            //arrival = arrivals[2];
             return arrivals[2];
         }
     }

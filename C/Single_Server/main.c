@@ -96,7 +96,7 @@ int main(int argc, char *argv[]) {
     printf("----------------------------------------------------------\n");
     printf("START SIMULATION\n");
     printf("----------------------------------------------------------\n");
-    PlantSeeds(123456789);
+    PlantSeeds(989757435);
 
     //variabili del sistema
 
@@ -126,7 +126,7 @@ int main(int argc, char *argv[]) {
 
         //verifico la scadenza del timer in modo da terminare la simulazione
         if (current_time > STOP) {
-            state.next = INF;
+            //state.next = INF;
             next_arrival = INF;
         } else {
             //determino il prossimo arrivo come l'evento che possiede il tempo minimo tra tutti.
@@ -135,12 +135,13 @@ int main(int argc, char *argv[]) {
                                       next_arrival_gelato_3_gusti}; //array contentente gli arrivi dei Job
             next_arrival = (double) min_array_associated_job(array_arrival, 3, &task_type_next_arrival);
 
+
         }
 
         //verifico le prossime terminazioni. si va ad aggiornare anche il valore delle variabili 
         // task_type_next_..._termination per andare a determinare quale tipo di Job ha terminato.
 
-        next_completion_cassa = find_next_termination(cassa_head, &task_type_next_termination_cassa);
+        //next_completion_cassa = find_next_termination(cassa_head, &task_type_next_termination_cassa);
         next_completion_delay = find_next_termination(delay_head, &task_type_next_termination_delay);
         next_completion_verifica = find_next_termination(verifica_head, &task_type_next_termination_verifica);
         next_completion_multiserver = find_next_termination(multiserver_head, &task_type_next_termination_multiserver);
@@ -277,6 +278,7 @@ int main(int argc, char *argv[]) {
 
                 time_completion = current_time + get_service_multiserver(task_type_next_termination);
 
+
                 //elimino la testa dalla lista dinamica della cassa
                 delete_head(&multiserver_head);
 
@@ -297,6 +299,8 @@ int main(int argc, char *argv[]) {
               response_verifica, response_type1_verifica, response_type2_verifica, response_type3_verifica,
               response_delay, response_type1_delay, response_type2_delay, response_type3_delay,
               response_multiserver, response_type1_multiserver, response_type2_multiserver, response_type3_multiserver);
+
+    //printf("pd %f\n", state.total_delay/state.total_system);
 
     check_state_variables_after_simulation(state);
     exit(0);

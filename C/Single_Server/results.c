@@ -63,17 +63,18 @@ int main() {
 
     //lambda percentuali
     ///////////
-    double lambda_verifica_p = lambda_tot*p000000; ////////////////////////
-    double lambda_delay_p = mu_verifica*((lambda1 * p100100) + (lambda2 * p010100) + (lambda3*p001100))*p_direct_delay;
-    double lambda_service_p = mu_verifica*((lambda1 * p100100) + (lambda2 * p010100) + (lambda3*p001100) + (mu_delay*p010010*p) + (mu_delay*p100010*p) + (mu_delay*p001010*p))*p_direct_service;
-
-    printf("lambdap %f\n", lambda_tot*p000000);
+    //double lambda_verifica_p = lambda_tot*p000000; ////////////////////////
+    //double lambda_delay_p = mu_verifica*((lambda1 * p100100) + (lambda2 * p010100) + (lambda3*p001100))*p_direct_delay;
+    //double lambda_service_p = mu_verifica*((lambda1 * p100100) + (lambda2 * p010100) + (lambda3*p001100) + (mu_delay*p010010*p) + (mu_delay*p100010*p) + (mu_delay*p001010*p))*p_direct_service;
+    double lambda_verifica_p = 1; ////////////////////////
+    double lambda_delay_p = lambda_verifica_p*p_direct_delay;
+    double lambda_service_p = lambda_verifica_p*p_direct_service;
 
 
     //utilizzazione
     double utilization = 1 - p000000; //rho
-    double rho_verifica = lambda_verifica_p/(mu_verifica);
-    double rho_delay = lambda_delay_p/(mu_delay);
+    double rho_verifica = lambda_tot*p1/(mu_verifica);
+    double rho_delay = (lambda_tot*lambda_delay_p)/(mu_delay);
     double rho1_service = lambda_service_p*p1/mu1_service;
     double rho2_service = lambda_service_p*p2/mu2_service;
     double rho3_service = lambda_service_p*p3/mu3_service;
@@ -83,6 +84,7 @@ int main() {
     /////////Statistiche Job tipo1///////////////////////////////
     //flusso di job di tipo 1 che entrano in verifica
     double lambda1_verifica = lambda1 * (p000000);
+    //double lambda1_verifica = lambda1;
     //flusso di job di tipo 1 che entrano in delay
     double lambda1_delay = mu_verifica * (p100100) * p_direct_delay;
     //flusso di job di tipo 1 che entrano in Service
@@ -99,7 +101,7 @@ int main() {
     double p1_service_global = lambda1_service / lambda1;
 
     //tassi di visita
-    double v1_verifica = p1_verifica_global;
+    double v1_verifica = 1;
     double v1_delay = p1_delay_global;
     double v1_service = p1_service_global;
 
@@ -120,7 +122,7 @@ int main() {
 
     //tempo medio di risposta
     double E_ts1_verifica = E_s1_verifica + E_tq1_verifica;
-    double E_ts1_delay = E_s1_delay + E_tq1_delay;
+    double E_ts1_delay = E_s1_delay + E_tq1_delay ;
     double E_ts1_service = E_s1_service + E_tq1_service;
     //tempo medio di risposta job tipo 1
     double E_ts1 = v1_verifica * E_ts1_verifica + v1_delay * E_ts1_delay + v1_service * E_ts1_service;
@@ -132,13 +134,15 @@ int main() {
     double E_n1 = E_n1_service + E_n1_delay + E_n1_verifica;
 
     //throughput
-    double x1_verifica = mu_verifica * (p100100);
+    double x1_verifica = lambda1*rho_verifica;
     double x1_delay = mu_delay * (p100010);
     double x1_service = mu1_service * (p100001);
 
     double x1_verifica_little = E_n1_verifica * mu_verifica;
     double x1_delay_little = E_n1_delay * mu_delay;
     double x1_service_little = E_n1_service * mu1_service;
+
+
 
     //double x1 = x1_service + x1_delay + x1_verifica;
     double x1 = x1_service + x1_delay + x1_verifica;
