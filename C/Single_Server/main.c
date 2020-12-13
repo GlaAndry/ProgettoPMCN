@@ -184,18 +184,21 @@ int main(int argc, char *argv[]) {
 
             if (task_type_next_arrival == TASK_TYPE1){
                 next_arrival_gelato_1_gusto = get_interarrival_cassa(task_type_next_arrival, 0);
+                insert_ordered(next_arrival_gelato_1_gusto,task_type_next_arrival,current_time,&verifica_head,&verifica_tail);
             } else if (task_type_next_arrival == TASK_TYPE2){
                 next_arrival_gelato_2_gusti = get_interarrival_cassa(task_type_next_arrival, 0);
+                insert_ordered(next_arrival_gelato_2_gusti,task_type_next_arrival,current_time,&verifica_head,&verifica_tail);
             } else {
                 next_arrival_gelato_3_gusti = get_interarrival_cassa(task_type_next_arrival, 0);
+                insert_ordered(next_arrival_gelato_3_gusti,task_type_next_arrival,current_time,&verifica_head,&verifica_tail);
             }
 
             update_state(task_type_next_arrival, DIRECT_VERIFY, &state);
 
             //definisco il tempo di completamento nel server cassa
-            double time_completion = current_time + get_service_cassa(task_type_next_arrival);
+            //double time_completion = current_time + get_service_cassa(task_type_next_arrival);
             //inserisco il Job all'interno della coda del server Cassa.
-            insert_ordered(time_completion,task_type_next_arrival,current_time,&verifica_head,&verifica_tail);
+            //insert_ordered(time_completion,task_type_next_arrival,current_time,&verifica_head,&verifica_tail);
             continue;
             //se il prossimo evento è un completamento
         } else if (current_time == next_completion) { //gestisco l'evento di completamento
