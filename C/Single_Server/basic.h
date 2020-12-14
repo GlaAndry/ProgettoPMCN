@@ -232,7 +232,7 @@ struct area{ //tipi di aree (calcolo ottenuto non dall'integrale ma dalla forma 
 
 #define START 0.0 //istante inizio simulazione
 //istante fine simulazione VECCHIO ISTANTE, quello nuovo è solo per test.
-#define STOP_SIMULATION  2000000
+#define STOP_SIMULATION  4000000
 #define INF (STOP_SIMULATION*10)
 #define NO_TIME_LOST 0.0
 #define NUM_BATCH 256 //k=numero di batch

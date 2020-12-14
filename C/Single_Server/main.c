@@ -134,8 +134,6 @@ int main(int argc, char *argv[]) {
             double array_arrival[] = {next_arrival_gelato_1_gusto, next_arrival_gelato_2_gusti,
                                       next_arrival_gelato_3_gusti}; //array contentente gli arrivi dei Job
             next_arrival = (double) min_array_associated_job(array_arrival, 3, &task_type_next_arrival);
-
-
         }
 
         //verifico le prossime terminazioni. si va ad aggiornare anche il valore delle variabili 
@@ -146,10 +144,9 @@ int main(int argc, char *argv[]) {
         next_completion_verifica = find_next_termination(verifica_head, &task_type_next_termination_verifica);
         next_completion_multiserver = find_next_termination(multiserver_head, &task_type_next_termination_multiserver);
 
-        double array_compl[] = {next_completion_cassa, next_completion_delay, next_completion_verifica,
-                                next_completion_multiserver};
+        double array_compl[] = {next_completion_delay, next_completion_verifica,next_completion_multiserver};
 
-        next_completion = min_array(array_compl, 4);
+        next_completion = min_array(array_compl, 3);
 
 
         //calcolo inizialmente tutti i tempi di servizio e verifico quelli con tempo minore dello stesso tipo

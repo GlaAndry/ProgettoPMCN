@@ -131,11 +131,26 @@ void calculate_batch(double time_next,struct state state,struct area area,struct
 
     /////////////////////
 
+    /////////Numero medio de gente/////////////////
+
+    double E_n_ver = (area.number_job_type1_verify)/time_next;
+    double E_n_del = (area.number_job_type1_delay)/time_next;
+    double E_n_serv = (area.number_job_type1_multiserver)/time_next;
+    //printf("env %f\n", E_n_ver);
+    //printf("end %f\n", E_n_del);
+    //printf("enm %f\n", E_n_serv);
+    //printf("1 %f\n", area.number_job_type1_verify);
+    //printf("t %f\n", time_next);
+
+
     ////CALCOLO TEMPI DI RISPOSTA
+
+
 
     //sistema
     //response_batch[*i] = (double) ((area.number_job_type1 + area.number_job_type2 + area.number_job_type3) - last_state->last_area)/(state.total_system - last_state->last_numberOfUsers);
-    response_batch[*i] = (double) (area.service - last_state->last_area_service)/(state.total_system - last_state->last_num_job_completed);
+    //response_batch[*i] = (double) (area.service - last_state->last_area_service)/(state.total_system - last_state->last_num_job_completed);
+    response_batch[*i] = (double) (area.service - last_state->last_area_service)/(state.total_system - last_state->last_numberOfUsers);
 
     //printf("rtot %f\n", state.total_system - state.total_completed);
     //printf("jobs %f\n", state.total_completed - last_state->last_num_job_completed);
@@ -148,8 +163,8 @@ void calculate_batch(double time_next,struct state state,struct area area,struct
     response_type3_batch[*i] = (double) ((area.service - last_state->last_area_service)/(state.total_job3_completed - last_state->last_num_job_3_completed_total));
 
     //server
-    response_verifica[*i] = (double) (area.number_verify - (last_state->last_area_type1_verifica + last_state->last_area_type2_verifica + last_state->last_area_type3_verifica))/((state.total_job1_verify + state.total_job2_verify + state.total_job3_verify)-(last_state->last_num_job_1_verifica_total + last_state->last_num_job_2_verifica_total + last_state->last_num_job_3_verifica_total));
-    //response_verifica[*i] = (double) ((area.service - last_state->last_area_service))/((state.total_job1_verify + state.total_job2_verify + state.total_job3_verify)-(last_state->last_num_job_1_verifica_total + last_state->last_num_job_2_verifica_total + last_state->last_num_job_3_verifica_total));
+    //response_verifica[*i] = (double) (area.number_verify - (last_state->last_area_type1_verifica + last_state->last_area_type2_verifica + last_state->last_area_type3_verifica))/((state.total_job1_verify + state.total_job2_verify + state.total_job3_verify)-(last_state->last_num_job_1_verifica_total + last_state->last_num_job_2_verifica_total + last_state->last_num_job_3_verifica_total));
+    response_verifica[*i] = (double) ((area.service - last_state->last_area_service))/((state.total_job1_verify + state.total_job2_verify + state.total_job3_verify)-(last_state->last_num_job_1_verifica_total + last_state->last_num_job_2_verifica_total + last_state->last_num_job_3_verifica_total));
     response_type1_verifica[*i] = (double) ((area.number_job_type1_verify - last_state->last_area_type1_verifica)/(state.total_job1_verify - last_state->last_num_job_1_verifica_total));
     //response_type1_verifica[*i] = (double) ((area.service - last_state->last_area_service)/(state.total_job1_verify - last_state->last_num_job_1_verifica_total));
     //printf("vertipo1 %f\n", response_type1_verifica[*i]);
