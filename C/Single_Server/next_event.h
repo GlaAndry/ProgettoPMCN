@@ -29,5 +29,12 @@ void assign_task_to_multiserver(double time_current, char task_type, struct node
 
 
 //funzioni di update
-void update_area(struct state state, struct area *area, double time_current,double time_next);
+void update_area(struct state state, struct area *area, double time_current,double time_next, char task_type);
+void update_area_verifica(struct state state, struct area *area, double time_current,double time_next, char task_type);
+void update_area_delay(struct state state, struct area *area, double time_current,double time_next, char task_type);
+void update_area_service(struct state state, struct area *area, double time_current,double time_next, char task_type);
+
+
+
+
 void update_state(char task_type, char location, struct state *state);
