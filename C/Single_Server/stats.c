@@ -136,30 +136,32 @@ void calculate_batch(double time_next,struct state state,struct area area,struct
     double E_n_ver = (area.number_job_type1_verify)/time_next;
     double E_n_del = (area.number_job_type1_delay)/time_next;
     double E_n_serv = (area.number_job_type1_multiserver)/time_next;
-    //printf("env %f\n", E_n_ver);
-    //printf("end %f\n", E_n_del);
-    //printf("enm %f\n", E_n_serv);
-    //printf("1 %f\n", area.number_job_type1_verify);
-    //printf("t %f\n", time_next);
+    printf("env %f\n", E_n_ver);
+    printf("end %f\n", E_n_del);
+    printf("enm %f\n", E_n_serv);
+    printf("1 %f\n", area.number_job_type1_verify);
+    printf("t %f\n", time_next);
 
 
     ////CALCOLO TEMPI DI RISPOSTA
 
-
-
     //sistema
-    response_batch[*i] = (double) ((area.number_job_type1 + area.number_job_type2 + area.number_job_type3) - last_state->last_area)/(state.total_system - last_state->last_numberOfUsers);
+    //response_batch[*i] = (double) ((area.service - last_state->last_area_service))/(state.total_completed - last_state->last_num_job_completed);
+    response_batch[*i] = (double) ((area.number_job_type1 + area.number_job_type2 + area.number_job_type3) - last_state->last_area)/(state.total_completed - last_state->last_num_job_completed);
     response_type1_batch[*i] = (double) ((area.number_job_type1 - last_state->last_area_type1)/(state.total_job1 - last_state->last_num_job_1_arrived_total));
+    //response_type1_batch[*i] = (double) ((area.service - last_state->last_area_service)/(state.total_job1 - last_state->last_num_job_1_arrived_total));
     response_type2_batch[*i] = (double) ((area.number_job_type2 - last_state->last_area_type2)/(state.total_job2 - last_state->last_num_job_2_arrived_total));
     response_type3_batch[*i] = (double) ((area.number_job_type3 - last_state->last_area_type3)/(state.total_job3 - last_state->last_num_job_3_arrived_total));
 
     //server
     response_verifica[*i] = (double) (area.number_verify - (last_state->last_area_type1_verifica + last_state->last_area_type2_verifica + last_state->last_area_type3_verifica))/((state.total_job1_verify + state.total_job2_verify + state.total_job3_verify)-(last_state->last_num_job_1_verifica_total + last_state->last_num_job_2_verifica_total + last_state->last_num_job_3_verifica_total));
+    //response_verifica[*i] = (double) (area.service_v)/((state.total_job1_verify + state.total_job2_verify + state.total_job3_verify));
     response_type1_verifica[*i] = (double) ((area.number_job_type1_verify - last_state->last_area_type1_verifica)/(state.total_job1_verify - last_state->last_num_job_1_verifica_total));
     response_type2_verifica[*i] = (double) ((area.number_job_type2_verify - last_state->last_area_type2_verifica)/(state.total_job2_verify - last_state->last_num_job_2_verifica_total));
     response_type3_verifica[*i] = (double) ((area.number_job_type3_verify - last_state->last_area_type3_verifica)/(state.total_job3_verify - last_state->last_num_job_3_verifica_total));
 
     response_delay[*i] =  (double) (area.number_delay - (last_state->last_area_type1_delay + last_state->last_area_type2_delay + last_state->last_area_type3_delay))/((state.total_job1_delay + state.total_job2_delay + state.total_job3_delay)-(last_state->last_num_job_1_delay_total + last_state->last_num_job_2_delay_total + last_state->last_num_job_3_delay_total));
+    //response_delay[*i] =  (double) (area.service_d)/((state.total_job1_delay + state.total_job2_delay + state.total_job3_delay));
     response_type1_delay[*i] = (double) ((area.number_job_type1_delay - last_state->last_area_type1_delay)/(state.total_job1_delay - last_state->last_num_job_1_delay_total));
     response_type2_delay[*i] =  (double) ((area.number_job_type2_delay - last_state->last_area_type2_delay)/(state.total_job2_delay - last_state->last_num_job_2_delay_total));
     response_type3_delay[*i] =  (double) ((area.number_job_type3_delay - last_state->last_area_type3_delay)/(state.total_job3_delay - last_state->last_num_job_3_delay_total));

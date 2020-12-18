@@ -8,6 +8,6 @@ install: prog_pmcsn_single_server risultati
 prog_pmcsn_single_server: main.c basic.c basic.h rngs.h rngs.c distributions.c distributions.h dynamic_list.c dynamic_list.h next_event.c next_event.h parser.c parser.h rvms.h rvms.c stats.c stats.h
 	$(CC) $(CFLAGS) -o $@ $^ -lm -std=c99 -lpthread
 
-risultati:results.c
+risultati:jackson.c
 	$(CC) $(CFLAGS) -o $@ $^
 

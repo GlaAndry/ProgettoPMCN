@@ -303,7 +303,7 @@ double find_next_termination(struct node *head, char *task_type_termination) {//
 * per il calcolo delle statistiche necessarie.
 * area_tipo=(time_next-time_current)*popolazione_tipo
 */
-void update_area(struct state state, struct area *area, double time_current,double time_next, char task_type){
+void update_area(struct state state, struct area *area, double time_current,double time_next){
 
     if(area == NULL) {
 
@@ -311,7 +311,7 @@ void update_area(struct state state, struct area *area, double time_current,doub
         
     }
 
-    if(time_current > time_next) {
+    if(time_current >= time_next) {
 
         handle_error_with_exit("error in update area: time_current > time_next\n");
 
@@ -344,34 +344,35 @@ void update_area(struct state state, struct area *area, double time_current,doub
     area -> users_lost += (time_next - time_current) * (state.number_lost_users);
     area -> service += (time_next - time_current);
 
-    //area -> number_job_type1_verify += (time_next - time_current) * (state.actual_job1_verify);
-    //area -> number_job_type1_delay += (time_next - time_current) * (state.actual_job1_delay);
-    //area -> number_job_type1_multiserver += (time_next - time_current) * (state.actual_job1_multi);
+//    area -> number_job_type1_verify += (time_next - time_current) * (state.actual_job1_verify);
+//    area -> number_job_type1_delay += (time_next - time_current) * (state.actual_job1_delay);
+    area -> number_job_type1_multiserver += (time_next - time_current) * (state.actual_job1_multi);
 
-    //area -> number_job_type2_verify += (time_next - time_current) * (state.actual_job2_verify);
-    //area -> number_job_type2_delay += (time_next - time_current) * (state.actual_job2_delay);
-    //area -> number_job_type2_multiserver += (time_next - time_current) * (state.actual_job2_multi);
+//    area -> number_job_type2_verify += (time_next - time_current) * (state.actual_job2_verify);
+//    area -> number_job_type2_delay += (time_next - time_current) * (state.actual_job2_delay);
+    area -> number_job_type2_multiserver += (time_next - time_current) * (state.actual_job2_multi);
 
     //area -> number_job_type3_verify += (time_next - time_current) * (state.actual_job3_verify);
-    //area -> number_job_type3_delay += (time_next - time_current) * (state.actual_job3_delay);
-    //area -> number_job_type3_multiserver += (time_next - time_current) * (state.actual_job3_multi);
+//    area -> number_job_type3_delay += (time_next - time_current) * (state.actual_job3_delay);
+    area -> number_job_type3_multiserver += (time_next - time_current) * (state.actual_job3_multi);
 
-    if (task_type == TASK_TYPE1){
-        area -> number_job_type1 += (time_next - time_current) * (state.actual_job1);
-    } else if (task_type == TASK_TYPE2){
-        area -> number_job_type2 += (time_next - time_current) * (state.actual_job2);
-    } else {
-        area -> number_job_type3 += (time_next - time_current) * (state.actual_job3);
-    }
+    area -> number_job_type1 += (time_next - time_current) * (state.actual_job1);
+    area -> number_job_type2 += (time_next - time_current) * (state.actual_job2);
+    area -> number_job_type3 += (time_next - time_current) * (state.actual_job3);
+
 
     //area -> number_verify += (time_next - time_current) * (state.actual_job1_verify + state.actual_job2_verify + state.actual_job3_verify);
-    //area -> number_delay += (time_next - time_current) * (state.actual_job1_delay + state.actual_job2_delay + state.actual_job3_delay);
-    //area -> number_multi += (time_next - time_current) * (state.actual_job1_multi + state.actual_job2_multi + state.actual_job3_multi);
+//    area -> number_delay += (time_next - time_current) * (state.actual_job1_delay + state.actual_job2_delay + state.actual_job3_delay);
+    area -> number_multi += (time_next - time_current) * (state.actual_job1_multi + state.actual_job2_multi + state.actual_job3_multi);
 
 
-    area -> service_v += (time_next - time_current);
-    area -> service_d += (time_next - time_current);
-    area -> service_s += (time_next - time_current);
+    //area -> service_v += (time_next - time_current);
+    //area -> service_d += (time_next - time_current);
+    //area -> service_s += (time_next - time_current);
+
+    //printf("Time Next :%f\n", time_next);
+    //printf("Time Current :%f\n\n", time_current);
+
 
     //calcolo il numero di Job nella coda
     //area -> number_queue_cassa += (time_next - time_current) * (state.number_of_user_cassa - 1);
@@ -385,87 +386,71 @@ void update_area(struct state state, struct area *area, double time_current,doub
     return;
 }
 
-void update_area_verifica(struct state state, struct area *area, double time_current,double time_next, char task_type){
+void update_area_verifica(struct state state, struct area *area, double time_current,double time_next){
+
     if(area == NULL) {
+
         handle_error_with_exit("error in update area: area is NULL\n");
-    }
-    if(time_current > time_next) {
-        handle_error_with_exit("error in update area: time_current > time_next\n");
-    }
-    if(time_current < 0) {
-        handle_error_with_exit("error in update area: time_current < 0\n");
-    }
-    if(time_next < 0) {
-        handle_error_with_exit("error in update area: time_next < 0\n");
+
     }
 
-    if(task_type == 1){
-        area -> number_job_type1_verify += (time_next - time_current) * (state.actual_job1_verify);
-    } else if(task_type == 2){
-        area -> number_job_type2_verify += (time_next - time_current) * (state.actual_job2_verify);
-    } else if(task_type == 3){
-        area -> number_job_type3_verify += (time_next - time_current) * (state.actual_job3_verify);
+    if(time_current >= time_next) {
+
+        handle_error_with_exit("error in update area: time_current > time_next\n");
+
+    }
+
+    if(time_current < 0) {
+
+        handle_error_with_exit("error in update area: time_current < 0\n");
+
+    }
+
+    if(time_next < 0) {
+
+        handle_error_with_exit("error in update area: time_next < 0\n");
+
     }
 
     area -> number_verify += (time_next - time_current) * (state.actual_job1_verify + state.actual_job2_verify + state.actual_job3_verify);
+    area -> number_job_type3_verify += (time_next - time_current) * (state.actual_job3_verify);
+    area -> number_job_type2_verify += (time_next - time_current) * (state.actual_job2_verify);
+    area -> number_job_type1_verify += (time_next - time_current) * (state.actual_job1_verify);
 
-    return;
 }
 
-void update_area_delay(struct state state, struct area *area, double time_current,double time_next, char task_type){
+void update_area_delay(struct state state, struct area *area, double time_current,double time_next){
+
     if(area == NULL) {
+
         handle_error_with_exit("error in update area: area is NULL\n");
-    }
-    if(time_current > time_next) {
-        handle_error_with_exit("error in update area: time_current > time_next\n");
-    }
-    if(time_current < 0) {
-        handle_error_with_exit("error in update area: time_current < 0\n");
-    }
-    if(time_next < 0) {
-        handle_error_with_exit("error in update area: time_next < 0\n");
+
     }
 
-    if(task_type == 1){
-        area -> number_job_type1_delay += (time_next - time_current) * (state.actual_job1_delay);
-    } else if(task_type == 2){
-        area -> number_job_type2_delay += (time_next - time_current) * (state.actual_job2_delay);
-    } else if(task_type == 3){
-        area -> number_job_type3_delay += (time_next - time_current) * (state.actual_job3_delay);
+    if(time_current >= time_next) {
+
+        handle_error_with_exit("error in update area: time_current > time_next\n");
+
     }
+
+    if(time_current < 0) {
+
+        handle_error_with_exit("error in update area: time_current < 0\n");
+
+    }
+
+    if(time_next < 0) {
+
+        handle_error_with_exit("error in update area: time_next < 0\n");
+
+    }
+
     area -> number_delay += (time_next - time_current) * (state.actual_job1_delay + state.actual_job2_delay + state.actual_job3_delay);
+    area -> number_job_type3_delay += (time_next - time_current) * (state.actual_job3_delay);
+    area -> number_job_type2_delay += (time_next - time_current) * (state.actual_job2_delay);
+    area -> number_job_type1_delay += (time_next - time_current) * (state.actual_job1_delay);
 
-
-    return;
 }
-
-void update_area_service(struct state state, struct area *area, double time_current,double time_next, char task_type){
-    if(area == NULL) {
-        handle_error_with_exit("error in update area: area is NULL\n");
-    }
-    if(time_current > time_next) {
-        handle_error_with_exit("error in update area: time_current > time_next\n");
-    }
-    if(time_current < 0) {
-        handle_error_with_exit("error in update area: time_current < 0\n");
-    }
-    if(time_next < 0) {
-        handle_error_with_exit("error in update area: time_next < 0\n");
-    }
-
-    if(task_type == 1){
-        area -> number_job_type1_multiserver += (time_next - time_current) * (state.actual_job1_multi);
-    } else if(task_type == 2){
-        area -> number_job_type2_multiserver += (time_next - time_current) * (state.actual_job2_multi);
-    } else if(task_type == 3){
-        area -> number_job_type3_multiserver += (time_next - time_current) * (state.actual_job3_multi);
-    }
-    area -> number_multi += (time_next - time_current) * (state.actual_job1_multi + state.actual_job2_multi + state.actual_job3_multi);
-
-
-    return;
-}
-
 /**
 * Aggiorna le variabili del sistema quando 
 * c'è un arrivo di tipo 1, 2 o 3

@@ -102,6 +102,7 @@ int main(int argc, char *argv[]) {
 
     double current_time = 0.0;      //Tempo iniziale della simulazione
     double next_event_time = 0.0;   //tempo del prossimo evento
+    double time_arrive = 0.0;
 
     int counter = 0;
 
@@ -134,8 +135,7 @@ int main(int argc, char *argv[]) {
         } else {
             //determino il prossimo arrivo come l'evento che possiede il tempo minimo tra tutti.
             //andando anche a scrivere il tipo di Job che è arrivato nella varibile task_type_next_arrival
-            double array_arrival[] = {next_arrival_gelato_1_gusto, next_arrival_gelato_2_gusti,
-                                      next_arrival_gelato_3_gusti}; //array contentente gli arrivi dei Job
+            double array_arrival[] = {next_arrival_gelato_1_gusto, next_arrival_gelato_2_gusti,next_arrival_gelato_3_gusti}; //array contentente gli arrivi dei Job
             next_arrival = (double) min_array_associated_job(array_arrival, 3, &task_type_next_arrival);
         }
 
@@ -159,24 +159,7 @@ int main(int argc, char *argv[]) {
 
 
         //aggiornamento dei valori dell'area
-
-        if(next_completion == next_completion_verifica){
-            task_type_term_temp = task_type_next_termination_verifica;
-            update_area_delay(state, &area, current_time, next_event_time, task_type_term_temp);
-            update_area_service(state, &area, current_time, next_event_time, task_type_term_temp);
-            update_area(state, &area, current_time, next_event_time, task_type_term_temp);
-        } else if (next_completion == next_completion_delay){
-            task_type_term_temp = task_type_next_termination_delay;
-            update_area_verifica(state, &area, current_time, next_event_time, task_type_term_temp);
-            update_area_service(state, &area, current_time, next_event_time, task_type_term_temp);
-            update_area(state, &area, current_time, next_event_time, task_type_term_temp);
-        } else {
-            task_type_term_temp = task_type_next_termination_multiserver;
-            update_area_verifica(state, &area, current_time, next_event_time, task_type_term_temp);
-            update_area_delay(state, &area, current_time, next_event_time, task_type_term_temp);
-            update_area(state, &area, current_time, next_event_time, task_type_term_temp);
-        }
-
+        update_area(state, &area, current_time, next_event_time);
 
 
 
@@ -216,7 +199,6 @@ int main(int argc, char *argv[]) {
                 next_arrival_gelato_3_gusti = get_interarrival_cassa(TASK_TYPE3, 0);
                 //insert_ordered(next_arrival_gelato_3_gusti,task_type_next_arrival,current_time,&verifica_head,&verifica_tail);
                 assign_task_to_verify(current_time, TASK_TYPE3, &verifica_head, &verifica_tail);
-
             }
 
 
@@ -232,6 +214,7 @@ int main(int argc, char *argv[]) {
             //gestione evento completamento server verifica.
             //possibili redirezioni a delay o al multiserver.
             if (current_time == next_completion_verifica) {
+
                 //determino il numero attuale di palline di gelato
                 int actual_number_of_icecream_balls = state.number_balls_icecream;
 
@@ -241,7 +224,10 @@ int main(int argc, char *argv[]) {
                 //time_completion = current_time + get_service_verifica(task_type_next_termination);
 
                 //elimino la testa dalla lista dinamica della cassa
-                delete_head(&verifica_head);
+                update_area_verifica(state, &area, time_arrive, current_time);
+                delete_head(&verifica_head, &time_arrive, 0);
+                area.service_v += (current_time - time_arrive);
+
 
 
                 //determino se andare verso il multiserver o verso il server di delay.
@@ -298,7 +284,10 @@ int main(int argc, char *argv[]) {
                 //time_completion = current_time + get_service_delay(task_type_next_termination);
 
                 //elimino la testa dalla lista dinamica della cassa
-                delete_head(&delay_head);
+                delete_head(&delay_head, &time_arrive, 0);
+                update_area_delay(state, &area, time_arrive, current_time);
+                area.service_d += (current_time - time_arrive);
+
                 //aggiungo il task appena calcolato nella lista dinamica della verifica
                 //determino se il Job esce dal sistema oppure va nel multiserver
                 if (prob < PROBABILITY) { //probabilità del 20% di uscire dal sistema
@@ -335,7 +324,9 @@ int main(int argc, char *argv[]) {
 
 
                 //elimino la testa dalla lista dinamica della cassa
-                delete_head(&multiserver_head);
+                delete_head(&multiserver_head, &time_arrive, 0);
+                area.service_s += (current_time - time_arrive);
+
 
                 continue;
             }
