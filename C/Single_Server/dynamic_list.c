@@ -96,7 +96,7 @@ void remove_prev_node(struct node**pprev,struct node**head){
 //    return 0;
 //}
 
-int delete_head(struct node** head,double *time_arrive,double *time_lost_in_cloudlet){//rimuove il primo elemento dalla lista dinamica,non è importante il valore iniziale di head
+int delete_head(struct node** head,double *time_arrive){//rimuove il primo elemento dalla lista dinamica,non è importante il valore iniziale di head
     if(head==NULL || time_arrive==NULL){
         handle_error_with_exit("error in delete head\n");
     }

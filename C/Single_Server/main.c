@@ -224,8 +224,8 @@ int main(int argc, char *argv[]) {
                 //time_completion = current_time + get_service_verifica(task_type_next_termination);
 
                 //elimino la testa dalla lista dinamica della cassa
-                update_area_verifica(state, &area, time_arrive, current_time);
-                delete_head(&verifica_head, &time_arrive, 0);
+                //update_area_verifica(state, &area, time_arrive, current_time);
+                delete_head(&verifica_head, &time_arrive);
                 area.service_v += (current_time - time_arrive);
 
 
@@ -284,8 +284,8 @@ int main(int argc, char *argv[]) {
                 //time_completion = current_time + get_service_delay(task_type_next_termination);
 
                 //elimino la testa dalla lista dinamica della cassa
-                delete_head(&delay_head, &time_arrive, 0);
-                update_area_delay(state, &area, time_arrive, current_time);
+                delete_head(&delay_head, &time_arrive);
+                //update_area_delay(state, &area, time_arrive, current_time);
                 area.service_d += (current_time - time_arrive);
 
                 //aggiungo il task appena calcolato nella lista dinamica della verifica
@@ -324,7 +324,7 @@ int main(int argc, char *argv[]) {
 
 
                 //elimino la testa dalla lista dinamica della cassa
-                delete_head(&multiserver_head, &time_arrive, 0);
+                delete_head(&multiserver_head, &time_arrive);
                 area.service_s += (current_time - time_arrive);
 
 

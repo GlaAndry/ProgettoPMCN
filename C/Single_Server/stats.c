@@ -133,14 +133,14 @@ void calculate_batch(double time_next,struct state state,struct area area,struct
 
     /////////Numero medio de gente/////////////////
 
-    double E_n_ver = (area.number_job_type1_verify)/time_next;
-    double E_n_del = (area.number_job_type1_delay)/time_next;
-    double E_n_serv = (area.number_job_type1_multiserver)/time_next;
-    printf("env %f\n", E_n_ver);
-    printf("end %f\n", E_n_del);
-    printf("enm %f\n", E_n_serv);
-    printf("1 %f\n", area.number_job_type1_verify);
-    printf("t %f\n", time_next);
+//    double E_n_ver = (area.number_job_type1_verify)/time_next;
+//    double E_n_del = (area.number_job_type1_delay)/time_next;
+//    double E_n_serv = (area.number_job_type1_multiserver)/time_next;
+//    printf("env %f\n", E_n_ver);
+//    printf("end %f\n", E_n_del);
+//    printf("enm %f\n", E_n_serv);
+//    printf("1 %f\n", area.number_job_type1_verify);
+//    printf("t %f\n", time_next);
 
 
     ////CALCOLO TEMPI DI RISPOSTA

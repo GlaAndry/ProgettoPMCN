@@ -344,16 +344,16 @@ void update_area(struct state state, struct area *area, double time_current,doub
     area -> users_lost += (time_next - time_current) * (state.number_lost_users);
     area -> service += (time_next - time_current);
 
-//    area -> number_job_type1_verify += (time_next - time_current) * (state.actual_job1_verify);
-//    area -> number_job_type1_delay += (time_next - time_current) * (state.actual_job1_delay);
+    area -> number_job_type1_verify += (time_next - time_current) * (state.actual_job1_verify);
+    area -> number_job_type1_delay += (time_next - time_current) * (state.actual_job1_delay);
     area -> number_job_type1_multiserver += (time_next - time_current) * (state.actual_job1_multi);
 
-//    area -> number_job_type2_verify += (time_next - time_current) * (state.actual_job2_verify);
-//    area -> number_job_type2_delay += (time_next - time_current) * (state.actual_job2_delay);
+    area -> number_job_type2_verify += (time_next - time_current) * (state.actual_job2_verify);
+    area -> number_job_type2_delay += (time_next - time_current) * (state.actual_job2_delay);
     area -> number_job_type2_multiserver += (time_next - time_current) * (state.actual_job2_multi);
 
-    //area -> number_job_type3_verify += (time_next - time_current) * (state.actual_job3_verify);
-//    area -> number_job_type3_delay += (time_next - time_current) * (state.actual_job3_delay);
+    area -> number_job_type3_verify += (time_next - time_current) * (state.actual_job3_verify);
+    area -> number_job_type3_delay += (time_next - time_current) * (state.actual_job3_delay);
     area -> number_job_type3_multiserver += (time_next - time_current) * (state.actual_job3_multi);
 
     area -> number_job_type1 += (time_next - time_current) * (state.actual_job1);
@@ -361,8 +361,8 @@ void update_area(struct state state, struct area *area, double time_current,doub
     area -> number_job_type3 += (time_next - time_current) * (state.actual_job3);
 
 
-    //area -> number_verify += (time_next - time_current) * (state.actual_job1_verify + state.actual_job2_verify + state.actual_job3_verify);
-//    area -> number_delay += (time_next - time_current) * (state.actual_job1_delay + state.actual_job2_delay + state.actual_job3_delay);
+    area -> number_verify += (time_next - time_current) * (state.actual_job1_verify + state.actual_job2_verify + state.actual_job3_verify);
+    area -> number_delay += (time_next - time_current) * (state.actual_job1_delay + state.actual_job2_delay + state.actual_job3_delay);
     area -> number_multi += (time_next - time_current) * (state.actual_job1_multi + state.actual_job2_multi + state.actual_job3_multi);
 
 
