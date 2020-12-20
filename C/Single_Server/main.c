@@ -228,10 +228,13 @@ int main(int argc, char *argv[]) {
                 delete_head(&verifica_head, &time_arrive);
                 area.service_v += (current_time - time_arrive);
                 if(task_type_next_termination == TASK_TYPE1){
+                    area.service_1 += (current_time - time_arrive);
                     area.service_v_1 += (current_time - time_arrive);
                 } else if(task_type_next_termination == TASK_TYPE2){
+                    area.service_2 += (current_time - time_arrive);
                     area.service_v_2 += (current_time - time_arrive);
                 } else {
+                    area.service_3 += (current_time - time_arrive);
                     area.service_v_3 += (current_time - time_arrive);
                 }
 
@@ -295,10 +298,13 @@ int main(int argc, char *argv[]) {
                 //update_area_delay(state, &area, time_arrive, current_time);
                 area.service_d += (current_time - time_arrive);
                 if(task_type_next_termination == TASK_TYPE1){
+                    area.service_1 += (current_time - time_arrive);
                     area.service_d_1 += (current_time - time_arrive);
                 } else if(task_type_next_termination == TASK_TYPE2){
+                    area.service_2 += (current_time - time_arrive);
                     area.service_d_2 += (current_time - time_arrive);
                 } else {
+                    area.service_3 += (current_time - time_arrive);
                     area.service_d_3 += (current_time - time_arrive);
                 }
 
@@ -342,10 +348,13 @@ int main(int argc, char *argv[]) {
                 area.service_s += (current_time - time_arrive);
 
                 if(task_type_next_termination == TASK_TYPE1){
+                    area.service_1 += (current_time - time_arrive);
                     area.service_s_1 += (current_time - time_arrive);
                 } else if(task_type_next_termination == TASK_TYPE2){
+                    area.service_2 += (current_time - time_arrive);
                     area.service_s_2 += (current_time - time_arrive);
                 } else {
+                    area.service_3 += (current_time - time_arrive);
                     area.service_s_3 += (current_time - time_arrive);
                 }
 

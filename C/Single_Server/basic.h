@@ -233,14 +233,17 @@ struct area{ //tipi di aree (calcolo ottenuto non dall'integrale ma dalla forma 
 
     //Service tipo Job
 
+    double service_1;
     double service_v_1;
     double service_d_1;
     double service_s_1;
 
+    double service_2;
     double service_v_2;
     double service_d_2;
     double service_s_2;
 
+    double service_3;
     double service_v_3;
     double service_d_3;
     double service_s_3;
