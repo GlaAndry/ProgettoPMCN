@@ -13,15 +13,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87415312-7195-4724-b327-0cb650329885" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/C/Single_Server/jackson.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/C/Single_Server/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/C/Single_Server/basic.h" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/basic.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/C/Single_Server/dynamic_list.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/dynamic_list.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/C/Single_Server/dynamic_list.h" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/dynamic_list.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/Single_Server/jackson.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/jackson.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/C/Single_Server/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/C/Single_Server/next_event.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/next_event.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/C/Single_Server/next_event.h" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/next_event.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/C/Single_Server/prog_pmcsn_single_server" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/prog_pmcsn_single_server" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/C/Single_Server/stats.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/stats.c" afterDir="false" />
     </list>
@@ -94,6 +89,8 @@
       <workItem from="1607978157058" duration="10074000" />
       <workItem from="1608151535371" duration="9617000" />
       <workItem from="1608237005636" duration="8764000" />
+      <workItem from="1608320893636" duration="301000" />
+      <workItem from="1608482335427" duration="3513000" />
     </task>
     <task id="LOCAL-00001" summary="committino">
       <created>1604875681923</created>
@@ -263,7 +260,21 @@
       <option name="project" value="LOCAL" />
       <updated>1608161176535</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="commit 18-12-2020 #1&#10;adjusted results.c">
+      <created>1608320915803</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1608320915803</updated>
+    </task>
+    <task id="LOCAL-00026" summary="commit 18-12-2020 #2&#10;adjusted results.c">
+      <created>1608321169569</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1608321169569</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -292,17 +303,19 @@
     <MESSAGE value="commit 13-12-2020 #3&#10;adjusted results.c" />
     <MESSAGE value="commit 14-12-2020 #3&#10;adjusted results.c" />
     <MESSAGE value="commit 17-12-2020 #3&#10;adjusted results.c" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit 17-12-2020 #3&#10;adjusted results.c" />
+    <MESSAGE value="commit 18-12-2020 #1&#10;adjusted results.c" />
+    <MESSAGE value="commit 18-12-2020 #2&#10;adjusted results.c" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit 18-12-2020 #2&#10;adjusted results.c" />
   </component>
   <component name="WindowStateProjectService">
     <state x="983" y="518" width="584" height="403" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1607466951481">
       <screen x="0" y="33" width="2560" height="1367" />
     </state>
     <state x="983" y="518" width="584" height="403" key="#com.intellij.fileTypes.FileTypeChooser/0.33.2560.1367/2560.0.2560.1440@0.33.2560.1367" timestamp="1607466951481" />
-    <state x="819" y="281" width="922" height="921" key="CommitChangelistDialog2" timestamp="1608161176397">
+    <state x="819" y="281" width="922" height="921" key="CommitChangelistDialog2" timestamp="1608321169520">
       <screen x="0" y="33" width="2560" height="1367" />
     </state>
-    <state x="819" y="281" width="922" height="921" key="CommitChangelistDialog2/0.33.2560.1367/2560.0.2560.1440@0.33.2560.1367" timestamp="1608161176397" />
+    <state x="819" y="281" width="922" height="921" key="CommitChangelistDialog2/0.33.2560.1367/2560.0.2560.1440@0.33.2560.1367" timestamp="1608321169520" />
     <state x="3379" y="261" width="922" height="918" key="CommitChangelistDialog2/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1607207121685" />
     <state x="2806" y="159" width="2048" height="1130" key="DiffContextDialog" timestamp="1604875679250">
       <screen x="2560" y="0" width="2560" height="1440" />
@@ -316,10 +329,10 @@
       <screen x="2560" y="0" width="2560" height="1440" />
     </state>
     <state x="3329" y="351" width="1022" height="737" key="SettingsEditor/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605216226377" />
-    <state x="875" y="462" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1608161178645">
+    <state x="875" y="462" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1608321170496">
       <screen x="0" y="33" width="2560" height="1367" />
     </state>
-    <state x="875" y="462" width="800" height="535" key="Vcs.Push.Dialog.v2/0.33.2560.1367/2560.0.2560.1440@0.33.2560.1367" timestamp="1608161178645" />
+    <state x="875" y="462" width="800" height="535" key="Vcs.Push.Dialog.v2/0.33.2560.1367/2560.0.2560.1440@0.33.2560.1367" timestamp="1608321170496" />
     <state x="3435" y="452" width="800" height="535" key="Vcs.Push.Dialog.v2/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1607207123491" />
     <state x="472" y="212" width="762" height="686" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1605652046132">
       <screen x="0" y="27" width="1920" height="985" />
@@ -335,6 +348,10 @@
       <screen x="2560" y="0" width="2560" height="1440" />
     </state>
     <state x="2560" y="33" width="2180" height="859" maximized="true" key="dock-window-2/0.33.2560.1367/2560.0.2560.1440@0.33.2560.1367" timestamp="1607900831127" />
+    <state x="944" y="333" key="run.anything.popup" timestamp="1608483755385">
+      <screen x="0" y="33" width="2560" height="1367" />
+    </state>
+    <state x="944" y="333" key="run.anything.popup/0.33.2560.1367/2560.0.2560.1440@0.33.2560.1367" timestamp="1608483755385" />
     <state x="943" y="359" width="896" height="644" key="search.everywhere.popup" timestamp="1608245561929">
       <screen x="0" y="33" width="2560" height="1367" />
     </state>

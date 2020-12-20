@@ -56,6 +56,7 @@ int main(){
     double X_d = E_n_d/E_t_s_d;
     double X_s = E_n_s/E_t_s_s;
 
+    printf("Statistiche Sistema \n\n");
     printf("rho_v :%f\n",rho_v);
     printf("rho_d :%f\n",rho_d);
     printf("rho_s :%f\n",rho_s);
@@ -74,4 +75,169 @@ int main(){
     printf("X_d :%f\n",X_d);
     printf("X_s :%f\n",X_s);
 
+
+    ////statistiche tipo 1
+
+    double lambda_v_1 = lambda1;
+    double lambda_d_1 = pDelay*lambda1;
+    double lambda_s_1 = pService*lambda1 + p*lambda_d_1;
+
+    double E_s_v_1 = 1/mu_verifica;
+    double E_s_d_1 = 1/mu_delay;
+    double E_s_s_1 = 1/mu_service;
+
+    double rho_v_1 = lambda_v_1/mu_verifica;
+    double rho_d_1 = lambda_d_1/mu_delay;
+    double rho_s_1 = lambda_s_1/mu_service;
+
+    double E_t_q_v_1 = (rho_v_1*E_s_v_1)/(1-rho_v_1);
+    double E_t_q_d_1 = (rho_d_1*E_s_d_1)/(1-rho_d_1);
+    double E_t_q_s_1 = (rho_s_1*E_s_s_1)/(1-rho_s_1);
+
+    double E_n_v_1 = rho_v_1/(1-rho_v_1);
+    double E_n_d_1 = rho_d_1/(1-rho_d_1);
+    double E_n_s_1 = rho_s_1/(1-rho_s_1);
+    double E_n_tot_1 = E_n_v_1+E_n_s_1+E_n_d_1;
+
+    double visit_v_1 = lambda_v_1/lambda1;
+    double visit_d_1 = lambda_d_1/lambda1;
+    double visit_s_1 = lambda_s_1/lambda1;
+
+    double E_t_s_v_1 = E_t_q_v_1 + E_s_v_1;
+    double E_t_s_d_1 = E_t_q_d_1 + E_s_d_1;
+    double E_t_s_s_1 = E_t_q_s_1 + E_s_s_1;
+    double E_t_s_tot_1 = visit_v_1*E_t_s_v_1 + visit_d_1*E_t_s_d_1 + visit_s_1*E_t_s_s_1;
+
+    double X_v_1 = E_n_v_1/E_t_s_v_1;
+    double X_d_1 = E_n_d_1/E_t_s_d_1;
+    double X_s_1 = E_n_s_1/E_t_s_s_1;
+
+    printf("Statistiche tipo 1 \n\n");
+    printf("rho_v_1 :%f\n",rho_v_1);
+    printf("rho_d_1 :%f\n",rho_d_1);
+    printf("rho_s_1 :%f\n",rho_s_1);
+    printf("E_n_v_1 :%f\n",E_n_v_1);
+    printf("E_n_d_1 :%f\n",E_n_d_1);
+    printf("E_n_s_1 :%f\n",E_n_s_1);
+    printf("E_n_tot_1 :%f\n",E_n_tot_1);
+    printf("visit_v_1 :%f\n",visit_v_1);
+    printf("visit_d_1 :%f\n",visit_d_1);
+    printf("visit_s_1 :%f\n",visit_s_1);
+    printf("E_t_s_v_1 :%f\n",E_t_s_v_1);
+    printf("E_t_s_d_1 :%f\n",E_t_s_d_1);
+    printf("E_t_s_s_1 :%f\n",E_t_s_s_1);
+    printf("E_t_s_tot_1 :%f\n",E_t_s_tot_1);
+    printf("X_v_1 :%f\n",X_v_1);
+    printf("X_d_1 :%f\n",X_d_1);
+    printf("X_s_1 :%f\n",X_s_1);
+
+    ////statistiche tipo 2
+
+    double lambda_v_2 = lambda2;
+    double lambda_d_2 = pDelay*lambda2;
+    double lambda_s_2 = pService*lambda2 + p*lambda_d_2;
+
+    double E_s_v_2 = 1/mu_verifica;
+    double E_s_d_2 = 1/mu_delay;
+    double E_s_s_2 = 1/mu_service;
+
+    double rho_v_2 = lambda_v_2/mu_verifica;
+    double rho_d_2 = lambda_d_2/mu_delay;
+    double rho_s_2 = lambda_s_2/mu_service;
+
+    double E_t_q_v_2 = (rho_v_2*E_s_v_2)/(1-rho_v_2);
+    double E_t_q_d_2 = (rho_d_2*E_s_d_2)/(1-rho_d_2);
+    double E_t_q_s_2 = (rho_s_2*E_s_s_2)/(1-rho_s_2);
+
+    double E_n_v_2 = rho_v_2/(1-rho_v_2);
+    double E_n_d_2 = rho_d_2/(1-rho_d_2);
+    double E_n_s_2 = rho_s_2/(1-rho_s_2);
+    double E_n_tot_2 = E_n_v_2+E_n_s_2+E_n_d_2;
+
+    double visit_v_2 = lambda_v_2/lambda2;
+    double visit_d_2 = lambda_d_2/lambda2;
+    double visit_s_2 = lambda_s_2/lambda2;
+
+    double E_t_s_v_2 = E_t_q_v_2 + E_s_v_2;
+    double E_t_s_d_2 = E_t_q_d_2 + E_s_d_2;
+    double E_t_s_s_2 = E_t_q_s_2 + E_s_s_2;
+    double E_t_s_tot_2 = visit_v_2*E_t_s_v_2 + visit_d_2*E_t_s_d_2 + visit_s_2*E_t_s_s_2;
+
+    double X_v_2 = E_n_v_2/E_t_s_v_2;
+    double X_d_2 = E_n_d_2/E_t_s_d_2;
+    double X_s_2 = E_n_s_2/E_t_s_s_2;
+
+    printf("Statistiche tipo 2 \n\n");
+    printf("rho_v_2 :%f\n",rho_v_2);
+    printf("rho_d_2 :%f\n",rho_d_2);
+    printf("rho_s_2 :%f\n",rho_s_2);
+    printf("E_n_v_2 :%f\n",E_n_v_2);
+    printf("E_n_d_2 :%f\n",E_n_d_2);
+    printf("E_n_s_2 :%f\n",E_n_s_2);
+    printf("E_n_tot_2 :%f\n",E_n_tot_2);
+    printf("visit_v_2 :%f\n",visit_v_2);
+    printf("visit_d_2 :%f\n",visit_d_2);
+    printf("visit_s_2 :%f\n",visit_s_2);
+    printf("E_t_s_v_2 :%f\n",E_t_s_v_2);
+    printf("E_t_s_d_2 :%f\n",E_t_s_d_2);
+    printf("E_t_s_s_2 :%f\n",E_t_s_s_2);
+    printf("E_t_s_tot_2 :%f\n",E_t_s_tot_2);
+    printf("X_v_2 :%f\n",X_v_2);
+    printf("X_d_2 :%f\n",X_d_2);
+    printf("X_s_2 :%f\n",X_s_2);
+
+    ////statistiche tipo 2
+
+    double lambda_v_3 = lambda3;
+    double lambda_d_3 = pDelay*lambda3;
+    double lambda_s_3 = pService*lambda3 + p*lambda_d_3;
+
+    double E_s_v_3 = 1/mu_verifica;
+    double E_s_d_3 = 1/mu_delay;
+    double E_s_s_3 = 1/mu_service;
+
+    double rho_v_3 = lambda_v_3/mu_verifica;
+    double rho_d_3 = lambda_d_3/mu_delay;
+    double rho_s_3 = lambda_s_3/mu_service;
+
+    double E_t_q_v_3 = (rho_v_3*E_s_v_3)/(1-rho_v_3);
+    double E_t_q_d_3 = (rho_d_3*E_s_d_3)/(1-rho_d_3);
+    double E_t_q_s_3 = (rho_s_3*E_s_s_3)/(1-rho_s_3);
+
+    double E_n_v_3 = rho_v_3/(1-rho_v_3);
+    double E_n_d_3 = rho_d_3/(1-rho_d_3);
+    double E_n_s_3 = rho_s_3/(1-rho_s_3);
+    double E_n_tot_3 = E_n_v_3+E_n_s_3+E_n_d_3;
+
+    double visit_v_3 = lambda_v_3/lambda3;
+    double visit_d_3 = lambda_d_3/lambda3;
+    double visit_s_3 = lambda_s_3/lambda3;
+
+    double E_t_s_v_3 = E_t_q_v_3 + E_s_v_3;
+    double E_t_s_d_3 = E_t_q_d_3 + E_s_d_3;
+    double E_t_s_s_3 = E_t_q_s_3 + E_s_s_3;
+    double E_t_s_tot_3 = visit_v_3*E_t_s_v_3 + visit_d_3*E_t_s_d_3 + visit_s_3*E_t_s_s_3;
+
+    double X_v_3 = E_n_v_3/E_t_s_v_3;
+    double X_d_3 = E_n_d_3/E_t_s_d_3;
+    double X_s_3 = E_n_s_3/E_t_s_s_3;
+
+    printf("Statistiche tipo 3 \n\n");
+    printf("rho_v_3 :%f\n",rho_v_3);
+    printf("rho_d_3 :%f\n",rho_d_3);
+    printf("rho_s_3 :%f\n",rho_s_3);
+    printf("E_n_v_3 :%f\n",E_n_v_3);
+    printf("E_n_d_3 :%f\n",E_n_d_3);
+    printf("E_n_s_3 :%f\n",E_n_s_3);
+    printf("E_n_tot_3 :%f\n",E_n_tot_3);
+    printf("visit_v_3 :%f\n",visit_v_3);
+    printf("visit_d_3 :%f\n",visit_d_3);
+    printf("visit_s_3 :%f\n",visit_s_3);
+    printf("E_t_s_v_3 :%f\n",E_t_s_v_3);
+    printf("E_t_s_d_3 :%f\n",E_t_s_d_3);
+    printf("E_t_s_s_3 :%f\n",E_t_s_s_3);
+    printf("E_t_s_tot_3 :%f\n",E_t_s_tot_3);
+    printf("X_v_3 :%f\n",X_v_3);
+    printf("X_d_3 :%f\n",X_d_3);
+    printf("X_s_3 :%f\n",X_s_3);
 }

@@ -224,12 +224,26 @@ struct area{ //tipi di aree (calcolo ottenuto non dall'integrale ma dalla forma 
     double users_lost;
     double ice_cream_balls;
 
+    ///Service
+
     double service;
     double service_v;
     double service_d;
     double service_s;
 
+    //Service tipo Job
 
+    double service_v_1;
+    double service_d_1;
+    double service_s_1;
+
+    double service_v_2;
+    double service_d_2;
+    double service_s_2;
+
+    double service_v_3;
+    double service_d_3;
+    double service_s_3;
 
     //double total_queue;                   /* time integrated number in the queue */
     //double total_service;                 /* time integrated number in service   */
