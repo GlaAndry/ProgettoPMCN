@@ -75,15 +75,11 @@ int main(int argc, char *argv[]) {
 
     char task_type_next_arrival = 0;//tipo di job del prossimo arrivo
     char task_type_next_termination = 0;//tipo di job del prossimo completamento
-    char task_type_next_termination_cassa = 0;
     char task_type_next_termination_verifica = 0;
     char task_type_next_termination_multiserver = 0;
     char task_type_next_termination_delay = 0;
 
     //definizione delle liste dinamiche
-    struct node *cassa_head = NULL;
-    //struct node *cassa_tail = NULL;
-
     struct node *verifica_head = NULL;
     struct node *verifica_tail = NULL;
 
@@ -104,8 +100,6 @@ int main(int argc, char *argv[]) {
     double next_event_time = 0.0;   //tempo del prossimo evento
     double time_arrive = 0.0;
 
-    int counter = 0;
-
 
     //Arrivi
     double next_arrival;
@@ -115,14 +109,9 @@ int main(int argc, char *argv[]) {
 
     //Completamenti
     double next_completion; //istante del prossimo completamento
-    double next_completion_cassa = INF;     //istante prossimo completamento server cassa
     double next_completion_verifica = INF;  //istante prossimo completamento server verifica
     double next_completion_delay = INF;     //istante prossimo completamento server delay
     double next_completion_multiserver = INF;   //istante prossimo completamento multiserver
-
-
-    char task_type_term_temp = 0;
-
 
     //se il tempo corrente è minore di quello massimo o ci sono ancora job in servizio
     while (current_time < STOP || state.actual_verify > 0 || state.actual_delay > 0 || state.actual_multi > 0) {
@@ -130,7 +119,6 @@ int main(int argc, char *argv[]) {
 
         //verifico la scadenza del timer in modo da terminare la simulazione
         if (current_time > STOP) {
-            //state.next = INF;
             next_arrival = INF;
         } else {
             //determino il prossimo arrivo come l'evento che possiede il tempo minimo tra tutti.
@@ -142,7 +130,6 @@ int main(int argc, char *argv[]) {
         //verifico le prossime terminazioni. si va ad aggiornare anche il valore delle variabili 
         // task_type_next_..._termination per andare a determinare quale tipo di Job ha terminato.
 
-        //next_completion_cassa = find_next_termination(cassa_head, &task_type_next_termination_cassa);
         next_completion_delay = find_next_termination(delay_head, &task_type_next_termination_delay);
         next_completion_verifica = find_next_termination(verifica_head, &task_type_next_termination_verifica);
         next_completion_multiserver = find_next_termination(multiserver_head, &task_type_next_termination_multiserver);
@@ -151,17 +138,12 @@ int main(int argc, char *argv[]) {
 
         next_completion = min_array(array_compl, 3);
 
-
-
         //calcolo inizialmente tutti i tempi di servizio e verifico quelli con tempo minore dello stesso tipo
         //determino l'istante del prossimo evento
         next_event_time = min(next_arrival, next_completion);
 
-
         //aggiornamento dei valori dell'area
         update_area(state, &area, current_time, next_event_time);
-
-
 
         //calcolo batch means
         if(next_event_time-last_state.last_observed_time >= LENGTH_BATCH_TIME) {
@@ -189,28 +171,18 @@ int main(int argc, char *argv[]) {
             if (task_type_next_arrival == TASK_TYPE1){
                 next_arrival_gelato_1_gusto = get_interarrival_cassa(TASK_TYPE1, 0);
                 assign_task_to_verify(current_time, TASK_TYPE1, &verifica_head, &verifica_tail);
-                //insert_ordered(next_arrival_gelato_1_gusto,task_type_next_arrival,current_time,&verifica_head,&verifica_tail);
             } else if (task_type_next_arrival == TASK_TYPE2){
                 next_arrival_gelato_2_gusti = get_interarrival_cassa(TASK_TYPE2, 0);
-                //insert_ordered(next_arrival_gelato_2_gusti,task_type_next_arrival,current_time,&verifica_head,&verifica_tail);
                 assign_task_to_verify(current_time, TASK_TYPE2, &verifica_head, &verifica_tail);
 
             } else {
                 next_arrival_gelato_3_gusti = get_interarrival_cassa(TASK_TYPE3, 0);
-                //insert_ordered(next_arrival_gelato_3_gusti,task_type_next_arrival,current_time,&verifica_head,&verifica_tail);
                 assign_task_to_verify(current_time, TASK_TYPE3, &verifica_head, &verifica_tail);
             }
 
-
             update_state(task_type_next_arrival, DIRECT_VERIFY, &state);
-
-            //definisco il tempo di completamento nel server cassa
-            //double time_completion = current_time + get_service_cassa(task_type_next_arrival);
-            //inserisco il Job all'interno della coda del server Cassa.
-            //insert_ordered(time_completion,task_type_next_arrival,current_time,&verifica_head,&verifica_tail);
             //se il prossimo evento è un completamento
         } else if (current_time == next_completion) { //gestisco l'evento di completamento
-            double time_completion = 0.0;
             //gestione evento completamento server verifica.
             //possibili redirezioni a delay o al multiserver.
             if (current_time == next_completion_verifica) {
@@ -220,11 +192,8 @@ int main(int argc, char *argv[]) {
 
                 ///update del tipo di task
                 task_type_next_termination = task_type_next_termination_verifica;
-                //calcolo il tempo di completamento del Task
-                //time_completion = current_time + get_service_verifica(task_type_next_termination);
 
                 //elimino la testa dalla lista dinamica della cassa
-                //update_area_verifica(state, &area, time_arrive, current_time);
                 delete_head(&verifica_head, &time_arrive);
                 area.service_v += (current_time - time_arrive);
                 if(task_type_next_termination == TASK_TYPE1){
@@ -242,11 +211,10 @@ int main(int argc, char *argv[]) {
 
                 //determino se andare verso il multiserver o verso il server di delay.
                 if (actual_number_of_icecream_balls - task_type_next_termination < 0) {
-                    //update_area_verifica(state, &area, current_time, time_completion, task_type_next_termination);
-                    update_state(task_type_next_termination, DIRECT_DELAY, &state);
+
                     //ci dirigiamo verso il server delay
-                    //aggiungo il task appena calcolato nella lista dinamica della verifica
-                    //insert_ordered(time_completion,task_type_next_termination, current_time, &delay_head, &delay_tail);
+                    update_state(task_type_next_termination, DIRECT_DELAY, &state);
+
                     if(task_type_next_termination == TASK_TYPE1){
                         assign_task_to_delay(current_time, TASK_TYPE1, &delay_head, &delay_tail);
                     } else if (task_type_next_termination == TASK_TYPE2){
@@ -256,17 +224,12 @@ int main(int argc, char *argv[]) {
                     }
 
                     continue;
-                    //aggiornamento delle variabili di stato.
                 } else {
                     //andiamo nel multiserver //multiserver arriva = completion verifica
                     //aggiungo il task appena calcolato nella lista dinamica della verifica
 
                     //aggiornamento delle variabili di stato.
                     update_state(task_type_next_termination, DIRECT_MULTISERVER_FROM_VER, &state);
-                    //update_area_verifica(state, &area, current_time, time_completion, task_type_next_termination);
-
-                    //insert_at_tail(new_completion_node, &multiserver_head, &multiserver_tail);
-                    //insert_ordered(time_completion,task_type_next_termination, current_time, &multiserver_head, &multiserver_tail);
 
                     if(task_type_next_termination == TASK_TYPE1){
                         assign_task_to_multiserver(current_time, TASK_TYPE1, &multiserver_head, &multiserver_tail);
@@ -289,13 +252,8 @@ int main(int argc, char *argv[]) {
                 //che sfrutta il generatore di Lehmer.
 
                 double prob = Random();
-
-                //calcolo il tempo di completamento del Task
-                //time_completion = current_time + get_service_delay(task_type_next_termination);
-
                 //elimino la testa dalla lista dinamica della cassa
                 delete_head(&delay_head, &time_arrive);
-                //update_area_delay(state, &area, time_arrive, current_time);
                 area.service_d += (current_time - time_arrive);
                 if(task_type_next_termination == TASK_TYPE1){
                     area.service_1 += (current_time - time_arrive);
@@ -319,7 +277,6 @@ int main(int argc, char *argv[]) {
                     //Job diretto verso il multiserver
                     //aggiornamento delle variabili di stato.
                     update_state(task_type_next_termination, DIRECT_MULTISERVER_FROM_DEL, &state);
-                    //insert_ordered(time_completion,task_type_next_termination, current_time, &multiserver_head, &multiserver_tail);
 
                     if(task_type_next_termination == TASK_TYPE1){
                         assign_task_to_multiserver(current_time, TASK_TYPE1, &multiserver_head, &multiserver_tail);
@@ -339,9 +296,6 @@ int main(int argc, char *argv[]) {
 
                 //aggiornamento delle variabili di stato.
                 update_state(task_type_next_termination, DIRECT_EXIT, &state);
-
-                //time_completion = current_time + get_service_multiserver(task_type_next_termination);
-
 
                 //elimino la testa dalla lista dinamica della cassa
                 delete_head(&multiserver_head, &time_arrive);
@@ -375,8 +329,6 @@ int main(int argc, char *argv[]) {
               response_verifica, response_type1_verifica, response_type2_verifica, response_type3_verifica,
               response_delay, response_type1_delay, response_type2_delay, response_type3_delay,
               response_multiserver, response_type1_multiserver, response_type2_multiserver, response_type3_multiserver);
-
-    //printf("pd %f\n", state.total_delay/state.total_system);
 
 
     check_state_variables_after_simulation(state);

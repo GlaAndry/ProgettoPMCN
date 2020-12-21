@@ -263,8 +263,8 @@ struct area{ //tipi di aree (calcolo ottenuto non dall'integrale ma dalla forma 
 
 //arrival rate and service rate
 #define ARRIVALONE	(double)3 //lambda1 1 gusto gelato        [task/s]*[1/60 s] = task/min
-#define ARRIVALTWO  (double)3 //lambda2 2 gusti gelato       [task/s]
-#define ARRIVALTHREE (double)3 //lamdbda3 3 gusti gelato     [task/s]
+#define ARRIVALTWO  (double)4 //lambda2 2 gusti gelato       [task/s]
+#define ARRIVALTHREE (double)5 //lamdbda3 3 gusti gelato     [task/s]
 
 //tasso di servizio cassa
 #define SERVICEONE_CASSA (double)13         //u1 1 gusto gelato            [task/s]

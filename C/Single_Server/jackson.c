@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-double lambda1 = 3.0;//frequenza arrivi di tipo 1
-double lambda2 = 3.0;//frequenza arrivi di tipo 2
-double lambda3 = 3.0;
-double lambda_tot = 9.0;//frequenza arrivi totale
+double const lambda1 = 3.0;//frequenza arrivi di tipo 1
+double const lambda2 = 4.0;//frequenza arrivi di tipo 2
+double const lambda3 = 5.0;
+double lambda_tot = lambda1+lambda2+lambda3;//frequenza arrivi totale
 
 double mu_verifica = 13; //frequenza di servizio job cassa+Verifica
 double mu_delay = 2;    //frequenza di servizio job Delay Server
@@ -14,8 +14,8 @@ double mu_service = 13; //frequenza di servizio job di tipo 1 Service Server
 
 //valori delle probabilità
 double p = 0.8;
-double pDelay = 0.063996;
-double pService = 0.948820;
+double const pDelay = 0.063996;
+double pService = (1.0-pDelay);
 
 int main(){
 
@@ -57,6 +57,9 @@ int main(){
     double X_s = E_n_s/E_t_s_s;
 
     printf("Statistiche Sistema \n\n");
+    printf("lambda_v :%f\n",lambda_v);
+    printf("lambda_d :%f\n",lambda_d);
+    printf("lambda_s :%f\n",lambda_s);
     printf("rho_v :%f\n",rho_v);
     printf("rho_d :%f\n",rho_d);
     printf("rho_s :%f\n",rho_s);
