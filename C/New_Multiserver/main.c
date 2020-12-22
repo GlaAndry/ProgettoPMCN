@@ -335,7 +335,7 @@ int main(int argc, char *argv[]) {
                     area.service_s_3 += (current_time - time_arrive);
                 }
 
-                for(int i = 0; i < NUM_MAX_SERVER; i++){
+                //for(int i = 0; i < NUM_MAX_SERVER; i++){
 
                     int num_task = count_element_linked_list(multiserver_head);
                     int server = find_completion_server(multiserver);
@@ -365,7 +365,7 @@ int main(int argc, char *argv[]) {
                     }
 
                     multiserver[server].type_event = 0;
-                }
+                //}
 
 
                 continue;
