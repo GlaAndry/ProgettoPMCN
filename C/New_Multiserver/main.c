@@ -14,7 +14,6 @@
 #include "rvms.h"
 
 
-
 int main(int argc, char *argv[]) {
 
     argc = argc;
@@ -33,7 +32,6 @@ int main(int argc, char *argv[]) {
     initialize_state_multiserver(&multiserver[NUM_MAX_SERVER]);
 
 
-
     double STOP = STOP_SIMULATION;
     state.number_balls_icecream = MAX_ICECREAM_TUB; //imposto il valore massimo
     //di palline di gelato quando inzia la simulazione.
@@ -42,22 +40,22 @@ int main(int argc, char *argv[]) {
     int i = 0;//indice di batch
 
     ///variabili THR
-    double* tr_batch=alloc_array_double(NUM_BATCH);
-    double* tr_type1_batch = alloc_array_double(NUM_BATCH);
-    double* tr_type2_batch = alloc_array_double(NUM_BATCH);
-    double* tr_type3_batch = alloc_array_double(NUM_BATCH);
-    double* tr_verifica = alloc_array_double(NUM_BATCH);
-    double* tr_type1_verifica = alloc_array_double(NUM_BATCH);
-    double* tr_type2_verifica = alloc_array_double(NUM_BATCH);
-    double* tr_type3_verifica = alloc_array_double(NUM_BATCH);
-    double* tr_delay = alloc_array_double(NUM_BATCH);
-    double* tr_type1_delay = alloc_array_double(NUM_BATCH);
-    double* tr_type2_delay = alloc_array_double(NUM_BATCH);
-    double* tr_type3_delay = alloc_array_double(NUM_BATCH);
-    double* tr_multiserver = alloc_array_double(NUM_BATCH);
-    double* tr_type1_multiserver = alloc_array_double(NUM_BATCH);
-    double* tr_type2_multiserver = alloc_array_double(NUM_BATCH);
-    double* tr_type3_multiserver = alloc_array_double(NUM_BATCH);
+    double *tr_batch = alloc_array_double(NUM_BATCH);
+    double *tr_type1_batch = alloc_array_double(NUM_BATCH);
+    double *tr_type2_batch = alloc_array_double(NUM_BATCH);
+    double *tr_type3_batch = alloc_array_double(NUM_BATCH);
+    double *tr_verifica = alloc_array_double(NUM_BATCH);
+    double *tr_type1_verifica = alloc_array_double(NUM_BATCH);
+    double *tr_type2_verifica = alloc_array_double(NUM_BATCH);
+    double *tr_type3_verifica = alloc_array_double(NUM_BATCH);
+    double *tr_delay = alloc_array_double(NUM_BATCH);
+    double *tr_type1_delay = alloc_array_double(NUM_BATCH);
+    double *tr_type2_delay = alloc_array_double(NUM_BATCH);
+    double *tr_type3_delay = alloc_array_double(NUM_BATCH);
+    double *tr_multiserver = alloc_array_double(NUM_BATCH);
+    double *tr_type1_multiserver = alloc_array_double(NUM_BATCH);
+    double *tr_type2_multiserver = alloc_array_double(NUM_BATCH);
+    double *tr_type3_multiserver = alloc_array_double(NUM_BATCH);
 
     ///variabili tempo di risposta
     double *response_batch = alloc_array_double(NUM_BATCH);
@@ -128,7 +126,8 @@ int main(int argc, char *argv[]) {
         } else {
             //determino il prossimo arrivo come l'evento che possiede il tempo minimo tra tutti.
             //andando anche a scrivere il tipo di Job che è arrivato nella varibile task_type_next_arrival
-            double array_arrival[] = {next_arrival_gelato_1_gusto, next_arrival_gelato_2_gusti,next_arrival_gelato_3_gusti}; //array contentente gli arrivi dei Job
+            double array_arrival[] = {next_arrival_gelato_1_gusto, next_arrival_gelato_2_gusti,
+                                      next_arrival_gelato_3_gusti}; //array contentente gli arrivi dei Job
             next_arrival = (double) min_array_associated_job(array_arrival, 3, &task_type_next_arrival);
         }
 
@@ -139,7 +138,7 @@ int main(int argc, char *argv[]) {
         next_completion_verifica = find_next_termination(verifica_head, &task_type_next_termination_verifica);
         next_completion_multiserver = find_next_termination(multiserver_head, &task_type_next_termination_multiserver);
 
-        double array_compl[] = {next_completion_delay, next_completion_verifica,next_completion_multiserver};
+        double array_compl[] = {next_completion_delay, next_completion_verifica, next_completion_multiserver};
 
         next_completion = min_array(array_compl, 3);
 
@@ -151,17 +150,19 @@ int main(int argc, char *argv[]) {
         update_area(state, &area, current_time, next_event_time);
 
         //calcolo batch means
-        if(next_event_time-last_state.last_observed_time >= LENGTH_BATCH_TIME) {
+        if (next_event_time - last_state.last_observed_time >= LENGTH_BATCH_TIME) {
 
-            calculate_batch(next_event_time,state,area,&last_state,&i,
-                            tr_batch,tr_type1_batch,tr_type2_batch,tr_type3_batch,
+            calculate_batch(next_event_time, state, area, &last_state, &i,
+                            tr_batch, tr_type1_batch, tr_type2_batch, tr_type3_batch,
                             tr_verifica, tr_type1_verifica, tr_type2_verifica, tr_type3_verifica,
                             tr_delay, tr_type1_delay, tr_type2_delay, tr_type3_delay,
                             tr_multiserver, tr_type1_multiserver, tr_type2_multiserver, tr_type3_multiserver,
-                            response_batch, response_type1_batch, response_type2_batch,response_type3_batch,
-                            response_verifica, response_type1_verifica, response_type2_verifica, response_type3_verifica,
+                            response_batch, response_type1_batch, response_type2_batch, response_type3_batch,
+                            response_verifica, response_type1_verifica, response_type2_verifica,
+                            response_type3_verifica,
                             response_delay, response_type1_delay, response_type2_delay, response_type3_delay,
-                            response_multiserver, response_type1_multiserver, response_type2_multiserver, response_type3_multiserver);
+                            response_multiserver, response_type1_multiserver, response_type2_multiserver,
+                            response_type3_multiserver);
 
         }
 
@@ -173,10 +174,10 @@ int main(int argc, char *argv[]) {
         //se il prossimo evento è un arrivo
         if (current_time == next_arrival) {
 
-            if (task_type_next_arrival == TASK_TYPE1){
+            if (task_type_next_arrival == TASK_TYPE1) {
                 next_arrival_gelato_1_gusto = get_interarrival_cassa(TASK_TYPE1, 0);
                 assign_task_to_verify(current_time, TASK_TYPE1, &verifica_head, &verifica_tail);
-            } else if (task_type_next_arrival == TASK_TYPE2){
+            } else if (task_type_next_arrival == TASK_TYPE2) {
                 next_arrival_gelato_2_gusti = get_interarrival_cassa(TASK_TYPE2, 0);
                 assign_task_to_verify(current_time, TASK_TYPE2, &verifica_head, &verifica_tail);
 
@@ -201,10 +202,10 @@ int main(int argc, char *argv[]) {
                 //elimino la testa dalla lista dinamica della cassa
                 delete_head(&verifica_head, &time_arrive);
                 area.service_v += (current_time - time_arrive);
-                if(task_type_next_termination == TASK_TYPE1){
+                if (task_type_next_termination == TASK_TYPE1) {
                     area.service_1 += (current_time - time_arrive);
                     area.service_v_1 += (current_time - time_arrive);
-                } else if(task_type_next_termination == TASK_TYPE2){
+                } else if (task_type_next_termination == TASK_TYPE2) {
                     area.service_2 += (current_time - time_arrive);
                     area.service_v_2 += (current_time - time_arrive);
                 } else {
@@ -220,9 +221,9 @@ int main(int argc, char *argv[]) {
                     //ci dirigiamo verso il server delay
                     update_state(task_type_next_termination, DIRECT_DELAY, &state);
 
-                    if(task_type_next_termination == TASK_TYPE1){
+                    if (task_type_next_termination == TASK_TYPE1) {
                         assign_task_to_delay(current_time, TASK_TYPE1, &delay_head, &delay_tail);
-                    } else if (task_type_next_termination == TASK_TYPE2){
+                    } else if (task_type_next_termination == TASK_TYPE2) {
                         assign_task_to_delay(current_time, TASK_TYPE2, &delay_head, &delay_tail);
                     } else {
                         assign_task_to_delay(current_time, TASK_TYPE3, &delay_head, &delay_tail);
@@ -236,9 +237,9 @@ int main(int argc, char *argv[]) {
                     //aggiornamento delle variabili di stato.
                     update_state(task_type_next_termination, DIRECT_MULTISERVER_FROM_VER, &state);
 
-                    if(task_type_next_termination == TASK_TYPE1){
+                    if (task_type_next_termination == TASK_TYPE1) {
                         assign_task_to_multiserver(current_time, TASK_TYPE1, &multiserver_head, &multiserver_tail);
-                    } else if (task_type_next_termination == TASK_TYPE2){
+                    } else if (task_type_next_termination == TASK_TYPE2) {
                         assign_task_to_multiserver(current_time, TASK_TYPE2, &multiserver_head, &multiserver_tail);
                     } else {
                         assign_task_to_multiserver(current_time, TASK_TYPE3, &multiserver_head, &multiserver_tail);
@@ -269,10 +270,10 @@ int main(int argc, char *argv[]) {
                 //elimino la testa dalla lista dinamica della cassa
                 delete_head(&delay_head, &time_arrive);
                 area.service_d += (current_time - time_arrive);
-                if(task_type_next_termination == TASK_TYPE1){
+                if (task_type_next_termination == TASK_TYPE1) {
                     area.service_1 += (current_time - time_arrive);
                     area.service_d_1 += (current_time - time_arrive);
-                } else if(task_type_next_termination == TASK_TYPE2){
+                } else if (task_type_next_termination == TASK_TYPE2) {
                     area.service_2 += (current_time - time_arrive);
                     area.service_d_2 += (current_time - time_arrive);
                 } else {
@@ -292,9 +293,9 @@ int main(int argc, char *argv[]) {
                     //aggiornamento delle variabili di stato.
                     update_state(task_type_next_termination, DIRECT_MULTISERVER_FROM_DEL, &state);
 
-                    if(task_type_next_termination == TASK_TYPE1){
+                    if (task_type_next_termination == TASK_TYPE1) {
                         assign_task_to_multiserver(current_time, TASK_TYPE1, &multiserver_head, &multiserver_tail);
-                    } else if (task_type_next_termination == TASK_TYPE2){
+                    } else if (task_type_next_termination == TASK_TYPE2) {
                         assign_task_to_multiserver(current_time, TASK_TYPE2, &multiserver_head, &multiserver_tail);
                     } else {
                         assign_task_to_multiserver(current_time, TASK_TYPE3, &multiserver_head, &multiserver_tail);
@@ -324,10 +325,10 @@ int main(int argc, char *argv[]) {
                 delete_head(&multiserver_head, &time_arrive);
                 area.service_s += (current_time - time_arrive);
 
-                if(task_type_next_termination == TASK_TYPE1){
+                if (task_type_next_termination == TASK_TYPE1) {
                     area.service_1 += (current_time - time_arrive);
                     area.service_s_1 += (current_time - time_arrive);
-                } else if(task_type_next_termination == TASK_TYPE2){
+                } else if (task_type_next_termination == TASK_TYPE2) {
                     area.service_2 += (current_time - time_arrive);
                     area.service_s_2 += (current_time - time_arrive);
                 } else {
@@ -335,37 +336,34 @@ int main(int argc, char *argv[]) {
                     area.service_s_3 += (current_time - time_arrive);
                 }
 
-                //for(int i = 0; i < NUM_MAX_SERVER; i++){
+                int num_task = count_element_linked_list(multiserver_head);
+                int server = find_completion_server(multiserver);
 
-                    int num_task = count_element_linked_list(multiserver_head);
-                    int server = find_completion_server(multiserver);
+                if (num_task >= NUM_MAX_SERVER) {
 
-                    if(num_task >= NUM_MAX_SERVER){
+                    task_type_next_termination = multiserver_head->task_type;
+                    //aggiornamento delle variabili di stato.
+                    update_state(task_type_next_termination, DIRECT_EXIT, &state);
 
-                        task_type_next_termination = multiserver_head->task_type;
-                        //aggiornamento delle variabili di stato.
-                        update_state(task_type_next_termination, DIRECT_EXIT, &state);
+                    //elimino la testa dalla lista dinamica della cassa
+                    delete_head(&multiserver_head, &time_arrive);
+                    multiserver[server].next_event_time = time_arrive;
 
-                        //elimino la testa dalla lista dinamica della cassa
-                        delete_head(&multiserver_head, &time_arrive);
-                        multiserver[server].next_event_time = time_arrive;
+                    area.service_s += (current_time - time_arrive);
 
-                        area.service_s += (current_time - time_arrive);
-
-                        if(task_type_next_termination == TASK_TYPE1){
-                            area.service_1 += (current_time - time_arrive);
-                            area.service_s_1 += (current_time - time_arrive);
-                        } else if(task_type_next_termination == TASK_TYPE2){
-                            area.service_2 += (current_time - time_arrive);
-                            area.service_s_2 += (current_time - time_arrive);
-                        } else {
-                            area.service_3 += (current_time - time_arrive);
-                            area.service_s_3 += (current_time - time_arrive);
-                        }
+                    if (task_type_next_termination == TASK_TYPE1) {
+                        area.service_1 += (current_time - time_arrive);
+                        area.service_s_1 += (current_time - time_arrive);
+                    } else if (task_type_next_termination == TASK_TYPE2) {
+                        area.service_2 += (current_time - time_arrive);
+                        area.service_s_2 += (current_time - time_arrive);
+                    } else {
+                        area.service_3 += (current_time - time_arrive);
+                        area.service_s_3 += (current_time - time_arrive);
                     }
+                }
 
-                    multiserver[server].type_event = 0;
-                //}
+                multiserver[server].type_event = 0;
 
 
                 continue;
@@ -376,12 +374,11 @@ int main(int argc, char *argv[]) {
     }
 
 
-
-    print_all(tr_batch,tr_type1_batch,tr_type2_batch,tr_type3_batch,
+    print_all(tr_batch, tr_type1_batch, tr_type2_batch, tr_type3_batch,
               tr_verifica, tr_type1_verifica, tr_type2_verifica, tr_type3_verifica,
               tr_delay, tr_type1_delay, tr_type2_delay, tr_type3_delay,
               tr_multiserver, tr_type1_multiserver, tr_type2_multiserver, tr_type3_multiserver,
-              response_batch, response_type1_batch, response_type2_batch,response_type3_batch,
+              response_batch, response_type1_batch, response_type2_batch, response_type3_batch,
               response_verifica, response_type1_verifica, response_type2_verifica, response_type3_verifica,
               response_delay, response_type1_delay, response_type2_delay, response_type3_delay,
               response_multiserver, response_type1_multiserver, response_type2_multiserver, response_type3_multiserver);

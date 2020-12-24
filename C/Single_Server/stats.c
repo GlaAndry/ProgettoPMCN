@@ -136,7 +136,9 @@ void calculate_batch(double time_next,struct state state,struct area area,struct
 
     double rho_verifica = area.service_v/time_next;
     double rho_delay = area.service_d/time_next;
-    double rho_service = area.service_s/time_next;
+    double rho_service = RHOS; //0.91131397;
+
+    //printf("rhos %f\n", rho_service);
 
     double rho_verifica_1 = area.service_v_1/time_next;
     double rho_delay_1 = area.service_d_1/time_next;
@@ -156,17 +158,17 @@ void calculate_batch(double time_next,struct state state,struct area area,struct
     double E_n_del = rho_delay/(1-rho_delay);
     double E_n_serv = rho_service/(1-rho_service);
 
-    double E_n_ver_1 = rho_verifica_1/(1-rho_verifica_1);
-    double E_n_del_1 = rho_delay_1/(1-rho_delay_1);
-    double E_n_serv_1 = rho_service_1/(1-rho_service_1);
+    double E_n_ver_1 = rho_verifica_1/(1-rho_verifica);
+    double E_n_del_1 = rho_delay_1/(1-rho_delay);
+    double E_n_serv_1 = rho_service_1/(1-rho_service);
 
-    double E_n_ver_2 = rho_verifica_2/(1-rho_verifica_2);
-    double E_n_del_2 = rho_delay_2/(1-rho_delay_2);
-    double E_n_serv_2 = rho_service_2/(1-rho_service_2);
+    double E_n_ver_2 = rho_verifica_2/(1-rho_verifica);
+    double E_n_del_2 = rho_delay_2/(1-rho_delay);
+    double E_n_serv_2 = rho_service_2/(1-rho_service);
 
-    double E_n_ver_3 = rho_verifica_3/(1-rho_verifica_3);
-    double E_n_del_3 = rho_delay_3/(1-rho_delay_3);
-    double E_n_serv_3 = rho_service_3/(1-rho_service_3);
+    double E_n_ver_3 = rho_verifica_3/(1-rho_verifica);
+    double E_n_del_3 = rho_delay_3/(1-rho_delay);
+    double E_n_serv_3 = rho_service_3/(1-rho_service);
 
     ////Tassi di Visita
 
