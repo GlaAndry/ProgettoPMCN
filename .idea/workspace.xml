@@ -14,12 +14,11 @@
   <component name="ChangeListManager">
     <list default="true" id="87415312-7195-4724-b327-0cb650329885" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/C/New_Multiserver/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/New_Multiserver/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/C/Single_Server/basic.h" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/basic.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/C/Single_Server/jackson.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/jackson.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/C/Single_Server/prog_pmcsn_single_server" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/prog_pmcsn_single_server" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/C/Single_Server/risultati" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/risultati" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/C/Single_Server/stats.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/Single_Server/stats.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/New_Multiserver/basic.h" beforeDir="false" afterPath="$PROJECT_DIR$/C/New_Multiserver/basic.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/New_Multiserver/jackson.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/New_Multiserver/jackson.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/New_Multiserver/prog_pmcsn_multi_server" beforeDir="false" afterPath="$PROJECT_DIR$/C/New_Multiserver/prog_pmcsn_multi_server" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/New_Multiserver/risultati" beforeDir="false" afterPath="$PROJECT_DIR$/C/New_Multiserver/risultati" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C/New_Multiserver/stats.c" beforeDir="false" afterPath="$PROJECT_DIR$/C/New_Multiserver/stats.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +51,13 @@
       <recent name="$PROJECT_DIR$/MatLab" />
       <recent name="$PROJECT_DIR$/C/Single_Server" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -94,7 +100,7 @@
       <workItem from="1608482335427" duration="5289000" />
       <workItem from="1608582600590" duration="10019000" />
       <workItem from="1608669668705" duration="4938000" />
-      <workItem from="1608850094184" duration="3183000" />
+      <workItem from="1608850094184" duration="4257000" />
     </task>
     <task id="LOCAL-00001" summary="committino">
       <created>1604875681923</created>
@@ -313,14 +319,20 @@
       <option name="project" value="LOCAL" />
       <updated>1608676605192</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="commit 25-12-2020 #1&#10;finish">
+      <created>1608853610953</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1608853610953</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="update variables" />
     <MESSAGE value="commit 13-11-2020" />
     <MESSAGE value="commit 13-11-2020 #2" />
     <MESSAGE value="commit 15-11-2020 #1" />
@@ -345,17 +357,18 @@
     <MESSAGE value="commit 21-12-2020 #1&#10;adjusted results.c" />
     <MESSAGE value="commit 21-12-2020 #2&#10;added multi_server" />
     <MESSAGE value="commit 22-12-2020 #2&#10;finish" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit 22-12-2020 #2&#10;finish" />
+    <MESSAGE value="commit 25-12-2020 #1&#10;finish" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit 25-12-2020 #1&#10;finish" />
   </component>
   <component name="WindowStateProjectService">
     <state x="983" y="518" width="584" height="403" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1607466951481">
       <screen x="0" y="33" width="2560" height="1367" />
     </state>
     <state x="983" y="518" width="584" height="403" key="#com.intellij.fileTypes.FileTypeChooser/0.33.2560.1367/2560.0.2560.1440@0.33.2560.1367" timestamp="1607466951481" />
-    <state x="3379" y="261" width="922" height="921" key="CommitChangelistDialog2" timestamp="1608676605057">
-      <screen x="2560" y="0" width="2560" height="1440" />
+    <state x="819" y="281" width="922" height="921" key="CommitChangelistDialog2" timestamp="1608853610822">
+      <screen x="0" y="33" width="2560" height="1367" />
     </state>
-    <state x="819" y="281" width="922" height="921" key="CommitChangelistDialog2/0.33.2560.1367/2560.0.2560.1440@0.33.2560.1367" timestamp="1608592538153" />
+    <state x="819" y="281" width="922" height="921" key="CommitChangelistDialog2/0.33.2560.1367/2560.0.2560.1440@0.33.2560.1367" timestamp="1608853610822" />
     <state x="3379" y="261" width="922" height="918" key="CommitChangelistDialog2/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1608676605057" />
     <state x="2806" y="159" width="2048" height="1130" key="DiffContextDialog" timestamp="1604875679250">
       <screen x="2560" y="0" width="2560" height="1440" />
@@ -369,10 +382,10 @@
       <screen x="2560" y="0" width="2560" height="1440" />
     </state>
     <state x="3329" y="351" width="1022" height="737" key="SettingsEditor/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605216226377" />
-    <state x="3435" y="452" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1608676607101">
-      <screen x="2560" y="0" width="2560" height="1440" />
+    <state x="875" y="462" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1608853613166">
+      <screen x="0" y="33" width="2560" height="1367" />
     </state>
-    <state x="875" y="462" width="800" height="535" key="Vcs.Push.Dialog.v2/0.33.2560.1367/2560.0.2560.1440@0.33.2560.1367" timestamp="1608592541374" />
+    <state x="875" y="462" width="800" height="535" key="Vcs.Push.Dialog.v2/0.33.2560.1367/2560.0.2560.1440@0.33.2560.1367" timestamp="1608853613166" />
     <state x="3435" y="452" width="800" height="535" key="Vcs.Push.Dialog.v2/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1608676607101" />
     <state x="472" y="212" width="762" height="686" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1605652046132">
       <screen x="0" y="27" width="1920" height="985" />
@@ -392,11 +405,11 @@
       <screen x="0" y="33" width="2560" height="1367" />
     </state>
     <state x="944" y="333" key="run.anything.popup/0.33.2560.1367/2560.0.2560.1440@0.33.2560.1367" timestamp="1608483755385" />
-    <state x="943" y="359" width="896" height="644" key="search.everywhere.popup" timestamp="1608587340722">
+    <state x="943" y="359" width="896" height="644" key="search.everywhere.popup" timestamp="1608853740056">
       <screen x="0" y="33" width="2560" height="1367" />
     </state>
     <state x="707" y="262" width="672" height="464" key="search.everywhere.popup/0.27.1920.985@0.27.1920.985" timestamp="1605652884218" />
-    <state x="943" y="359" width="896" height="644" key="search.everywhere.popup/0.33.2560.1367/2560.0.2560.1440@0.33.2560.1367" timestamp="1608587340722" />
+    <state x="943" y="359" width="896" height="644" key="search.everywhere.popup/0.33.2560.1367/2560.0.2560.1440@0.33.2560.1367" timestamp="1608853740056" />
     <state x="3503" y="343" width="672" height="678" key="search.everywhere.popup/0.33.2560.1367/2560.0.2560.1440@2560.0.2560.1440" timestamp="1605648159365" />
   </component>
 </project>

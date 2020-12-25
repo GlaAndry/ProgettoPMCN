@@ -144,7 +144,7 @@ void calculate_batch(double time_next,struct state state,struct area area,struct
 
     double rho_verifica = area.service_v/time_next;
     double rho_delay = area.service_d/time_next;
-    double rho_service = area.service_s/(NUM_MAX_SERVER*time_next);
+    double rho_service = RHOS;
 
     //printf("rhos %f\n", rho_service);
 
@@ -169,27 +169,6 @@ void calculate_batch(double time_next,struct state state,struct area area,struct
     p_0 += (pow(NUM_MAX_SERVER*rho_service,NUM_MAX_SERVER)/(fattoriale(NUM_MAX_SERVER)*(1-rho_service)));
     double Pq = ((pow(NUM_MAX_SERVER*rho_service,NUM_MAX_SERVER))/(fattoriale(NUM_MAX_SERVER)*(1-rho_service)))*(pow(p_0,-1));
 
-    double p_0_1;
-    for(int i = 0; i < NUM_MAX_SERVER; i++){
-        p_0_1 += (pow(NUM_MAX_SERVER*rho_service_1, i))/(fattoriale(i));
-    }
-    p_0_1 += (pow(NUM_MAX_SERVER*rho_service_1,NUM_MAX_SERVER)/(fattoriale(NUM_MAX_SERVER)*(1-rho_service_1)));
-    double Pq_1 = ((pow(NUM_MAX_SERVER*rho_service_1,NUM_MAX_SERVER))/(fattoriale(NUM_MAX_SERVER)*(1-rho_service_1)))*(pow(p_0_1,-1));
-
-    double p_0_2;
-    for(int i = 0; i < NUM_MAX_SERVER; i++){
-        p_0_2 += (pow(NUM_MAX_SERVER*rho_service_2, i))/(fattoriale(i));
-    }
-    p_0_2 += (pow(NUM_MAX_SERVER*rho_service_2,NUM_MAX_SERVER)/(fattoriale(NUM_MAX_SERVER)*(1-rho_service_2)));
-    double Pq_2 = ((pow(NUM_MAX_SERVER*rho_service_2,NUM_MAX_SERVER))/(fattoriale(NUM_MAX_SERVER)*(1-rho_service_2)))*(pow(p_0_2,-1));
-
-    double p_0_3;
-    for(int i = 0; i < NUM_MAX_SERVER; i++){
-        p_0_3 += (pow(NUM_MAX_SERVER*rho_service_3, i))/(fattoriale(i));
-    }
-    p_0_3 += (pow(NUM_MAX_SERVER*rho_service_3,NUM_MAX_SERVER)/(fattoriale(NUM_MAX_SERVER)*(1-rho_service_3)));
-    double Pq_3 = ((pow(NUM_MAX_SERVER*rho_service_3,NUM_MAX_SERVER))/(fattoriale(NUM_MAX_SERVER)*(1-rho_service_3)))*(pow(p_0_3,-1));
-
     ////Numero Medio di JOB//////
 
     double E_n_ver = rho_verifica/(1-rho_verifica);
@@ -197,17 +176,17 @@ void calculate_batch(double time_next,struct state state,struct area area,struct
     double E_n_serv = Pq*(rho_service/(1-rho_service)) + (NUM_MAX_SERVER*rho_service);
     //printf("Ens %f\n", E_n_serv);
 
-    double E_n_ver_1 = rho_verifica_1/(1-rho_verifica_1);
-    double E_n_del_1 = rho_delay_1/(1-rho_delay_1);
-    double E_n_serv_1 = Pq_1*(rho_service_1/(1-rho_service_1)) + (NUM_MAX_SERVER*rho_service_1);
+    double E_n_ver_1 = rho_verifica_1/(1-rho_verifica);
+    double E_n_del_1 = rho_delay_1/(1-rho_delay);
+    double E_n_serv_1 = Pq*(rho_service_1/(1-rho_service)) + (NUM_MAX_SERVER*rho_service_1);
 
-    double E_n_ver_2 = rho_verifica_2/(1-rho_verifica_2);
-    double E_n_del_2 = rho_delay_2/(1-rho_delay_2);
-    double E_n_serv_2 = Pq_2*(rho_service_2/(1-rho_service_2)) + (NUM_MAX_SERVER*rho_service_2);
+    double E_n_ver_2 = rho_verifica_2/(1-rho_verifica);
+    double E_n_del_2 = rho_delay_2/(1-rho_delay);
+    double E_n_serv_2 = Pq*(rho_service_2/(1-rho_service)) + (NUM_MAX_SERVER*rho_service_2);
 
-    double E_n_ver_3 = rho_verifica_3/(1-rho_verifica_3);
-    double E_n_del_3 = rho_delay_3/(1-rho_delay_3);
-    double E_n_serv_3 = Pq_3*(rho_service_3/(1-rho_service_3)) + (NUM_MAX_SERVER*rho_service_3);
+    double E_n_ver_3 = rho_verifica_3/(1-rho_verifica);
+    double E_n_del_3 = rho_delay_3/(1-rho_delay);
+    double E_n_serv_3 = Pq*(rho_service_3/(1-rho_service)) + (NUM_MAX_SERVER*rho_service_3);
 
     ////Tassi di Visita
 

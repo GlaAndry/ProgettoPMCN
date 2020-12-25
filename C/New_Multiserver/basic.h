@@ -364,4 +364,6 @@ double**alloc_matrix_double(int num_row,int num_col);
 int**alloc_matrix_int(int num_row,int num_col);
 */
 
+#define RHOS (double) 0.455656
+
 #endif

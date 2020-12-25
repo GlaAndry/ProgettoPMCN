@@ -109,21 +109,13 @@ int main(){
     double rho_d_1 = lambda_d_1/mu_delay;
     double rho_s_1 = lambda_s_1/(m*mu_service);
 
-    double p_0_1;
-    for(int i = 0; i < m; i++){
-        p_0_1 += (pow(m*rho_s_1, i))/(fattoriale(i));
-    }
-    p_0_1 += (pow(m*rho_s_1,m)/(fattoriale(m)*(1-rho_s_1)));
-    double Pq_1 = ((pow(m*rho_s_1,m))/(fattoriale(m)*(1-rho_s_1)))*(pow(p_0_1,-1));
+    double E_t_q_v_1 = (rho_v*E_s_v_1)/(1-rho_v);
+    double E_t_q_d_1 = (rho_d*E_s_d_1)/(1-rho_d);
+    double E_t_q_s_1 = (Pq*E_s_s_1)/(1-rho_s);
 
-
-    double E_t_q_v_1 = (rho_v_1*E_s_v_1)/(1-rho_v_1);
-    double E_t_q_d_1 = (rho_d_1*E_s_d_1)/(1-rho_d_1);
-    double E_t_q_s_1 = (Pq_1*E_s_s_1)/(1-rho_s_1);
-
-    double E_n_v_1 = rho_v_1/(1-rho_v_1);
-    double E_n_d_1 = rho_d_1/(1-rho_d_1);
-    double E_n_s_1 = Pq_1*(rho_s_1/(1-rho_s_1)) + (m*rho_s_1);
+    double E_n_v_1 = rho_v_1/(1-rho_v);
+    double E_n_d_1 = rho_d_1/(1-rho_d);
+    double E_n_s_1 = Pq*(rho_s_1/(1-rho_s)) + (m*rho_s_1);
     double E_n_tot_1 = E_n_v_1+E_n_s_1+E_n_d_1;
 
     double visit_v_1 = lambda_v_1/lambda1;
@@ -172,21 +164,13 @@ int main(){
     double rho_d_2 = lambda_d_2/mu_delay;
     double rho_s_2 = lambda_s_2/(m*mu_service);
 
-    double p_0_2;
-    for(int i = 0; i < m; i++){
-        p_0_2 += (pow(m*rho_s_2, i))/(fattoriale(i));
-    }
-    p_0_2 += (pow(m*rho_s_2,m)/(fattoriale(m)*(1-rho_s_2)));
-    double Pq_2 = ((pow(m*rho_s_2,m))/(fattoriale(m)*(1-rho_s_2)))*(pow(p_0_2,-1));
+    double E_t_q_v_2 = (rho_v*E_s_v_2)/(1-rho_v);
+    double E_t_q_d_2 = (rho_d*E_s_d_2)/(1-rho_d);
+    double E_t_q_s_2 = (Pq*E_s_s_2)/(1-rho_s);
 
-
-    double E_t_q_v_2 = (rho_v_2*E_s_v_2)/(1-rho_v_2);
-    double E_t_q_d_2 = (rho_d_2*E_s_d_2)/(1-rho_d_2);
-    double E_t_q_s_2 = (Pq_2*E_s_s_2)/(1-rho_s_2);
-
-    double E_n_v_2 = rho_v_2/(1-rho_v_2);
-    double E_n_d_2 = rho_d_2/(1-rho_d_2);
-    double E_n_s_2 = Pq_2*(rho_s_2/(1-rho_s_2)) + (m*rho_s_2);
+    double E_n_v_2 = rho_v_2/(1-rho_v);
+    double E_n_d_2 = rho_d_2/(1-rho_d);
+    double E_n_s_2 = Pq*(rho_s_2/(1-rho_s)) + (m*rho_s_2);
     double E_n_tot_2 = E_n_v_2+E_n_s_2+E_n_d_2;
 
     double visit_v_2 = lambda_v_2/lambda2;
@@ -235,21 +219,13 @@ int main(){
     double rho_d_3 = lambda_d_3/mu_delay;
     double rho_s_3 = lambda_s_3/(m*mu_service);
 
-    double p_0_3;
-    for(int i = 0; i < m; i++){
-        p_0_3 += (pow(m*rho_s_3, i))/(fattoriale(i));
-    }
-    p_0_3 += (pow(m*rho_s_3,m)/(fattoriale(m)*(1-rho_s_3)));
-    double Pq_3 = ((pow(m*rho_s_3,m))/(fattoriale(m)*(1-rho_s_3)))*(pow(p_0_3,-1));
+    double E_t_q_v_3 = (rho_v*E_s_v_3)/(1-rho_v);
+    double E_t_q_d_3 = (rho_d*E_s_d_3)/(1-rho_d);
+    double E_t_q_s_3 = (Pq*E_s_s_3)/(1-rho_s);
 
-
-    double E_t_q_v_3 = (rho_v_3*E_s_v_3)/(1-rho_v_3);
-    double E_t_q_d_3 = (rho_d_3*E_s_d_3)/(1-rho_d_3);
-    double E_t_q_s_3 = (Pq_3*E_s_s_3)/(1-rho_s_3);
-
-    double E_n_v_3 = rho_v_3/(1-rho_v_3);
-    double E_n_d_3 = rho_d_3/(1-rho_d_3);
-    double E_n_s_3 = Pq_3*(rho_s_3/(1-rho_s_3)) + (m*rho_s_3);
+    double E_n_v_3 = rho_v_3/(1-rho_v);
+    double E_n_d_3 = rho_d_3/(1-rho_d);
+    double E_n_s_3 = Pq*(rho_s_3/(1-rho_s)) + (m*rho_s_3);
     double E_n_tot_3 = E_n_v_3+E_n_s_3+E_n_d_3;
 
     double visit_v_3 = lambda_v_3/lambda3;
