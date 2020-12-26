@@ -4,6 +4,11 @@
 double idf_student(long k);
 double standard_dev(double* array_mean,double mean,int length);
 
+void print_en(double*E_n_sys,double*E_n_sys_1,double* E_n_sys_2, double* E_n_sys_3,
+              double*E_n_ver,double*E_n_ver_1,double* E_n_ver_2, double* E_n_ver_3,
+              double*E_n_del,double*E_n_del_1,double* E_n_del_2, double* E_n_del_3,
+              double*E_n_serv,double*E_n_serv_1,double* E_n_serv_2, double* E_n_serv_3);
+
 void print_all(double*tr_batch,double* tr_type1_batch,double* tr_type2_batch, double* tr_type3_batch,
                double *tr_verifica, double *tr_type1_verifica, double *tr_type2_verifica, double *tr_type3_verifica,
                double *tr_delay, double *tr_type1_delay, double *tr_type2_delay,double *tr_type3_delay,
@@ -21,7 +26,11 @@ void calculate_batch(double time_next,struct state state,struct area area,struct
                      double *response_batch, double *response_type1_batch, double *response_type2_batch, double *response_type3_batch,
                      double *response_verifica, double *response_type1_verifica, double *response_type2_verifica,double *response_type3_verifica,
                      double *response_delay, double *response_type1_delay, double *response_type2_delay, double *response_type3_delay,
-                     double *response_multiserver, double *response_type1_multiserver, double *response_type2_multiserver, double *response_type3_multiserver);
+                     double *response_multiserver, double *response_type1_multiserver, double *response_type2_multiserver, double *response_type3_multiserver,
+                     double*E_n_sys,double*E_n_sys_1,double* E_n_sys_2, double* E_n_sys_3,
+                     double*E_n_ver,double*E_n_ver_1,double* E_n_ver_2, double* E_n_ver_3,
+                     double*E_n_del,double*E_n_del_1,double* E_n_del_2, double* E_n_del_3,
+                     double*E_n_serv,double*E_n_serv_1,double* E_n_serv_2, double* E_n_serv_3);
 
 void calculate_mean_and_deviation(double*array,int length,double*mean,double*deviation);
 void calculate_and_print_interval(double* batch,char*string);

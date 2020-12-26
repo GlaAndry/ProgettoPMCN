@@ -74,6 +74,25 @@ int main(int argc, char *argv[]) {
     double *response_type1_multiserver = alloc_array_double(NUM_BATCH);
     double *response_type2_multiserver = alloc_array_double(NUM_BATCH);
     double *response_type3_multiserver = alloc_array_double(NUM_BATCH);
+
+    //////variabili numero medio di utenti
+
+    double *E_n_sys = alloc_array_double(NUM_BATCH);
+    double *E_n_sys_1 = alloc_array_double(NUM_BATCH);
+    double *E_n_sys_2 = alloc_array_double(NUM_BATCH);
+    double *E_n_sys_3 = alloc_array_double(NUM_BATCH);
+    double *E_n_ver = alloc_array_double(NUM_BATCH);
+    double *E_n_ver_1 = alloc_array_double(NUM_BATCH);
+    double *E_n_ver_2 = alloc_array_double(NUM_BATCH);
+    double *E_n_ver_3 = alloc_array_double(NUM_BATCH);
+    double *E_n_del = alloc_array_double(NUM_BATCH);
+    double *E_n_del_1 = alloc_array_double(NUM_BATCH);
+    double *E_n_del_2 = alloc_array_double(NUM_BATCH);
+    double *E_n_del_3 = alloc_array_double(NUM_BATCH);
+    double *E_n_serv = alloc_array_double(NUM_BATCH);
+    double *E_n_serv_1 = alloc_array_double(NUM_BATCH);
+    double *E_n_serv_2 = alloc_array_double(NUM_BATCH);
+    double *E_n_serv_3 = alloc_array_double(NUM_BATCH);
     ///////////////////
 
     char task_type_next_arrival = 0;//tipo di job del prossimo arrivo
@@ -162,7 +181,11 @@ int main(int argc, char *argv[]) {
                             response_type3_verifica,
                             response_delay, response_type1_delay, response_type2_delay, response_type3_delay,
                             response_multiserver, response_type1_multiserver, response_type2_multiserver,
-                            response_type3_multiserver);
+                            response_type3_multiserver,
+                            E_n_sys,E_n_sys_1,E_n_sys_2,E_n_sys_3,
+                            E_n_ver, E_n_ver_1, E_n_ver_2, E_n_ver_3,
+                            E_n_del, E_n_del_1, E_n_del_2, E_n_del_3,
+                            E_n_serv, E_n_serv_1, E_n_serv_2, E_n_serv_3);
 
         }
 
@@ -382,6 +405,11 @@ int main(int argc, char *argv[]) {
               response_verifica, response_type1_verifica, response_type2_verifica, response_type3_verifica,
               response_delay, response_type1_delay, response_type2_delay, response_type3_delay,
               response_multiserver, response_type1_multiserver, response_type2_multiserver, response_type3_multiserver);
+
+    print_en(E_n_sys,E_n_sys_1,E_n_sys_2,E_n_sys_3,
+             E_n_ver, E_n_ver_1, E_n_ver_2, E_n_ver_3,
+             E_n_del, E_n_del_1, E_n_del_2, E_n_del_3,
+             E_n_serv, E_n_serv_1, E_n_serv_2, E_n_serv_3);
 
 
     check_state_variables_after_simulation(state);
