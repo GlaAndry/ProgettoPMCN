@@ -35,7 +35,7 @@ void calculate_and_print_interval(double *batch, char *string) {
     calculate_mean_and_deviation(batch, NUM_BATCH, &mean, &s);
     delta = (double) t * s / (sqrt(NUM_BATCH - 1));//calcolo di delta
     printf("%s:\n", string);
-    printf("%lf +/- %lf = (%lf, %lf)\n\n", mean, delta, mean - delta, mean + delta);//stampa intervallo
+    printf("%lf +/- %lf = (%lf, %lf)\n\n", mean, fmod(delta, 1.0), mean - delta, mean + delta);//stampa intervallo
 }
 
 void print_en(double *E_n_sys, double *E_n_sys1, double *E_n_sys2, double *E_n_sys3,

@@ -114,7 +114,7 @@ int main(int argc, char *argv[]) {
     printf("----------------------------------------------------------\n");
     printf("START SIMULATION\n");
     printf("----------------------------------------------------------\n");
-    PlantSeeds(989757435);
+    PlantSeeds(123456789);
 
     //variabili del sistema
 
@@ -182,7 +182,7 @@ int main(int argc, char *argv[]) {
                             response_delay, response_type1_delay, response_type2_delay, response_type3_delay,
                             response_multiserver, response_type1_multiserver, response_type2_multiserver,
                             response_type3_multiserver,
-                            E_n_sys,E_n_sys_1,E_n_sys_2,E_n_sys_3,
+                            E_n_sys, E_n_sys_1, E_n_sys_2, E_n_sys_3,
                             E_n_ver, E_n_ver_1, E_n_ver_2, E_n_ver_3,
                             E_n_del, E_n_del_1, E_n_del_2, E_n_del_3,
                             E_n_serv, E_n_serv_1, E_n_serv_2, E_n_serv_3);
@@ -406,7 +406,7 @@ int main(int argc, char *argv[]) {
               response_delay, response_type1_delay, response_type2_delay, response_type3_delay,
               response_multiserver, response_type1_multiserver, response_type2_multiserver, response_type3_multiserver);
 
-    print_en(E_n_sys,E_n_sys_1,E_n_sys_2,E_n_sys_3,
+    print_en(E_n_sys, E_n_sys_1, E_n_sys_2, E_n_sys_3,
              E_n_ver, E_n_ver_1, E_n_ver_2, E_n_ver_3,
              E_n_del, E_n_del_1, E_n_del_2, E_n_del_3,
              E_n_serv, E_n_serv_1, E_n_serv_2, E_n_serv_3);
